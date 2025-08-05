@@ -1,0 +1,156 @@
+
+Table MELANBIDE11_CONTRATACION creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+INDEX MELANBIDE11_CONTRATACION_PK creado.
+
+
+Table MELANBIDE11_CONTRATACION alterado.
+
+
+Table MELANBIDE11_CONTRATACION alterado.
+
+
+Sequence SEQ_MELANBIDE11_CONTRATACION creado.
+
+
+Table MELANBIDE11_SUBSOLIC creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+Comment creado.
+
+
+INDEX MELANBIDE11_SUBSOLIC_PK creado.
+
+
+Table MELANBIDE11_SUBSOLIC alterado.
+
+
+Table MELANBIDE11_SUBSOLIC alterado.
+
+
+Sequence SEQ_MELANBIDE11_SUBSOLIC creado.
+

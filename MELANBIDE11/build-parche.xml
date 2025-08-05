@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+<project name="MELANBIDE11" default="compile" basedir=".">
+    <property name="modulo.projectname" value="MELANBIDE11"/>
+    <property name="modulo.home" value="."/>
+    <property name="modulo.lib" value="C:\DESARROLLO\FLEXIA\Librerias_ModulosExtension\Nueva_Libreria\lib"/>
+    <property name="modulo.source" value="${modulo.home}/src/java"/>	
+    <property name="modulo.source.web" value="${modulo.home}/src/web"/>	
+    <property name="modulo.build" value="${modulo.home}/build"/>
+    <property name="modulo.build.root" value="flexia"/>
+    <property name="modulo.classes" value="${modulo.build}/classes"/>
+    <property name="modulo.classes.text" value="${modulo.classes}/es/altia/flexia/integracion/moduloexterno/MELANBIDE11/i18n/text"/>
+    <property name="modulo.src.text" value="${modulo.source}/es/altia/flexia/integracion/moduloexterno/MELANBIDE11/i18n/text"/>
+    <property name="modulo.build.web" value="${modulo.build}/${modulo.build.root}"/>
+   
+    <property name="flexia.home" value="C:\apache-tomcat\webapps\Flexia18"/>
+    <property name="flexia.classes" value="C:\DESARROLLO\FLEXIA\Libreria_FLEXIA_18\classes"/>
+
+    <!-- =============================  ClassPath ============================== -->
+
+    <path id="modulo.classpath">
+        <fileset dir="${modulo.lib}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+
+    <!-- Java compiler -->
+    <property name="build.compiler" value="modern"/>
+    <property name="javac.debug" value="on"/>
+    <property name="javac.optimize" value="off"/>
+    <property name="javac.deprecation" value="on"/>
+
+
+    <!-- ============================ "init" target ============================ -->
+    <target name="init">
+        <echo>
+            --------------------------------------------------------------------------------
+            Ejecutando fichero build-parche.xml para el modulo externo "${modulo.projectname}" ...
+            --------------------------------------------------------------------------------
+        </echo>
+    </target>
+
+    <!-- ========================== "compile" target =========================== -->
+
+    <target name="compile" depends="cleanclasses">
+        <echo>
+            --------------------------------------------------------------------------------
+            Compilando el modulo "${modulo.projectname}"
+            --------------------------------------------------------------------------------            
+        </echo>
+        <mkdir dir="${modulo.classes}"/>
+        <javac srcdir="${modulo.source}"
+               destdir="${modulo.classes}"
+               debug="${javac.debug}"
+               optimize="${javac.optimize}"
+               classpathref="modulo.classpath"
+               deprecation="${javac.deprecation}">
+                
+               <classpath>
+                    <pathelement path="${flexia.classes}"/>                    
+               </classpath>
+        </javac>
+    </target>
+    
+    <!-- ========================= "cleanclasses" target ======================= -->
+   <target name="cleanclasses" depends="init">      
+       <delete dir="${modulo.build}"/>
+   </target>
+
+   <!-- ========================== "rebuild" target =========================== -->
+   <target name="rebuild" depends="cleanclasses, compile"/>
+
+   <!-- ========================== "generarModulo" target =========================== -->
+   <target name="generarModulo" depends="compile">
+        <echo>
+            --------------------------------------------------------------------------------
+            Generando el modulo con la estructura de parche de Flexia en ${modulo.build}
+            --------------------------------------------------------------------------------            
+        </echo>
+
+       <copy todir="${modulo.build.web}">
+            <fileset dir="${modulo.source.web}">
+                <include name="**/*"/>
+            </fileset>
+       </copy>
+
+       <copy todir="${modulo.classes}">
+            <fileset dir="${modulo.source}">
+                <include name="*.properties"/>
+            </fileset>
+       </copy>
+           
+       <copy todir="${flexia.home}\scripts">
+           <fileset dir="${modulo.build}\${modulo.build.root}\scripts"/>
+       </copy>
+
+        <copy todir="${modulo.classes.text}">
+            <fileset dir="${modulo.src.text}">
+                <include name="*.properties"/>
+            </fileset>							
+        </copy>	   
+	   
+   </target>
+   
+   <target name="desplegar" depends="generarModulo">
+		<copy todir="${flexia.home}\jsp">
+			<fileset dir="${modulo.build}\${modulo.build.root}\jsp"/>
+		</copy>
+		<copy todir="${flexia.home}\css">
+			<fileset dir="${modulo.build}\${modulo.build.root}\css"/>
+		</copy>
+	
+		<copy todir="${flexia.home}\scripts">
+			<fileset dir="${modulo.build}\${modulo.build.root}\scripts"/>
+		</copy>
+     	
+		<copy todir="${flexia.home}\WEB-INF\classes">
+			<fileset dir="${modulo.classes}"/>
+		</copy>
+   </target>
+   
+</project>
