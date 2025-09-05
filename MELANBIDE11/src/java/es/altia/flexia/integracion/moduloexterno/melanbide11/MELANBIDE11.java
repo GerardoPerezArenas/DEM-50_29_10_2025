@@ -157,6 +157,12 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
                 listaJornada = traducirDesplegable(request, listaJornada);
                 request.setAttribute("listaJornada", listaJornada);
             }
+            // TITREQPUESTO 
+            List<DesplegableAdmonLocalVO> listaTitReqPuesto = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_TITREQPUESTO, ConstantesMeLanbide11.FICHERO_PROPIEDADES), this.getAdaptSQLBD(String.valueOf(codOrganizacion)));
+            if (listaTitReqPuesto.size() > 0) {
+                listaTitReqPuesto = traducirDesplegable(request, listaTitReqPuesto);
+                request.setAttribute("listaTitReqPuesto", listaTitReqPuesto);
+            }
             List<DesplegableAdmonLocalVO> listaGrupoCotizacion = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_GCOT, ConstantesMeLanbide11.FICHERO_PROPIEDADES), this.getAdaptSQLBD(String.valueOf(codOrganizacion)));
             if (listaGrupoCotizacion.size() > 0) {
                 listaGrupoCotizacion = traducirDesplegable(request, listaGrupoCotizacion);
@@ -238,6 +244,12 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
             if (listaJornada.size() > 0) {
                 listaJornada = traducirDesplegable(request, listaJornada);
                 request.setAttribute("listaJornada", listaJornada);
+            }
+             // TITREQPUESTO 
+            List<DesplegableAdmonLocalVO> listaTitReqPuesto = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_TITREQPUESTO, ConstantesMeLanbide11.FICHERO_PROPIEDADES), this.getAdaptSQLBD(String.valueOf(codOrganizacion)));
+            if (listaTitReqPuesto.size() > 0) {
+                listaTitReqPuesto = traducirDesplegable(request, listaTitReqPuesto);
+                request.setAttribute("listaTitReqPuesto", listaTitReqPuesto);
             }
             List<DesplegableAdmonLocalVO> listaGrupoCotizacion = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_GCOT, ConstantesMeLanbide11.FICHERO_PROPIEDADES), this.getAdaptSQLBD(String.valueOf(codOrganizacion)));
             if (listaGrupoCotizacion.size() > 0) {
@@ -349,18 +361,43 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
             String cProfesionalidad = (String) request.getParameter("cProfesionalidad");
             String modalidadContrato = (String) request.getParameter("modalidadContrato");
             String jornada = (String) request.getParameter("jornada");
-            String porcJornada = (String) request.getParameter("porcJornada").replace(",", ".");
+            String porcJornadaParam = (String) request.getParameter("porcJornada");
+            String porcJornada = (porcJornadaParam != null) ? porcJornadaParam.replace(",", ".") : null;
             String horasConv = (String) request.getParameter("horasConv");
             String fechaInicio = (String) request.getParameter("fechaInicio");
             String fechaFin = (String) request.getParameter("fechaFin");
             String mesesContrato = (String) request.getParameter("mesesContrato");
-            String grupoCotizacion = (String) request.getParameter("grupoCotizacion");
-            String direccionCT = (String) request.getParameter("direccionCT");
-            String numSS = (String) request.getParameter("numSS");
-            String costeContrato = (String) request.getParameter("costeContrato").replace(",", ".");
-            String tipRetribucion = (String) request.getParameter("tipRetribucion");
-            
-            String importeSub = (String) request.getParameter("importeSub").replace(",", ".");
+
+            // --- Normalización y validación de parámetros numéricos y texto ---
+            String grupoCotizacion = request.getParameter("grupoCotizacion");
+            grupoCotizacion = (grupoCotizacion != null && !grupoCotizacion.trim().isEmpty()) ? grupoCotizacion.trim() : null;
+
+            String direccionCT = request.getParameter("direccionCT");
+            direccionCT = (direccionCT != null && !direccionCT.trim().isEmpty()) ? direccionCT.trim() : null;
+
+            String numSS = request.getParameter("numSS");
+            numSS = (numSS != null && !numSS.trim().isEmpty()) ? numSS.trim() : null;
+
+            String costeContratoParam = request.getParameter("costeContrato");
+            String costeContrato = (costeContratoParam != null && !costeContratoParam.trim().isEmpty()) ? costeContratoParam.trim().replace(",", ".") : null;
+
+            String tipRetribucion = request.getParameter("tipRetribucion");
+            tipRetribucion = (tipRetribucion != null && !tipRetribucion.trim().isEmpty()) ? tipRetribucion.trim() : null;
+
+            String importeSubParam = request.getParameter("importeSub");
+            String importeSub = (importeSubParam != null && !importeSubParam.trim().isEmpty()) ? importeSubParam.trim().replace(",", ".") : null;
+
+            // --- Nuevos campos TITREQPUESTO y FUNCIONES ---
+            String titReqPuesto = request.getParameter("titReqPuesto"); // código del combo
+            titReqPuesto = (titReqPuesto != null && !titReqPuesto.trim().isEmpty()) ? titReqPuesto.trim() : null;
+
+            String funciones = request.getParameter("funciones");
+            if (funciones != null) {
+                funciones = funciones.trim();
+                if (funciones.length() > 200) funciones = funciones.substring(0, 200);
+                if (funciones.isEmpty()) funciones = null;
+            }
+
             
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             
@@ -395,6 +432,8 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
             nuevaContratacion.setcProfesionalidad(cProfesionalidad);
             nuevaContratacion.setModalidadContrato(modalidadContrato);
             nuevaContratacion.setJornada(jornada);
+            nuevaContratacion.setTitReqPuesto(titReqPuesto);
+            nuevaContratacion.setFunciones(funciones);
             if (porcJornada != null && !"".equals(porcJornada)) {
                 nuevaContratacion.setPorcJornada(Double.parseDouble(porcJornada));
             }
@@ -477,7 +516,8 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
             String cProfesionalidad = (String) request.getParameter("cProfesionalidad");
             String modalidadContrato = (String) request.getParameter("modalidadContrato");
             String jornada = (String) request.getParameter("jornada");
-            String porcJornada = (String) request.getParameter("porcJornada").replace(",", ".");
+            String porcJornadaParam = (String) request.getParameter("porcJornada");
+            String porcJornada = (porcJornadaParam != null) ? porcJornadaParam.replace(",", ".") : null;
             String horasConv = (String) request.getParameter("horasConv");
             String fechaInicio = (String) request.getParameter("fechaInicio");
             //log.debug("++++++++fechaInicio: " + fechaInicio);
@@ -487,10 +527,19 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
             String grupoCotizacion = (String) request.getParameter("grupoCotizacion");
             String direccionCT = (String) request.getParameter("direccionCT");
             String numSS = (String) request.getParameter("numSS");
-            String costeContrato = (String) request.getParameter("costeContrato").replace(",", ".");
+            String costeContratoParam = (String) request.getParameter("costeContrato");
+            String costeContrato = (costeContratoParam != null) ? costeContratoParam.replace(",", ".") : null;
             String tipRetribucion = (String) request.getParameter("tipRetribucion");
             
-            String importeSub = (String) request.getParameter("importeSub").replace(",", ".");
+            String importeSubParam = (String) request.getParameter("importeSub");
+            String importeSub = (importeSubParam != null) ? importeSubParam.replace(",", ".") : null;
+
+            // Nuevos campos TITREQPUESTO y FUNCIONES (modificar)
+            String titReqPuesto = (String) request.getParameter("titReqPuesto");
+            String funciones = request.getParameter("funciones");
+            if (funciones != null && funciones.length() > 200) {
+                funciones = funciones.substring(0, 200);
+            }
 
             if (id == null || id.equals("")) {
                 log.debug("No se ha recibido desde la JSP el id de la contrataciï¿½n a modificar ");
@@ -535,6 +584,8 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
                 datModif.setcProfesionalidad(cProfesionalidad);
                 datModif.setModalidadContrato(modalidadContrato);
                 datModif.setJornada(jornada);
+                datModif.setTitReqPuesto(titReqPuesto);
+                datModif.setFunciones(funciones);
                 datModif.setPorcJornada(null);
                 if (porcJornada != null && !"".equals(porcJornada)) {
                     datModif.setPorcJornada(Double.parseDouble(porcJornada));
@@ -949,6 +1000,17 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
     // ----------------------------------------------------------------------------------------------------------
     // ---------------    XML    --------------------------------------------------------------------------------
     // ----------------------------------------------------------------------------------------------------------
+    private String escapeXml(String s) {
+        if (s == null) return null;
+        String out = s;
+        out = out.replace("&", "&amp;");
+        out = out.replace("<", "&lt;");
+        out = out.replace(">", "&gt;");
+        out = out.replace("\"", "&quot;");
+        out = out.replace("'", "&apos;");
+        return out;
+    }
+    
     private void retornarXML(String salida, HttpServletResponse response) {
         try {
             if (salida != null) {
@@ -1054,7 +1116,12 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
             xmlSalida.append(fila.getModalidadContrato());
             xmlSalida.append("</MODCONT>");
             xmlSalida.append("<JORCONT>");
-            xmlSalida.append(getDescripcionDesplegable(request, fila.getDesJornada()));
+            String descJornada = getDescripcionDesplegable(request, fila.getDesJornada());
+            if (descJornada == null || descJornada.trim().isEmpty() || "-".equals(descJornada.trim())) {
+                xmlSalida.append("-");
+            } else {
+                xmlSalida.append(descJornada);
+            }
             xmlSalida.append("</JORCONT>");
             xmlSalida.append("<PORCJOR>");
             if (fila.getPorcJornada()!= null && !"".equals(fila.getPorcJornada())) {
@@ -1118,8 +1185,15 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
                 xmlSalida.append("null");
             }
             xmlSalida.append("</IMPSUBVCONT>");
+            xmlSalida.append("<TITREQPUESTO>");
+            xmlSalida.append(getDescripcionDesplegable(request, fila.getDesTitReqPuesto()));
+            xmlSalida.append("</TITREQPUESTO>");
+            xmlSalida.append("<FUNCIONES>");
+            xmlSalida.append(escapeXml(fila.getFunciones()));
+            xmlSalida.append("</FUNCIONES>");
             
-            
+            // ================================
+
             xmlSalida.append("</FILA>");
         }
         xmlSalida.append("</RESPUESTA>");

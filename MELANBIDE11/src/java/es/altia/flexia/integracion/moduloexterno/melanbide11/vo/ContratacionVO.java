@@ -89,6 +89,8 @@ public class ContratacionVO {
     private String titulacion;
     private String desTitulacionLibre;
     private String desTitulacion;
+    private String titulacionRequerida;
+    private String desTitulacionRequerida;
     private String cProfesionalidad;
     private String desCProfesionalidad;
     private String modalidadContrato;
@@ -108,6 +110,11 @@ public class ContratacionVO {
     private String desTipRetribucion;
     
     private Double importeSub;
+
+    // Nuevos campos MELANBIDE11: TITREQPUESTO y FUNCIONES
+    private String titReqPuesto;
+    private String desTitReqPuesto;
+    private String funciones;
 
     public Integer getId() {
         return id;
@@ -349,6 +356,32 @@ public class ContratacionVO {
         this.porcJornada = porcJornada;
     }
 
+    // Getters y setters para titReqPuesto
+    public String getTitReqPuesto() {
+        return titReqPuesto;
+    }
+
+    public void setTitReqPuesto(String titReqPuesto) {
+        this.titReqPuesto = titReqPuesto;
+    }
+
+    public String getDesTitReqPuesto() {
+        return desTitReqPuesto;
+    }
+
+    public void setDesTitReqPuesto(String desTitReqPuesto) {
+        this.desTitReqPuesto = desTitReqPuesto;
+    }
+
+    // Getter y setter para funciones
+    public String getFunciones() {
+        return funciones;
+    }
+
+    public void setFunciones(String funciones) {
+        this.funciones = funciones;
+    }
+
     public Integer getHorasConv() {
         return horasConv;
     }
@@ -445,5 +478,20 @@ public class ContratacionVO {
         this.importeSub = importeSub;
     }
 
-    
+    public String getTitulacionRequerida() {
+        return titulacionRequerida;
+    }
+
+    public void setTitulacionRequerida(String titulacionRequerida) {
+        this.titulacionRequerida = titulacionRequerida;
+    }
+
+    public String getDesTitulacionRequerida() {
+        return desTitulacionRequerida;
+    }
+
+    public void setDesTitulacionRequerida(String desTitulacionRequerida) {
+        this.desTitulacionRequerida = desTitulacionRequerida;
+    }
+ 
 }

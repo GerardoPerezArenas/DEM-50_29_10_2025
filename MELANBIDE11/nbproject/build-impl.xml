@@ -250,7 +250,7 @@ is divided into following sections:
             </and>
         </condition>
         <condition else="false" property="javac.fork">
-            <or>Z
+            <or>
                 <istrue value="${jdkBug6558476}"/>
                 <istrue value="${javac.external.vm}"/>
             </or>

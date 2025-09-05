@@ -93,13 +93,13 @@
         <script type="text/javascript" src="<c:url value='/scripts/calendario.js'/>"></script>
         <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/validaciones.js"></script>
         <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/popup.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/meLanbide11/JavaScriptUtil.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/meLanbide11/Parsers.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/meLanbide11/InputMask.js"></script>
-        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/meLanbide11/lanbide.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/JavaScriptUtil.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/Parsers.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/InputMask.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/lanbide.js"></script>      
         <!-- listaComboBox modificado para que busque sin tener en cuenta las tildes -->
         <script type="text/javascript">
-            var APP_CONTEXT_PATH = '<%=request.getContextPath()%>';
+         var APP_CONTEXT_PATH = '<%=request.getContextPath()%>';
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // INICIO OBJETO COMBOBOX
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -196,8 +196,8 @@
                     } else if (tecla == 13) {
                         this.combo.ocultar();
                         if (this.combo.cod)
-                            this.combo.cod.select();
-                        else
+                            this.combo.cod.select();	
+						else
                             this.combo.des.select();
                     } else {
                         if (tecla > 95)
@@ -1006,66 +1006,66 @@
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // FIN OBJETO COMBO
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
-            function getOffsetLeft(el) {
-                var ol = el.offsetLeft;
-                while ((el = el.offsetParent) != null)
-                    ol += el.offsetLeft;
-                return ol;
+    function getOffsetLeft(el) {
+        var ol = el.offsetLeft;
+        while ((el = el.offsetParent) != null)
+            ol += el.offsetLeft;
+        return ol;
+    }
+
+    function getOffsetTop(el) {
+        var ot = el.offsetTop;
+        while ((el = el.offsetParent) != null)
+            ot += el.offsetTop;
+        return ot;
+    }
+
+    function isTabPage(el) {
+        var pane = false;
+        while ((el = el.parentElement) != null) {
+            if (el.className == 'tab-page')
+                pane = true;
+        }
+        return pane;
+    }
+
+    function CB_addElement(lista, elemento) {
+        var i = lista.length;
+        lista[i] = elemento;
+    }
+
+    function CB_deleteElement(lista, index) {
+        if (index < 0 || index >= lista.length)
+            return null;
+        var val = lista[index];
+        var i, j;
+        for (i = eval(index); i < (lista.length - 1); i++) {
+            j = i + 1;
+            lista[i] = lista[j];
+        }
+        lista.length--;
+        return val;
+    }
+
+    function CB_clearSelected() {
+        this.buscaLinea(-1);
+
+        if (this.items) {
+            for (var i = 0; i < this.items.length; i++) {
+                this.view.children[i].className = '';
             }
+        }
 
-            function getOffsetTop(el) {
-                var ot = el.offsetTop;
-                while ((el = el.offsetParent) != null)
-                    ot += el.offsetTop;
-                return ot;
-            }
-
-            function isTabPage(el) {
-                var pane = false;
-                while ((el = el.parentElement) != null) {
-                    if (el.className == 'tab-page')
-                        pane = true;
-                }
-                return pane;
-            }
-
-            function CB_addElement(lista, elemento) {
-                var i = lista.length;
-                lista[i] = elemento;
-            }
-
-            function CB_deleteElement(lista, index) {
-                if (index < 0 || index >= lista.length)
-                    return null;
-                var val = lista[index];
-                var i, j;
-                for (i = eval(index); i < (lista.length - 1); i++) {
-                    j = i + 1;
-                    lista[i] = lista[j];
-                }
-                lista.length--;
-                return val;
-            }
-
-            function CB_clearSelected() {
-                this.buscaLinea(-1);
-
-                if (this.items) {
-                    for (var i = 0; i < this.items.length; i++) {
-                        this.view.children[i].className = '';
-                    }
-                }
-
-                return true;
-            }
+        return true;
+    }
 
 
-        </script>    
+</script>    
 
         <script type="text/javascript">
 
             var mensajeValidacion = '';
-
+       
             var comboListaSexo;
             var listaCodigosSexo = new Array();
             var listaDescripcionesSexo = new Array();
@@ -1121,6 +1121,16 @@
                 buscaCodigoTitulacion(codTitulacionSeleccionado);
             }
 
+            var comboListaTitulacionRequerida;
+            var listaCodigosTitulacionRequerida = new Array();
+            var listaDescripcionesTitulacionRequerida = new Array();
+            function buscaCodigoTitulacionRequerida(codTitulacionRequerida) {
+                comboListaTitulacionRequerida.buscaCodigo(codTitulacionRequerida);
+            }
+            function cargarDatosTitulacionRequerida() {
+                var codTitulacionRequeridaSeleccionado = document.getElementById("codListaTitulacionRequerida").value;
+                buscaCodigoTitulacionRequerida(codTitulacionRequeridaSeleccionado);
+            }
             var comboListaCProfesionalidad;
             var listaCodigosCProfesionalidad = new Array();
             var listaDescripcionesCProfesionalidad = new Array();
@@ -1165,6 +1175,18 @@
                 buscaCodigoTipRetribucion(codTipRetribucionSeleccionado);
             }
 
+            var comboListaTitReqPuesto;
+            var listaCodigosTitReqPuesto = new Array();
+            var listaDescripcionesTitReqPuesto = new Array();
+            function buscaCodigoTitReqPuesto(codTitReqPuesto) {
+                comboListaTitReqPuesto.buscaCodigo(codTitReqPuesto);
+            }
+            function cargarDatosTitReqPuesto() {
+                var codTitReqPuestoSeleccionado = document.getElementById("codListaTitReqPuesto").value;
+                buscaCodigoTitReqPuesto(codTitReqPuestoSeleccionado);
+            }
+
+            
             function reemplazarPuntos(campo) {
                 try {
                     var valor = campo.value;
@@ -1183,10 +1205,12 @@
                     buscaCodigoFinFormativa('<%=datModif.getFinFormativa() != null ? datModif.getFinFormativa() : ""%>');
                     buscaCodigoOcupacion('<%=datModif.getOcupacion() != null ? datModif.getOcupacion() : ""%>');
                     buscaCodigoTitulacion('<%=datModif.getTitulacion() != null ? datModif.getTitulacion() : ""%>');
+                    buscaCodigoTitulacionRequerida('<%=datModif.getTitulacionRequerida() != null ? datModif.getTitulacionRequerida() : ""%>');
                     buscaCodigoCProfesionalidad('<%=datModif.getcProfesionalidad() != null ? datModif.getcProfesionalidad() : ""%>');
                     buscaCodigoJornada('<%=datModif.getJornada() != null ? datModif.getJornada() : ""%>');
                     buscaCodigoGrupoCotizacion('<%=datModif.getGrupoCotizacion() != null ? datModif.getGrupoCotizacion() : ""%>');
                     buscaCodigoTipRetribucion('<%=datModif.getTipRetribucion() != null ? datModif.getTipRetribucion() : ""%>');
+                    buscaCodigoTitReqPuesto('<%= datModif.getTitReqPuesto() != null ? datModif.getTitReqPuesto() : ""%>');
                 } else
                     alert('No hemos podido cargar los datos para modificar');
             }
@@ -1243,8 +1267,8 @@
                     }
 
                     if (nuevo != null && nuevo == "1") {
-                        parametros = "tarea=preparar&modulo=MELANBIDE11&operacion=crearNuevaContratacion&tipo=0"
-                                + "&expediente=<%=expediente%>"
+                                    parametros = "tarea=preparar&modulo=MELANBIDE11&operacion=crearNuevaContratacion&tipo=0"
+                                        + "&expediente=<%=expediente%>"
                                 + "&oferta=" + document.getElementById('oferta').value
                                 + "&idContrato1=" + document.getElementById('idContrato1').value
                                 + "&idContrato2=" + document.getElementById('idContrato2').value
@@ -1278,11 +1302,14 @@
                                 + "&costeContrato=" + document.getElementById('costeContrato').value
                                 + "&tipRetribucion=" + document.getElementById('codListaTipRetribucion').value
                                 + "&importeSub=" + document.getElementById('importeSub').value
-                                ;
-
+                            	// === NUEVOS CAMPOS ===
+                            	+ "&titReqPuesto=" + v('codListaTitReqPuesto')
+                            	+ "&funciones=" + encodeURIComponent(safeReplaceQuotes(v('funciones')))
+           
+                            ;
                     } else {
                         parametros = "tarea=preparar&modulo=MELANBIDE11&operacion=modificarContratacion&tipo=0"
-                                + "&id=<%=datModif != null && datModif.getId() != null ? datModif.getId().toString() : ""%>"
+                                                        + "&id=<%=datModif != null && datModif.getId() != null ? datModif.getId().toString() : ""%>"
                                 + "&oferta=" + document.getElementById('oferta').value
                                 + "&idContrato1=" + document.getElementById('idContrato1').value
                                 + "&idContrato2=" + document.getElementById('idContrato2').value
@@ -1316,7 +1343,14 @@
                                 + "&costeContrato=" + document.getElementById('costeContrato').value
                                 + "&tipRetribucion=" + document.getElementById('codListaTipRetribucion').value
                                 + "&importeSub=" + document.getElementById('importeSub').value
-                                ;
+
+                                
+                                
+                                
+                                // === NUEVOS CAMPOS ===
+                                + "&titReqPuesto=" + v('codListaTitReqPuesto')
+                                + "&funciones=" + encodeURIComponent(safeReplaceQuotes(v('funciones')))
+                            ;
                     }
                     try {
                         ajax.open("POST", url, false);
@@ -1336,7 +1370,7 @@
                                 xmlDoc = ajax.responseXML;
                             }//if(navigator.appName.indexOf("Internet Explorer")!=-1)
                         }//if (ajax.readyState==4 && ajax.status==200)
-                        nodos = xmlDoc.getElementsByTagName("RESPUESTA");
+                            nodos = xmlDoc.getElementsByTagName("RESPUESTA");
                         var elemento = nodos[0];
                         var hijos = elemento.childNodes;
                         var codigoOperacion = null;
@@ -1344,37 +1378,37 @@
                         var fila = new Array();
                         var nodoFila;
                         var hijosFila;
-                        for (j = 0; hijos != null && j < hijos.length; j++) {
+                            for (j = 0; hijos != null && j < hijos.length; j++) {
                             if (hijos[j].nodeName == "CODIGO_OPERACION") {
                                 codigoOperacion = hijos[j].childNodes[0].nodeValue;
                                 lista[j] = codigoOperacion;
                             }//if(hijos[j].nodeName=="CODIGO_OPERACION")                      
-                            else if (hijos[j].nodeName == "FILA") {
+                                else if (hijos[j].nodeName == "FILA") {
                                 nodoFila = hijos[j];
                                 hijosFila = nodoFila.childNodes;
-                                for (var cont = 0; cont < hijosFila.length; cont++) {
+                                    for (var cont = 0; cont < hijosFila.length; cont++) {
                                     if (hijosFila[cont].nodeName == "ID") {
                                         if (hijosFila[cont].childNodes.length > 0) {
                                             fila[0] = hijosFila[cont].childNodes[0].nodeValue;
                                         } else {
                                             fila[0] = '-';
-                                        }
+                                    }
                                     } else if (hijosFila[cont].nodeName == "NOFECONT") {
                                         if (hijosFila[cont].childNodes[0].nodeValue != "null") {
                                             fila[1] = hijosFila[cont].childNodes[0].nodeValue;
                                         } else {
                                             fila[1] = '-';
-                                        }
+                                }
                                     } else if (hijosFila[cont].nodeName == "IDCONT1") {
                                         if (hijosFila[cont].childNodes[0].nodeValue != "null") {
                                             fila[2] = hijosFila[cont].childNodes[0].nodeValue;
                                         } else {
                                             fila[2] = '-';
-                                        }
+                            }
                                     } else if (hijosFila[cont].nodeName == "IDCONT2") {
                                         if (hijosFila[cont].childNodes.length > 0) {
                                             fila[3] = hijosFila[cont].childNodes[0].nodeValue;
-                                        } else {
+                        } else {
                                             fila[3] = '-';
                                         }
                                     } else if (hijosFila[cont].nodeName == "DNICONT") {
@@ -1834,6 +1868,26 @@
                  mensajeValidacion = '<%=meLanbide11I18n.getMensaje(idiomaUsuario, "msg.importeSub")%>';
                  return false;
                  }*/
+                // =============================
+                // NUEVO: Validación FUNCIONES (máximo 200)
+                // =============================
+
+                var funciones = document.getElementById('funciones').value;    
+    
+
+                // =============================
+                // NUEVO: Lectura TITREQPUESTO (no obligatorio, como JORN)
+                // =============================
+                // Soporte doble: patrón legacy (codListaTitReqPuesto) o <select id="titReqPuesto">
+                var titReqPuesto = document.getElementById('codListaTitReqPuesto'),value;
+    
+                // Si en el futuro fuera obligatorio, descomentar:
+                /*
+                    if (titReqPuesto == null || titReqPuesto == '') {
+                     mensajeValidacion = '<%=meLanbide11I18n.getMensaje(idiomaUsuario, "msg.titReqPuesto")%>';
+                     return false;
+                    }
+                */
 
 
                 return correcto;
@@ -2168,7 +2222,7 @@
                     <br><br><br><br>
 
                     <div class="lineaFormulario">
-                        <div style="width: 250px; float: left;" class="etiqueta">
+                    <div style="width: 250px; float: left;" class="etiqueta">
                             <%=meLanbide11I18n.getMensaje(idiomaUsuario,"label.desTitulacionLibre")%>
                         </div>
                         <div>
@@ -2188,7 +2242,7 @@
                             <div>
                                 <input type="text" name="codListaTitulacion" id="codListaTitulacion" size="12" class="inputTexto" value="" onkeyup="xAMayusculas(this);" />
                                 <input type="text" name="descListaTitulacion"  id="descListaTitulacion" size="120" class="inputTexto" readonly="true" value="" />
-                                <a href="" id="anchorListaTitulacion" name="anchorListaTitulacion">
+                            <a href="" id="anchorListaTitulacion" name="anchorListaTitulacion">
                                     <span class="fa fa-chevron-circle-down" aria-hidden="true" id="botonAplicacion"
                                           name="botonAplicacion" style="cursor:pointer;"></span>
                                 </a>
@@ -2196,6 +2250,35 @@
                         </div>
                     </div>
 
+                   <!-- Campo FUNCIONES -->
+<div class="lineaFormulario">
+  <div class="etiqueta" style="width: 250px; float: left;">
+    <%=meLanbide11I18n.getMensaje(idiomaUsuario,"contrataciones.funciones.label")%>
+  </div>
+  <div>
+    <div style="float: left;">
+      <input id="funciones" name="funciones" type="text" class="inputTexto" size="120" maxlength="200"
+             value="<%=datModif != null && datModif.getFunciones() != null ? datModif.getFunciones() : ""%>"/>
+    </div>
+  </div>
+</div>
+<br><br>
+
+
+<div class="lineaFormulario">
+  <div class="etiqueta" style="width: 250px; float: left;">
+    <%=meLanbide11I18n.getMensaje(idiomaUsuario,"contrataciones.titreqpuesto.label")%>
+  </div>
+  <div>
+    <div>
+      <input type="text" name="codListaTitReqPuesto" id="codListaTitReqPuesto" size="12" class="inputTexto" value="" onkeyup="xAMayusculas(this);" />
+      <input type="text" name="descListaTitReqPuesto" id="descListaTitReqPuesto" size="120" class="inputTexto" readonly="true" value="" />
+      <a href="" id="anchorListaTitReqPuesto" name="anchorListaTitReqPuesto">
+        <span class="fa fa-chevron-circle-down" aria-hidden="true" id="botonAplicacion" name="botonAplicacion" style="cursor:pointer;"></span>
+      </a>
+    </div>
+  </div>
+</div>
                     <br><br>
                     <div class="lineaFormulario">
                         <div class="etiqueta" style="width: 250px; float: left;">
@@ -2539,12 +2622,26 @@
                 comboListaTipRetribucion = new Combo("ListaTipRetribucion");
                 comboListaTipRetribucion.addItems(listaCodigosTipRetribucion, listaDescripcionesTipRetribucion);
                 comboListaTipRetribucion.change = cargarDatosTipRetribucion;
-
+                
                 var nuevo = "<%=nuevo%>";
                 if (nuevo == 0) {
                     rellenardatModificar();
                 }
+                
+                /*desplegable titReqPuesto*/
 
+                listaCodigosTitReqPuesto[0] = "";
+                listaDescripcionesTitReqPuesto[0] = "";
+                contador = 0;
+                <logic:iterate id="titReqPuesto" name="listaTitReqPuesto" scope="request">
+                listaCodigosTitReqPuesto[contador] = ['<bean:write name="titReqPuesto" property="des_val_cod" />'];
+                listaDescripcionesTitReqPuesto[contador] = ['<bean:write name="titReqPuesto" property="des_nom" />'];
+                contador++;
+                </logic:iterate>
+                comboListaTitReqPuesto = new Combo("ListaTitReqPuesto");
+                comboListaTitReqPuesto.addItems(listaCodigosTitReqPuesto, listaDescripcionesTitReqPuesto);
+                comboListaTitReqPuesto.change = cargarDatosTitReqPuesto;
+                                              
             </script>
             <div id="popupcalendar" class="text"></div>        
         </div>

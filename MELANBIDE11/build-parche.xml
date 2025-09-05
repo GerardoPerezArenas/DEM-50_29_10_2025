@@ -13,7 +13,7 @@
     <property name="modulo.src.text" value="${modulo.source}/es/altia/flexia/integracion/moduloexterno/MELANBIDE11/i18n/text"/>
     <property name="modulo.build.web" value="${modulo.build}/${modulo.build.root}"/>
    
-    <property name="flexia.home" value="C:\apache-tomcat\webapps\Flexia18"/>
+    <property name="flexia.home" value="C:\apache-tomcat-7.0.104-64Bit\webapps\Flexia18"/>
     <property name="flexia.classes" value="C:\DESARROLLO\FLEXIA\Libreria_FLEXIA_18\classes"/>
 
     <!-- =============================  ClassPath ============================== -->

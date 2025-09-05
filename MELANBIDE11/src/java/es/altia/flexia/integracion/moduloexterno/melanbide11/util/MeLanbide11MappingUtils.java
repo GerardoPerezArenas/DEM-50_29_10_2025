@@ -59,6 +59,21 @@ public class MeLanbide11MappingUtils {
         return null;
     }
 
+    /**
+     * Comprueba de forma segura si el ResultSet contiene una columna con la etiqueta dada.
+     * Evita lanzar SQLException en mapeos parciales cuando algunos SELECT no incluyen
+     * columnas recién añadidas.
+     */
+    private boolean hasColumn(ResultSet rs, String columnLabel) {
+        try {
+            // Acceso por nombre; devolverá excepción si no existe la etiqueta.
+            rs.findColumn(columnLabel);
+            return true;
+        } catch (SQLException ex) {
+            return false;
+        }
+    }
+
     private Object mapearContratacionVO(ResultSet rs) throws SQLException {
         ContratacionVO contratacion = new ContratacionVO();
 
@@ -126,6 +141,11 @@ public class MeLanbide11MappingUtils {
         if (aux5 != 0) {
             contratacion.setImporteSub(aux5.doubleValue());
         }
+
+        contratacion.setTitReqPuesto(rs.getString("TITREQPUESTO"));
+        
+        contratacion.setFunciones(rs.getString("FUNCIONES"));
+        
         
         
         return contratacion;

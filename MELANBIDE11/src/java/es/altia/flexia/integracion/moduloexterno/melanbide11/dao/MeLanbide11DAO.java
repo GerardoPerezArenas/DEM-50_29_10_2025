@@ -193,13 +193,19 @@ public class MeLanbide11DAO {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             fechaFin = formatoFecha.format(nuevaContratacion.getFechaFin());
         }
+        // === NUEVO: preparamos valores (escape de comillas y null-safe) ===
+    String titReq = nuevaContratacion.getTitReqPuesto();
+    titReq = (titReq != null) ? titReq.replace("'", "''") : null;
+    String funciones = nuevaContratacion.getFunciones();
+    funciones = (funciones != null) ? funciones.replace("'", "''") : null;
         try {
 
             int id = recogerIDInsertar(ConfigurationParameter.getParameter(ConstantesMeLanbide11.SEQ_MELANBIDE11_CONTRATACION, ConstantesMeLanbide11.FICHERO_PROPIEDADES), con);
             query = "INSERT INTO " + ConfigurationParameter.getParameter(ConstantesMeLanbide11.MELANBIDE11_CONTRATACION, ConstantesMeLanbide11.FICHERO_PROPIEDADES)
                     + "(ID,NUM_EXP,NOFECONT,IDCONT1,IDCONT2,DNICONT,NOMCONT,"
                     + "APE1CONT,APE2CONT,FECHNACCONT,EDADCONT,SEXOCONT,MAY55CONT,ACCFORCONT,CODFORCONT,DENFORCONT,"
-                    + "PUESTOCONT,CODOCUCONT,OCUCONT,DESTITULACION,TITULACION,CPROFESIONALIDAD,MODCONT,JORCONT,PORCJOR,HORASCONV,FECHINICONT,FECHFINCONT,DURCONT,GRSS,DIRCENTRCONT,NSSCONT,CSTCONT,TIPRSB,IMPSUBVCONT) "
+                    + "PUESTOCONT,CODOCUCONT,OCUCONT,DESTITULACION,TITULACION,CPROFESIONALIDAD,MODCONT,JORCONT,PORCJOR,HORASCONV,FECHINICONT,FECHFINCONT,DURCONT,GRSS,DIRCENTRCONT,NSSCONT,CSTCONT,TIPRSB,IMPSUBVCONT,"
+                    +  "TITREQPUESTO,FUNCIONES) " 
                     + " VALUES (" + id
                     + ", '" + nuevaContratacion.getNumExp()
                     + "', '" + nuevaContratacion.getOferta()
@@ -235,6 +241,8 @@ public class MeLanbide11DAO {
                     + "', " + nuevaContratacion.getCosteContrato()
                     + ", '" + nuevaContratacion.getTipRetribucion()
                     + "'," + nuevaContratacion.getImporteSub()
+                    + ", " + (titReq != null ? "'" + titReq + "'" : "null")
+                    + ", " + (funciones != null ? "'" + funciones + "'" : "null")
                     + ")";
             if (log.isDebugEnabled()) {
                 log.debug("sql = " + query);
@@ -281,7 +289,11 @@ public class MeLanbide11DAO {
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
             fechaFin = formatoFecha.format(datModif.getFechaFin());
         }
-        
+        String titReq = datModif.getTitReqPuesto();
+        titReq = (titReq != null) ? titReq.replace("'", "''") : null;
+        String funciones = datModif.getFunciones();
+        funciones = (funciones != null) ? funciones.replace("'", "''") : null;
+
         
         try {
             query = "UPDATE " + ConfigurationParameter.getParameter(ConstantesMeLanbide11.MELANBIDE11_CONTRATACION, ConstantesMeLanbide11.FICHERO_PROPIEDADES)
@@ -318,6 +330,8 @@ public class MeLanbide11DAO {
                     + ", CSTCONT=" + datModif.getCosteContrato()
                     + ", TIPRSB='" + datModif.getTipRetribucion()+ "'"
                     + ", IMPSUBVCONT=" + datModif.getImporteSub()
+                    + ", TITREQPUESTO=" + (titReq != null ? "'" + titReq + "'" : "null")
+                    + ", FUNCIONES=" + (funciones != null ? "'" + funciones + "'" : "null")
                     + " WHERE ID=" + datModif.getId();
             if (log.isDebugEnabled()) {
                 log.debug("sql = " + query);

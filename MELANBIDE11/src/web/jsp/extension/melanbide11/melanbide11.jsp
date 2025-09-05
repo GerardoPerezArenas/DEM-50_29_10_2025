@@ -1,22 +1,22 @@
 <%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
-<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
-<%@taglib uri="/WEB-INF/tlds/c.tld" prefix="c" %>
+<%@ taglib uri="/WEB-INF/struts-bean.tld"  prefix="bean"  %>
+<%@ taglib uri="/WEB-INF/tlds/c.tld"       prefix="c"     %>
 
-<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide11.i18n.MeLanbide11I18n" %>
-<%@page import="es.altia.agora.business.escritorio.UsuarioValueObject" %>
-<%@page import="es.altia.common.service.config.Config"%>
-<%@page import="es.altia.common.service.config.ConfigServiceHelper"%>
-<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide11.vo.ContratacionVO"%>
-<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide11.util.ConfigurationParameter"%>
-<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide11.util.ConstantesMeLanbide11"%>
-<%@page import="java.util.ArrayList" %>
-<%@page import="java.util.List" %>
-<%@page import="java.text.DateFormat" %>
-<%@page import="java.text.SimpleDateFormat" %>
+<%@ page import="es.altia.flexia.integracion.moduloexterno.melanbide11.i18n.MeLanbide11I18n" %>
+<%@ page import="es.altia.agora.business.escritorio.UsuarioValueObject" %>
+<%@ page import="es.altia.common.service.config.Config" %>
+<%@ page import="es.altia.common.service.config.ConfigServiceHelper" %>
+<%@ page import="es.altia.flexia.integracion.moduloexterno.melanbide11.vo.ContratacionVO" %>
+<%@ page import="es.altia.flexia.integracion.moduloexterno.melanbide11.util.ConfigurationParameter" %>
+<%@ page import="es.altia.flexia.integracion.moduloexterno.melanbide11.util.ConstantesMeLanbide11" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.text.DateFormat" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 <%
-int idiomaUsuario = 1;
-    if(request.getParameter("idioma") != null)
+    int idiomaUsuario = 1;
+   if(request.getParameter("idioma") != null)
     {
         try
         {
@@ -135,14 +135,21 @@ int idiomaUsuario = 1;
         var fila = new Array();
         var nodoFila;
         var hijosFila;
+        
         for (j = 0; hijos != null && j < hijos.length; j++) {
             if (hijos[j].nodeName == "CODIGO_OPERACION") {
                 codigoOperacion = hijos[j].childNodes[0].nodeValue;
                 listaNueva[j] = codigoOperacion;
-            }//if(hijos[j].nodeName=="CODIGO_OPERACION")                      
-            else if (hijos[j].nodeName == "FILA") {
+            } else if (hijos[j].nodeName == "FILA") {
                 nodoFila = hijos[j];
                 hijosFila = nodoFila.childNodes;
+                
+                // Inicializar array con 36 elementos en "-"
+                fila = new Array(36);
+                for (var init = 0; init < 36; init++) {
+                    fila[init] = '-';
+                }
+                
                 for (var cont = 0; cont < hijosFila.length; cont++) {
                     if (hijosFila[cont].nodeName == "ID") {
                         if (hijosFila[cont].childNodes.length > 0) {
@@ -252,13 +259,13 @@ int idiomaUsuario = 1;
                         } else {
                             fila[17] = '-';
                         }
-                    } else if (hijosFila[cont].nodeName == "DESTITULACION") {
+                    } else if (hijosFila[cont].nodeName == "TITREQPUESTO") {
                         if (hijosFila[cont].childNodes[0].nodeValue != "null") {
                             fila[18] = hijosFila[cont].childNodes[0].nodeValue;
                         } else {
                             fila[18] = '-';
                         }
-                    } else if (hijosFila[cont].nodeName == "TITULACION") {
+                    } else if (hijosFila[cont].nodeName == "FUNCIONES") {
                         if (hijosFila[cont].childNodes[0].nodeValue != "null") {
                             fila[19] = hijosFila[cont].childNodes[0].nodeValue;
                         } else {
@@ -356,7 +363,20 @@ int idiomaUsuario = 1;
                             fila[33] = tex;
                         } else {
                             fila[33] = '-';
+                        }                   
+                                        
+                   } else if (hijosFila[cont].nodeName == "DESTITULACION") {
+                        if (hijosFila[cont].childNodes[0].nodeValue != "null") {
+                            fila[34] = hijosFila[cont].childNodes[0].nodeValue;
+                        } else {
+                            fila[34] = '-';
                         }
+                    } else if (hijosFila[cont].nodeName == "TITULACION") {
+                        if (hijosFila[cont].childNodes[0].nodeValue != "null") {
+                            fila[35] = hijosFila[cont].childNodes[0].nodeValue;
+                        } else {
+                            fila[35] = '-';
+                        }         
                     }
                 }
                 listaNueva[j] = fila;
@@ -373,10 +393,19 @@ int idiomaUsuario = 1;
         listaAccesosTabla = new Array();
         for (var i = 1; i < result.length; i++) {
             fila = result[i];
-            listaAccesos[i - 1] = [fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9], fila[10], fila[11], fila[12],
-                fila[13], fila[14], fila[15], fila[16], fila[17], fila[18], fila[19], fila[20], fila[21], fila[22], fila[23], fila[24], fila[25], fila[26], fila[27], fila[28], fila[29], fila[30], fila[31], fila[32], fila[33]];
-            listaAccesosTabla[i - 1] = [fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9], fila[10], fila[11], fila[12],
-                fila[13], fila[14], fila[15], fila[16], fila[17], fila[18], fila[19], fila[20], fila[21], fila[22], fila[23], fila[24], fila[25], fila[26], fila[27], fila[28], fila[29], fila[30], fila[31], fila[32], fila[33]];
+            // Copiamos posiciones 0..35
+            listaAccesos[i - 1] = [
+                fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9],
+                fila[10], fila[11], fila[12], fila[13], fila[14], fila[15], fila[16], fila[17], fila[18], fila[19],
+                fila[20], fila[21], fila[22], fila[23], fila[24], fila[25], fila[26], fila[27], fila[28], fila[29],
+                fila[30], fila[31], fila[32], fila[33], fila[34], fila[35]
+            ];
+            listaAccesosTabla[i - 1] = [
+                fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9],
+                fila[10], fila[11], fila[12], fila[13], fila[14], fila[15], fila[16], fila[17], fila[18], fila[19],
+                fila[20], fila[21], fila[22], fila[23], fila[24], fila[25], fila[26], fila[27], fila[28], fila[29],
+                fila[30], fila[31], fila[32], fila[33], fila[34], fila[35]
+            ];
         }
 
         inicializarTabla();
@@ -409,8 +438,12 @@ int idiomaUsuario = 1;
         tabaAccesos.addColumna('200', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.puesto")%>");
         tabaAccesos.addColumna('100', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.codOcupacion")%>");
         tabaAccesos.addColumna('330', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.ocupacion")%>");
-        tabaAccesos.addColumna('330', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.desTitulacion")%>");
-        tabaAccesos.addColumna('330', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.titulacion")%>");
+
+        // Nuevas columnas intermedias
+        tabaAccesos.addColumna('330', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.titreqpuesto")%>");
+        tabaAccesos.addColumna('330', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.funciones")%>");
+        
+        
         tabaAccesos.addColumna('330', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.cProfesionalidad")%>");
         tabaAccesos.addColumna('150', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.modalidadContrato")%>");
         tabaAccesos.addColumna('100', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.jornada")%>");
@@ -425,8 +458,10 @@ int idiomaUsuario = 1;
         tabaAccesos.addColumna('70', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.costeContrato")%>");
         tabaAccesos.addColumna('70', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.tipRetribucion")%>");
         tabaAccesos.addColumna('70', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.importeSub")%>");
-
-        //tabaAccesos.numColumnasFijas = 3;              
+        
+        // Históricos al final
+        tabaAccesos.addColumna('330', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.historico.desTitulacion")%> (consulta)");
+        tabaAccesos.addColumna('330', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.historico.titulacion")%> (consulta)");
         tabaAccesos.displayCabecera = true;
         tabaAccesos.height = 360;
         tabaAccesos.altoCabecera = 40;
@@ -440,44 +475,46 @@ int idiomaUsuario = 1;
 </script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/jquery/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/DataTables/datatables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/scripts/DataTables/datatables.min.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/extension/melanbide11/melanbide11.css"/>
+<link  rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/scripts/DataTables/datatables.min.css"/>
+<link  rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/extension/melanbide11/melanbide11.css"/>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/validaciones.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/popup.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/FixedColumnsTable.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/meLanbide11/JavaScriptUtil.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/JavaScriptUtil.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/Parsers.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/InputMask.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/lanbide.js"></script>      
 <script type="text/javascript">
     var APP_CONTEXT_PATH = '<%=request.getContextPath()%>';
 </script>
-<!-- Eventos onKeyPress compatibilidad firefox  -->
-<!--<script type="text/javascript" src="http://code.jquery.com/jquery-1.4.4.js"></script>-->
+
 <div class="tab-page" id="tabPage111" style="height:520px; width: 100%;">
-    <h2 class="tab" id="pestana111"><%=meLanbide11I18n.getMensaje(idiomaUsuario,"label.titulo.pestana")%></h2> 
+    <h2 class="tab" id="pestana111"><%=meLanbide11I18n.getMensaje(idiomaUsuario,"label.titulo.pestana")%></h2>
     <script type="text/javascript">tp1.addTabPage(document.getElementById("tabPage111"));</script>
     <br/>
     <h2 class="legendAzul" id="pestanaPrinc"><%=meLanbide11I18n.getMensaje(idiomaUsuario,"label.tituloPrincipal")%></h2>
-    <div>    
+    <div>
         <br>
-        <div id="divGeneral">     
-            <div id="listaAccesos"  align="center"></div>
+        <div id="divGeneral">
+            <div id="listaAccesos" align="center"></div>
         </div>
         <br/><br>
         <div class="botonera" style="text-align: center;">
-            <input type="button" id="btnNuevoAcceso" name="btnNuevoAcceso" class="botonGeneral"  value="<%=meLanbide11I18n.getMensaje(idiomaUsuario, "btn.nuevo")%>" onclick="pulsarNuevaContratacion();">
+            <input type="button" id="btnNuevoAcceso"     name="btnNuevoAcceso"     class="botonGeneral" value="<%=meLanbide11I18n.getMensaje(idiomaUsuario, "btn.nuevo")%>"     onclick="pulsarNuevaContratacion();">
             <input type="button" id="btnModificarAcceso" name="btnModificarAcceso" class="botonGeneral" value="<%=meLanbide11I18n.getMensaje(idiomaUsuario, "btn.modificar")%>" onclick="pulsarModificarContratacion();">
-            <input type="button" id="btnEliminarAcceso" name="btnEliminarAcceso"   class="botonGeneral" value="<%=meLanbide11I18n.getMensaje(idiomaUsuario, "btn.eliminar")%>" onclick="pulsarEliminarContratacion();">
+            <input type="button" id="btnEliminarAcceso"  name="btnEliminarAcceso"  class="botonGeneral" value="<%=meLanbide11I18n.getMensaje(idiomaUsuario, "btn.eliminar")%>"  onclick="pulsarEliminarContratacion();">
         </div>
-    </div>  
+    </div>
 </div>
-<script  type="text/javascript">
+<script type="text/javascript">
     var tabaAccesos;
     var listaAccesos = new Array();
     var listaAccesosTabla = new Array();
 
     inicializarTabla();
 
-    <%  		
-            ContratacionVO objectVO = null;
+<%
+       ContratacionVO objectVO = null;
             List<ContratacionVO> List = null;
             if(request.getAttribute("listaAccesos")!=null){
                 List = (List<ContratacionVO>)request.getAttribute("listaAccesos");
@@ -543,22 +580,22 @@ int idiomaUsuario = 1;
                     }else{
                         edad="-";
                     }
-                    String sexo="";
-                    if(objectVO.getDesSexo()!=null){
-                        String descripcion = objectVO.getDesSexo();
+                    String sexo="";            
+                    if (objectVO.getDesSexo() != null) {
+                String descripcion = objectVO.getDesSexo();
                         
-                        String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
-                        String[] descripcionDobleIdioma = (descripcion!=null?descripcion.split(barraSeparadoraDobleIdiomaDesple):null);
-                        if(descripcionDobleIdioma!=null && descripcionDobleIdioma.length>1){
-                            if(idiomaUsuario==ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA){
-                                descripcion=descripcionDobleIdioma[1];
-                            }else{
+                String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
+                String[] descripcionDobleIdioma = (descripcion != null ? descripcion.split(barraSeparadoraDobleIdiomaDesple) : null);
+                if (descripcionDobleIdioma != null && descripcionDobleIdioma.length > 1) {
+                    if (idiomaUsuario == ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA) {
+                        descripcion = descripcionDobleIdioma[1];
+                    } else {
                                 // Cogemos la primera posición que debería ser castellano
-                                descripcion=descripcionDobleIdioma[0];
-                            }
-                        }
-                        sexo = descripcion;
-                    }else{
+                        descripcion = descripcionDobleIdioma[0];
+                    }
+                }
+                sexo = descripcion;
+}else{
                         sexo="-";
                     }
                     String mayor55="";
@@ -608,18 +645,21 @@ int idiomaUsuario = 1;
                             ocupacion="-";
                         }
                     }
-                    String desTitulacion="";
-                    if(objectVO.getDesTitulacionLibre()!=null){
-                        desTitulacion = objectVO.getDesTitulacionLibre();
-                    }else{
-                        desTitulacion="-";
-                    }
-                    String titulacion="";
-                    if(objectVO.getDesTitulacion()!=null){
-                        titulacion = objectVO.getDesTitulacion();
-                    }else{
-                        titulacion="-";
-                    }
+                    
+                    String titReqPuesto="";
+if (objectVO.getTitReqPuesto()!=null && !"".equals(objectVO.getTitReqPuesto().trim())){
+    titReqPuesto = objectVO.getTitReqPuesto();
+} else {
+    titReqPuesto = "-";
+}
+String funciones="";
+if (objectVO.getFunciones()!=null && !"".equals(objectVO.getFunciones().trim())){
+    funciones = objectVO.getFunciones();
+} else {
+    funciones = "-";
+}
+
+
                     String cProfesionalidad="";
                     if(objectVO.getDesCProfesionalidad()!=null){
                         cProfesionalidad = objectVO.getDesCProfesionalidad();
@@ -632,25 +672,25 @@ int idiomaUsuario = 1;
                     }else{
                         modalidadContrato="-";
                     }
-                    String jornada="";
-                    if(objectVO.getDesJornada()!=null){
-                        String descripcion = objectVO.getDesJornada();
+                    String jornada="";            
+                    if (objectVO.getDesJornada() != null) {
+                String descripcion = objectVO.getDesJornada();
                         
-                        String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
-                        String[] descripcionDobleIdioma = (descripcion!=null?descripcion.split(barraSeparadoraDobleIdiomaDesple):null);
-                        if(descripcionDobleIdioma!=null && descripcionDobleIdioma.length>1){
-                            if(idiomaUsuario==ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA){
-                                descripcion=descripcionDobleIdioma[1];
-                            }else{
+                String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
+                String[] descripcionDobleIdioma = (descripcion != null ? descripcion.split(barraSeparadoraDobleIdiomaDesple) : null);
+                if (descripcionDobleIdioma != null && descripcionDobleIdioma.length > 1) {
+                    if (idiomaUsuario == ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA) {
+                        descripcion = descripcionDobleIdioma[1];
+                    } else {
                                 // Cogemos la primera posición que debería ser castellano
-                                descripcion=descripcionDobleIdioma[0];
-                            }
-                        }
-                        jornada = descripcion;
+                        descripcion = descripcionDobleIdioma[0];
+                    }
+                }
+                jornada = descripcion;
                     }else{
                         jornada="-";
                     }
-                    String porcJornada="";
+           String porcJornada="";
                     if(objectVO.getPorcJornada()!=null){
                         porcJornada=String.valueOf((objectVO.getPorcJornada().toString()).replace(".",","));
                     }else{
@@ -681,24 +721,24 @@ int idiomaUsuario = 1;
                         mesesContrato="-";
                     }
                     String grupoCotizacion="";
-                    if(objectVO.getDesGrupoCotizacion()!=null){
-                        String descripcion = objectVO.getDesGrupoCotizacion();
+            if (objectVO.getDesGrupoCotizacion() != null) {
+                String descripcion = objectVO.getDesGrupoCotizacion();
                         
-                        String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
-                        String[] descripcionDobleIdioma = (descripcion!=null?descripcion.split(barraSeparadoraDobleIdiomaDesple):null);
-                        if(descripcionDobleIdioma!=null && descripcionDobleIdioma.length>1){
-                            if(idiomaUsuario==ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA){
-                                descripcion=descripcionDobleIdioma[1];
-                            }else{
+                String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
+                String[] descripcionDobleIdioma = (descripcion != null ? descripcion.split(barraSeparadoraDobleIdiomaDesple) : null);
+                if (descripcionDobleIdioma != null && descripcionDobleIdioma.length > 1) {
+                    if (idiomaUsuario == ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA) {
+                        descripcion = descripcionDobleIdioma[1];
+                    } else {
                                 // Cogemos la primera posición que debería ser castellano
-                                descripcion=descripcionDobleIdioma[0];
-                            }
-                        }
-                        grupoCotizacion = descripcion;
-                    }else{
+                        descripcion = descripcionDobleIdioma[0];
+                    }
+                }
+                grupoCotizacion = descripcion;
+}else{
                         grupoCotizacion="-";
                     }
-                    String direccionCT="";
+            String direccionCT="";
                     if(objectVO.getDireccionCT()!=null){
                         direccionCT=objectVO.getDireccionCT();
                     }else{
@@ -717,21 +757,21 @@ int idiomaUsuario = 1;
                         costeContrato="-";
                     }
                     String tipRetribucion="";
-                    if(objectVO.getDesTipRetribucion()!=null){
-                        String descripcion = objectVO.getDesTipRetribucion();
+            if (objectVO.getDesTipRetribucion() != null) {
+                String descripcion = objectVO.getDesTipRetribucion();
                         
-                        String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
-                        String[] descripcionDobleIdioma = (descripcion!=null?descripcion.split(barraSeparadoraDobleIdiomaDesple):null);
-                        if(descripcionDobleIdioma!=null && descripcionDobleIdioma.length>1){
-                            if(idiomaUsuario==ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA){
-                                descripcion=descripcionDobleIdioma[1];
-                            }else{
+                String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
+                String[] descripcionDobleIdioma = (descripcion != null ? descripcion.split(barraSeparadoraDobleIdiomaDesple) : null);
+                if (descripcionDobleIdioma != null && descripcionDobleIdioma.length > 1) {
+                    if (idiomaUsuario == ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA) {
+                        descripcion = descripcionDobleIdioma[1];
+                    } else {
                                 // Cogemos la primera posición que debería ser castellano
-                                descripcion=descripcionDobleIdioma[0];
-                            }
-                        }
-                        tipRetribucion = descripcion;
-                    }else{
+                        descripcion = descripcionDobleIdioma[0];
+                    }
+                }
+                tipRetribucion = descripcion;
+}else{
                         tipRetribucion="-";
                     }
                     
@@ -741,24 +781,36 @@ int idiomaUsuario = 1;
                     }else{
                         importeSub="-";
                     }
+                    String desTitulacion="";
+                    if(objectVO.getDesTitulacionLibre()!=null){
+                        desTitulacion = objectVO.getDesTitulacionLibre();
+                    }else{
+                        desTitulacion="-";
+                    }
+                    String titulacion="";
+                    if(objectVO.getDesTitulacion()!=null){
+                        titulacion = objectVO.getDesTitulacion();
+                    }else{
+                        titulacion="-";
+                    }
         
 
-    %>
+%>
+ 
     listaAccesos[<%=indice%>] = ['<%=objectVO.getId()%>', '<%=oferta%>', '<%=idContrato1%>', '<%=idContrato2%>', '<%=dni%>',
         '<%=nombre%>', '<%=apellido1%>', '<%=apellido2%>', '<%=fechaNacimiento%>', '<%=edad%>', '<%=sexo%>', '<%=mayor55%>',
-        '<%=finFormativa%>', '<%=codFormativa%>', '<%=denFormativa%>', '<%=puesto%>', '<%=codOcupacion%>', '<%=ocupacion%>', '<%=desTitulacion%>', '<%=titulacion%>', '<%=cProfesionalidad%>', '<%=modalidadContrato%>', '<%=jornada%>', '<%=porcJornada%>', '<%=horasConv%>', '<%=fechaInicio%>',
-        '<%=fechaFin%>', '<%=mesesContrato%>', '<%=grupoCotizacion%>', '<%=direccionCT%>', '<%=numSS%>', '<%=costeContrato%>', '<%=tipRetribucion%>', '<%=importeSub%>'];
+        '<%=finFormativa%>', '<%=codFormativa%>', '<%=denFormativa%>', '<%=puesto%>', '<%=codOcupacion%>', '<%=ocupacion%>', '<%=titReqPuesto%>', '<%=funciones%>', '<%=cProfesionalidad%>', '<%=modalidadContrato%>', '<%=jornada%>', '<%=porcJornada%>', '<%=horasConv%>', '<%=fechaInicio%>',
+        '<%=fechaFin%>', '<%=mesesContrato%>', '<%=grupoCotizacion%>', '<%=direccionCT%>', '<%=numSS%>', '<%=costeContrato%>', '<%=tipRetribucion%>', '<%=importeSub%>', '<%=desTitulacion%>', '<%=titulacion%>', '<%=desTitulacion%>', '<%=titulacion%>'];
     listaAccesosTabla[<%=indice%>] = ['<%=objectVO.getId()%>', '<%=oferta%>', '<%=idContrato1%>', '<%=idContrato2%>', '<%=dni%>',
         '<%=nombre%>', '<%=apellido1%>', '<%=apellido2%>', '<%=fechaNacimiento%>', '<%=edad%>', '<%=sexo%>', '<%=mayor55%>',
-        '<%=finFormativa%>', '<%=codFormativa%>', '<%=denFormativa%>', '<%=puesto%>', '<%=codOcupacion%>', '<%=ocupacion%>', '<%=desTitulacion%>', '<%=titulacion%>', '<%=cProfesionalidad%>', '<%=modalidadContrato%>', '<%=jornada%>', '<%=porcJornada%>', '<%=horasConv%>', '<%=fechaInicio%>',
-        '<%=fechaFin%>', '<%=mesesContrato%>', '<%=grupoCotizacion%>', '<%=direccionCT%>', '<%=numSS%>', '<%=costeContrato%>', '<%=tipRetribucion%>', '<%=importeSub%>'];
-    <%
-                }// for
-            }// if
-    %>
+        '<%=finFormativa%>', '<%=codFormativa%>', '<%=denFormativa%>', '<%=puesto%>', '<%=codOcupacion%>', '<%=ocupacion%>', '<%=titReqPuesto%>', '<%=funciones%>', '<%=cProfesionalidad%>', '<%=modalidadContrato%>', '<%=jornada%>', '<%=porcJornada%>', '<%=horasConv%>', '<%=fechaInicio%>',
+        '<%=fechaFin%>', '<%=mesesContrato%>', '<%=grupoCotizacion%>', '<%=direccionCT%>', '<%=numSS%>', '<%=costeContrato%>',  '<%=tipRetribucion%>', '<%=importeSub%>','<%=desTitulacion%>', '<%=titulacion%>', '<%=desTitulacion%>', '<%=titulacion%>'];
+   <%  
+        } // for
+    } // if
+%>
 
-    tabaAccesos.lineas = listaAccesosTabla;
-    tabaAccesos.displayTabla();
+        tabaAccesos.lineas = listaAccesosTabla;
+        tabaAccesos.displayTabla();
 </script>
 <div id="popupcalendar" class="text"></div>                
-

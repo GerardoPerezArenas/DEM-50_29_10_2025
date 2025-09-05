@@ -76,7 +76,9 @@ public class MeLanbide11Manager {
             List<DesplegableAdmonLocalVO> listaJornada = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_JORN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
             List<DesplegableAdmonLocalVO> listaGrupoCotizacion = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_GCOT, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
             List<DesplegableAdmonLocalVO> listaTipRetribucion = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_DTRT, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
-           
+           List<DesplegableAdmonLocalVO> listaTitReqPuesto = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(
+                ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_TITREQPUESTO, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+
            
             //desplegables externos
             DatosTablaDesplegableExtVO datosTablaDesplegableOcupaciones = MeLanbide11Manager.getInstance().getDatosMapeoDesplegableExterno(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_EXT_OCIN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
@@ -122,6 +124,12 @@ public class MeLanbide11Manager {
                         break;
                     }
                 }
+                for (DesplegableAdmonLocalVO valordesp : listaTitReqPuesto) {
+                if (valordesp.getDes_val_cod().equals(cont.getTitReqPuesto())) {
+                    cont.setDesTitReqPuesto(valordesp.getDes_nom());
+                    break;
+                }
+            }
                 for (DesplegableAdmonLocalVO valordesp : listaGrupoCotizacion) {
                     if (valordesp.getDes_val_cod().equals(cont.getGrupoCotizacion())) {
                         cont.setDesGrupoCotizacion(valordesp.getDes_nom());
@@ -222,34 +230,62 @@ public class MeLanbide11Manager {
             MeLanbide11DAO meLanbide11DAO = MeLanbide11DAO.getInstance();
             lista = meLanbide11DAO.getContratacion(numExp, con);
 
-            //recuperamos los cod y desc de desplegables para traducir en la tabla principal
-            List<DesplegableAdmonLocalVO> listaSexo = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_SEXO, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
-            List<DesplegableAdmonLocalVO> listaMayor55 = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_BOOL, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
-            List<DesplegableAdmonLocalVO> listaFinFormativa = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_BOOL, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
-            List<DesplegableAdmonLocalVO> listaJornada = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_JORN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
-            List<DesplegableAdmonLocalVO> listaGrupoCotizacion = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_GCOT, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
-            List<DesplegableAdmonLocalVO> listaTipRetribucion = MeLanbide11Manager.getInstance().getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_DTRT, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
-           
-            
-            //desplegables externos
-            DatosTablaDesplegableExtVO datosTablaDesplegableOcupaciones = MeLanbide11Manager.getInstance().getDatosMapeoDesplegableExterno(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_EXT_OCIN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+            // recuperamos los cod y desc de desplegables para traducir en la tabla
+            // principal
+            List<DesplegableAdmonLocalVO> listaSexo = MeLanbide11Manager.getInstance()
+                    .getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(
+                            ConstantesMeLanbide11.COD_DES_SEXO, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+            List<DesplegableAdmonLocalVO> listaMayor55 = MeLanbide11Manager.getInstance()
+                    .getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(
+                            ConstantesMeLanbide11.COD_DES_BOOL, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+            List<DesplegableAdmonLocalVO> listaFinFormativa = MeLanbide11Manager.getInstance()
+                    .getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(
+                            ConstantesMeLanbide11.COD_DES_BOOL, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+            List<DesplegableAdmonLocalVO> listaJornada = MeLanbide11Manager.getInstance()
+                    .getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(
+                            ConstantesMeLanbide11.COD_DES_JORN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+            List<DesplegableAdmonLocalVO> listaGrupoCotizacion = MeLanbide11Manager.getInstance()
+                    .getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(
+                            ConstantesMeLanbide11.COD_DES_GCOT, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+            List<DesplegableAdmonLocalVO> listaTipRetribucion = MeLanbide11Manager.getInstance()
+                    .getValoresDesplegablesAdmonLocalxdes_cod(ConfigurationParameter.getParameter(
+                            ConstantesMeLanbide11.COD_DES_DTRT, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+            List<DesplegableAdmonLocalVO> listaTitReqPuesto = MeLanbide11Manager.getInstance()
+                    .getValoresDesplegablesAdmonLocalxdes_cod(
+                            ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_TITREQPUESTO,
+                                    ConstantesMeLanbide11.FICHERO_PROPIEDADES),
+                            adapt);
+
+            // desplegables externos
+            DatosTablaDesplegableExtVO datosTablaDesplegableOcupaciones = MeLanbide11Manager.getInstance()
+                    .getDatosMapeoDesplegableExterno(ConfigurationParameter.getParameter(
+                            ConstantesMeLanbide11.COD_DES_EXT_OCIN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
             String tablaOcupaciones = datosTablaDesplegableOcupaciones.getTabla();
             String campoCodigoOcupaciones = datosTablaDesplegableOcupaciones.getCampoCodigo();
             String campoValorOcupaciones = datosTablaDesplegableOcupaciones.getCampoValor();
-            List<DesplegableExternoVO> listaOcupacion = MeLanbide11Manager.getInstance().getValoresDesplegablesExternos(tablaOcupaciones, campoCodigoOcupaciones, campoValorOcupaciones, adapt);
-        
-            DatosTablaDesplegableExtVO datosTablaDesplegableTitulaciones = MeLanbide11Manager.getInstance().getDatosMapeoDesplegableExterno(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_EXT_TIIN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+            List<DesplegableExternoVO> listaOcupacion = MeLanbide11Manager.getInstance().getValoresDesplegablesExternos(
+                    tablaOcupaciones, campoCodigoOcupaciones, campoValorOcupaciones, adapt);
+
+            DatosTablaDesplegableExtVO datosTablaDesplegableTitulaciones = MeLanbide11Manager.getInstance()
+                    .getDatosMapeoDesplegableExterno(ConfigurationParameter.getParameter(
+                            ConstantesMeLanbide11.COD_DES_EXT_TIIN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
             String tablaTitulaciones = datosTablaDesplegableTitulaciones.getTabla();
             String campoCodigoTitulaciones = datosTablaDesplegableTitulaciones.getCampoCodigo();
             String campoValorTitulaciones = datosTablaDesplegableTitulaciones.getCampoValor();
-            List<DesplegableExternoVO> listaTitulacion = MeLanbide11Manager.getInstance().getValoresDesplegablesExternos(tablaTitulaciones, campoCodigoTitulaciones, campoValorTitulaciones, adapt);
-            
-            DatosTablaDesplegableExtVO datosTablaDesplegableCProfesionales = MeLanbide11Manager.getInstance().getDatosMapeoDesplegableExterno(ConfigurationParameter.getParameter(ConstantesMeLanbide11.COD_DES_EXT_CPIN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
+            List<DesplegableExternoVO> listaTitulacion = MeLanbide11Manager.getInstance()
+                    .getValoresDesplegablesExternos(tablaTitulaciones, campoCodigoTitulaciones, campoValorTitulaciones,
+                            adapt);
+
+            DatosTablaDesplegableExtVO datosTablaDesplegableCProfesionales = MeLanbide11Manager.getInstance()
+                    .getDatosMapeoDesplegableExterno(ConfigurationParameter.getParameter(
+                            ConstantesMeLanbide11.COD_DES_EXT_CPIN, ConstantesMeLanbide11.FICHERO_PROPIEDADES), adapt);
             String tablaCProfesionales = datosTablaDesplegableCProfesionales.getTabla();
             String campoCodigoCProfesionales = datosTablaDesplegableCProfesionales.getCampoCodigo();
             String campoValorCProfesionales = datosTablaDesplegableCProfesionales.getCampoValor();
-            List<DesplegableExternoVO> listaCProfesionalidad = MeLanbide11Manager.getInstance().getValoresDesplegablesExternos(tablaCProfesionales, campoCodigoCProfesionales, campoValorCProfesionales, adapt);
-            
+            List<DesplegableExternoVO> listaCProfesionalidad = MeLanbide11Manager.getInstance()
+                    .getValoresDesplegablesExternos(tablaCProfesionales, campoCodigoCProfesionales,
+                            campoValorCProfesionales, adapt);
+
             for (ContratacionVO cont : lista) {
                 for (DesplegableAdmonLocalVO valordesp : listaSexo) {
                     if (valordesp.getDes_val_cod().equals(cont.getSexo())) {
@@ -275,6 +311,13 @@ public class MeLanbide11Manager {
                         break;
                     }
                 }
+                // NUEVO: descripción TITREQPUESTO
+                for (DesplegableAdmonLocalVO valordesp : listaTitReqPuesto) {
+                    if (valordesp.getDes_val_cod().equals(cont.getTitReqPuesto())) {
+                        cont.setDesTitReqPuesto(valordesp.getDes_nom());
+                        break;
+                    }
+                }
                 for (DesplegableAdmonLocalVO valordesp : listaGrupoCotizacion) {
                     if (valordesp.getDes_val_cod().equals(cont.getGrupoCotizacion())) {
                         cont.setDesGrupoCotizacion(valordesp.getDes_nom());
@@ -287,8 +330,8 @@ public class MeLanbide11Manager {
                         break;
                     }
                 }
-                
-                //desplegables externos
+
+                // desplegables externos
                 for (DesplegableExternoVO valordesp : listaOcupacion) {
                     if (valordesp.getCampoCodigo().equals(cont.getOcupacion())) {
                         cont.setDesOcupacion(valordesp.getCampoValor());
@@ -308,7 +351,7 @@ public class MeLanbide11Manager {
                     }
                 }
             }
-            
+
             return lista;
         } catch (BDException e) {
             log.error("Se ha producido una excepción en la BBDD recuperando las contrataciones:  " + e);

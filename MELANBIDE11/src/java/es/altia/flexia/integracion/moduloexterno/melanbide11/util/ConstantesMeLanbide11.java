@@ -42,11 +42,14 @@ public class ConstantesMeLanbide11
     
     // Códigos desplegables 
     public static final String COD_DES_SEXO = "COD_DES_SEXO";
+    
     public static final String COD_DES_BOOL = "COD_DES_BOOL";
     public static final String COD_DES_JORN = "COD_DES_JORN";
     public static final String COD_DES_GCOT = "COD_DES_GCOT";
     public static final String COD_DES_DTRT = "COD_DES_DTRT";
     public static final String COD_DES_DTSV = "COD_DES_DTSV";
+    public static final String COD_DES_TITREQPUESTO = "COD_DES_TITREQPUESTO";
+
     
     // Códigos deplegables externos
     public static final String COD_DES_EXT_OCIN = "COD_DES_EXT_OCIN";

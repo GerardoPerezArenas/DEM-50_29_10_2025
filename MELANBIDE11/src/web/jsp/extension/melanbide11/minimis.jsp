@@ -241,7 +241,7 @@ int idiomaUsuario = 1;
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/validaciones.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/popup.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/FixedColumnsTable.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/meLanbide11/JavaScriptUtil.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/JavaScriptUtil.js"></script>
 <script type="text/javascript">
     var APP_CONTEXT_PATH = '<%=request.getContextPath()%>';
 </script>
