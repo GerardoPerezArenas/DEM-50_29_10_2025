@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="2b61e4d5-7497-422b-b6c9-02539f10eb97" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/MELANBIDE11.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/MELANBIDE11.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/MeLanbide11DAO$ComplementosPorTipo.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/MeLanbide11DAO$ComplementosPorTipo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/MeLanbide11DAO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/MeLanbide11DAO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/MeLanbide11I18n.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/MeLanbide11I18n.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/ContratacionVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/ContratacionVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DatosTablaDesplegableExtVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DatosTablaDesplegableExtVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DesgloseRSBVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DesgloseRSBVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DesplegableAdmonLocalVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DesplegableAdmonLocalVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DesplegableExternoVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DesplegableExternoVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/MinimisVO.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/MinimisVO.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/MELANBIDE11.jar" beforeDir="false" afterPath="$PROJECT_DIR$/dist/MELANBIDE11.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/allclasses-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/allclasses-noframe.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/constant-values.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/deprecated-list.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/MELANBIDE11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/class-use/MELANBIDE11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/MeLanbide11DAO.ComplementosPorTipo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/MeLanbide11DAO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/class-use/MeLanbide11DAO.ComplementosPorTipo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/class-use/MeLanbide11DAO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/package-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/package-use.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/MeLanbide11I18n.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/class-use/MeLanbide11I18n.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/package-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/package-use.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/manager/MeLanbide11Manager.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/manager/class-use/MeLanbide11Manager.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/manager/package-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/manager/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/manager/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/manager/package-use.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/package-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/package-use.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/test/TestComplementosPorTipo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/test/class-use/TestComplementosPorTipo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/test/package-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/test/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/test/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/test/package-use.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/ConfigurationParameter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/ConstantesMeLanbide11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/MeLanbide11MappingUtils.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/class-use/ConfigurationParameter.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/class-use/ConstantesMeLanbide11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/class-use/MeLanbide11MappingUtils.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/package-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/util/package-use.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/ContratacionVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DatosTablaDesplegableExtVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DesgloseRSBVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DesplegableAdmonLocalVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/DesplegableExternoVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/MinimisVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/class-use/ContratacionVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/class-use/DatosTablaDesplegableExtVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/class-use/DesgloseRSBVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/class-use/DesplegableAdmonLocalVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/class-use/DesplegableExternoVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/class-use/MinimisVO.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/package-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/package-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/package-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/package-use.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/help-doc.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-10.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-11.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-12.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-3.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-4.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-5.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-6.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-7.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-8.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index-files/index-9.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/overview-frame.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/overview-summary.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/overview-tree.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/package-list" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/resources/inherit.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/dist/javadoc/stylesheet.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/nekohtml-1.9.7 - copia.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/nbproject/private/private.xml" beforeDir="false" afterPath="$PROJECT_DIR$/nbproject/private/private.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/MELANBIDE11.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/MELANBIDE11.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/MELANBIDE11.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/MELANBIDE11.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/MELANBIDE11.java.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/MeLanbide11DAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/dao/MeLanbide11DAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/text/MELANBIDE11_TEXT_1.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/text/MELANBIDE11_TEXT_1.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/text/MELANBIDE11_TEXT_4.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/i18n/text/MELANBIDE11_TEXT_4.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/manager/MeLanbide11Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/manager/MeLanbide11Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/manager/MeLanbide11Manager.java.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/util/ConstantesMeLanbide11.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/util/ConstantesMeLanbide11.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/util/MeLanbide11MappingUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/util/MeLanbide11MappingUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/util/MeLanbide11MappingUtils.java.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/ContratacionVO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/ContratacionVO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/ContratacionVO.java.bak" beforeDir="false" afterPath="$PROJECT_DIR$/src/java/es/altia/flexia/integracion/moduloexterno/melanbide11/vo/ContratacionVO.java.bak" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/css/extension/melanbide11/melanbide11.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/css/extension/melanbide11/melanbide11.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/DesgloseRetribucion.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/desglose/m11Desglose.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/desglose/m11Desglose.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/desglose/m11Desglose_Tab1.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/desglose/m11Desglose_Tab1.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/desglose/m11Desglose_Tab2.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/desglose/m11Desglose_Tab2.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/m11Desglose.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/m11Desglose_tab1.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/m11Desglose_tab2.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/melanbide11.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/melanbide11.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/melanbide11.jsp.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/nuevaContratacion.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/nuevaContratacion.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/nuevaContratacion.jsp.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/nuevoMinimis.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/nuevoMinimis.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/web/jsp/extension/melanbide11/nuevoMinimis.jsp.bak" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_calculos.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_query.sql" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test_rsb_flujo.sql" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$/.." value="ci-setup" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GerardoPerezArenas"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/GerardoPerezArenas/-866124_DEM50-.git",
+    "accountId": "c5a0dd73-cd50-4747-8a99-c3fd2095abc4"
+  }
+}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 1
+}</component>
+  <component name="ProjectId" id="335ZdwVUlsGMhQiHSPm4P0fbc6z" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;Rebasing ci-setup22&quot;,
+    &quot;junie.onboarding.icon.badge.shown&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/gerardo.perez/Desktop/866124_DEM50-/MELANBIDE11&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;to.speed.mode.migration.done&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="2b61e4d5-7497-422b-b6c9-02539f10eb97" name="Changes" comment="" />
+      <created>1758608984742</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758608984742</updated>
+      <workItem from="1758608985933" duration="1818000" />
+      <workItem from="1758610877901" duration="7209000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>

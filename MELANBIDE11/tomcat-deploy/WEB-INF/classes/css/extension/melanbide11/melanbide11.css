@@ -1,0 +1,53 @@
+/* Datos históricos (solo consulta) */
+.datosAntiguos { background:#f7f7f7; color:#666; font-style: italic; }
+th.datosAntiguos { font-weight: normal; }
+/* Estilo para datos antiguos */
+.datosAntiguos {
+  color: #888;
+  background-color: #f5f5f5;
+  font-style: italic;
+}
+.legendAzul{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: center;
+}
+
+table.dataTable td {
+    padding: 3px 10px;
+    width: 1px;
+    white-space: nowrap;
+}
+
+/* Estilo para los campos antiguos de titulación en la tabla */
+.datoAntiguos {
+    background-color: #f0f0f0;
+    font-style: italic;
+}
+
+/* === DEM50 - Contrataciones: marcar columnas históricas === */
+th.col-historico {
+  background-color: #e6f2ff;   /* azul clarito en cabecera */
+}
+
+td.col-historico {
+  background-color: #f7fbff;   /* leve realce en celdas */
+}
+
+.legend-historico {
+  font-size: 11px;
+  margin: 4px 0 8px 0;
+}
+
+.legend-historico .chip {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background-color: #e6f2ff;
+  border: 1px solid #cfe6ff;
+  margin-right: 6px;
+}
+
+
