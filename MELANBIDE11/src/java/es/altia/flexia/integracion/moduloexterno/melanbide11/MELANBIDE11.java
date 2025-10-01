@@ -7,6 +7,7 @@ import es.altia.agora.technical.ConstantesDatos;
 import es.altia.common.exception.TechnicalException;
 
 import es.altia.flexia.integracion.moduloexterno.melanbide11.manager.MeLanbide11Manager;
+import es.altia.flexia.integracion.moduloexterno.melanbide11.dao.MeLanbide11DAO.ComplementosPorTipo;
 import es.altia.flexia.integracion.moduloexterno.melanbide11.util.ConfigurationParameter;
 import es.altia.flexia.integracion.moduloexterno.melanbide11.util.ConstantesMeLanbide11;
 import es.altia.flexia.integracion.moduloexterno.melanbide11.vo.ContratacionVO;
@@ -1382,6 +1383,83 @@ public class MELANBIDE11 extends ModuloIntegracionExterno {
         xmlSalida.append("</RESPUESTA>");
         log.debug("xml: " + xmlSalida);
         return xmlSalida.toString();
+    }
+
+    /**
+     * Nueva acción para la pantalla de Desglose RSB (modal con pestañas). Alineada
+     * con la llamada usando parametro operacion=cargarDesgloseRSB. Coloca en
+     * request los atributos necesarios y define las URLs de las pestañas.
+     */
+    public String cargarDesgloseRSB(int codOrganizacion, int codTramite, int ocurrenciaTramite, String numExpediente,
+            HttpServletRequest request, HttpServletResponse response) {
+        String numExp = null;
+        String idProyecto = null;
+        String idContrato = null;
+        try {
+            numExp = request.getParameter("numExp");
+            if (numExp == null || numExp.trim().isEmpty()) {
+                numExp = numExpediente;
+            }
+            idProyecto = request.getParameter("idProyecto");
+            idContrato = request.getParameter("id");
+
+            request.setAttribute("numExp", numExp);
+            request.setAttribute("idProyecto", idProyecto);
+            if (idContrato != null && idContrato.trim().length() > 0) {
+                request.setAttribute("id", idContrato); // Necesario para Tab1
+            }
+
+            try {
+                if (idContrato != null && idContrato.trim().length() > 0) {
+                    ContratacionVO vo = MeLanbide11Manager.getInstance().getContratacionPorID(idContrato,
+                            this.getAdaptSQLBD(String.valueOf(codOrganizacion)));
+                    if (vo != null) {
+                        if (vo.getRsbSalBase() != null) {
+                            request.setAttribute("salarioBase", String.valueOf(vo.getRsbSalBase()).replace('.', ','));
+                        }
+                        if (vo.getRsbPagExtra() != null) {
+                            request.setAttribute("pagasExtra", String.valueOf(vo.getRsbPagExtra()).replace('.', ','));
+                        }
+                        // El campo RSBIMPORTE en tabla contratacion lo usamos como "Complementos
+                        // salariales" persistidos
+                        if (vo.getRsbImporte() != null) {
+                            request.setAttribute("compImporte", String.valueOf(vo.getRsbImporte()).replace('.', ','));
+                        }
+                        // Complementos extrasalariales: SIEMPRE se calculan desde la tabla de desglose
+                        // por RSBTIPO=2
+                        try {
+                            String dni = vo.getDni();
+                            if (dni != null && !dni.trim().isEmpty()) {
+                                ComplementosPorTipo comp = MeLanbide11Manager.getInstance().getSumaComplementosPorTipo(
+                                        numExp, dni, this.getAdaptSQLBD(String.valueOf(codOrganizacion)));
+                                if (comp != null) {
+                                    // Salariales (tipo 1) se usan solo como referencia para comparar con RSBIMPORTE
+                                    // si se quisiera.
+                                    double extras = comp.getExtrasalariales();
+                                    request.setAttribute("compExtra", String.valueOf(extras).replace('.', ','));
+                                    if (log.isDebugEnabled()) {
+                                        // Debug de complementos
+                                    }
+                                } else {
+                                    request.setAttribute("compExtra", "0");
+                                }
+                            }
+                        } catch (Exception calcEx) {
+                            log.warn("[cargarDesgloseRSB] No se pudieron calcular complementos extrasalariales",
+                                    calcEx);
+                        }
+                    }
+                }
+            } catch (Exception inner) {
+                log.warn("[cargarDesgloseRSB] Error cargando datos iniciales de contratación para pestaña 1", inner);
+            }
+
+            request.setAttribute("urlPestanaResumen", "/jsp/extension/melanbide11/desglose/m11Desglose_Tab1.jsp");
+            request.setAttribute("urlPestanaComplementos", "/jsp/extension/melanbide11/desglose/m11Desglose_Tab2.jsp");
+        } catch (Exception e) {
+            log.error("Error en cargarDesgloseRSB", e);
+        }
+        return "/jsp/extension/melanbide11/desglose/m11Desglose.jsp";
     }
 
 }

@@ -314,11 +314,11 @@ td.col-historico { background-color: #f7fbff; }
   margin: 0 5px;
 }
 
-/* Forzar eliminación de scrolls horizontales en tablas FixedColumnTable */
-[id*="hScroll_"]:not(.keep-scroll), 
-[id*="scrollcontent_"]:not(.keep-scroll), 
-[id*="frozencontent_"]:not(.keep-scroll),
-.scrollX {
+/* Forzar eliminación de scrolls horizontales SOLO en tablas del desglose modal */
+.m11-desglose-wrapper [id*="hScroll_"]:not(.keep-scroll), 
+.m11-desglose-wrapper [id*="scrollcontent_"]:not(.keep-scroll), 
+.m11-desglose-wrapper [id*="frozencontent_"]:not(.keep-scroll),
+.m11-desglose-wrapper .scrollX {
   display: none !important;
   visibility: hidden !important;
   width: 0 !important;

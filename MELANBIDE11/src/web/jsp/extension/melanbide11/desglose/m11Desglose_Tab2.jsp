@@ -196,31 +196,37 @@
 				}
 			});
 			
-			// Forzar que NO aparezcan scrolls horizontales en divs internos
+			// Forzar que NO aparezcan scrolls horizontales SOLO en divs del desglose
 			setTimeout(function() {
-				// Ocultar solo los scrolls horizontales específicos de FixedColumnTable
-				var scrollElements = document.querySelectorAll('[id*="hScroll_"]:not([id*="wrapper"]):not([id*="tabla"])');
-				for (var i = 0; i < scrollElements.length; i++) {
-					scrollElements[i].style.display = 'none';
-					scrollElements[i].style.visibility = 'hidden';
-					scrollElements[i].style.width = '0px';
-					scrollElements[i].style.height = '0px';
-				}
-				
-				// Aplicar estilo directo a las tablas internas de FixedColumnTable
-				var tablasInternas = document.querySelectorAll('table[id*="tbl_"], .FixedColumnTable table');
-				for (var i = 0; i < tablasInternas.length; i++) {
-					tablasInternas[i].style.width = '100%';
-					tablasInternas[i].style.maxWidth = anchoDisponible + 'px';
-					tablasInternas[i].style.tableLayout = 'fixed';
+				// Ocultar solo los scrolls horizontales específicos de FixedColumnTable EN EL DESGLOSE
+				var modalDesglose = document.querySelector('.m11-desglose-wrapper');
+				if (modalDesglose) {
+					var scrollElements = modalDesglose.querySelectorAll('[id*="hScroll_"]:not([id*="wrapper"]):not([id*="tabla"])');
+					for (var i = 0; i < scrollElements.length; i++) {
+						scrollElements[i].style.display = 'none';
+						scrollElements[i].style.visibility = 'hidden';
+						scrollElements[i].style.width = '0px';
+						scrollElements[i].style.height = '0px';
+					}
+					
+					// Aplicar estilo directo a las tablas internas de FixedColumnTable EN EL DESGLOSE
+					var tablasInternas = modalDesglose.querySelectorAll('table[id*="tbl_"], .FixedColumnTable table');
+					for (var i = 0; i < tablasInternas.length; i++) {
+						tablasInternas[i].style.width = '100%';
+						tablasInternas[i].style.maxWidth = anchoDisponible + 'px';
+						tablasInternas[i].style.tableLayout = 'fixed';
+					}
 				}
 			}, 50);
 			
-			// Solo ocultar scrolls específicos, no todos los elementos
+			// Solo ocultar scrolls específicos EN EL DESGLOSE, no todos los elementos
 			setTimeout(function() {
-				var scrollsEspecificos = document.querySelectorAll('[id^="hScroll_"], [id*="_hScroll"]');
-				for (var i = 0; i < scrollsEspecificos.length; i++) {
-					scrollsEspecificos[i].style.display = 'none';
+				var modalDesglose = document.querySelector('.m11-desglose-wrapper');
+				if (modalDesglose) {
+					var scrollsEspecificos = modalDesglose.querySelectorAll('[id^="hScroll_"], [id*="_hScroll"]');
+					for (var i = 0; i < scrollsEspecificos.length; i++) {
+						scrollsEspecificos[i].style.display = 'none';
+					}
 				}
 			}, 200);
 			
