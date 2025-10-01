@@ -1,0 +1,229 @@
+
+
+### Definicion de Textos y recurso de Idioma ###
+
+### LABELS
+label.tituloPrincipal=Contrataciones
+label.titulo.pestana=Anexo A &#45; Contrataciones
+label.nuevaContratacion=Alta / Modificación contratación
+label.tituloMinimis=Subvenciones
+label.titulo.pestanaSub=Anexo B &#45; Subvenciones
+label.nuevaSubvencion=Alta / Modificación subvención
+label.titulo.pestanaDesgloseRSB=Desglose Retribución salarial bruta
+# M11 Desglose - etiquetas de pestañas
+label.m11.desglose.titulo.tab1=Retribución salarial bruta
+label.m11.desglose.titulo.tab2=Desglose Retribución salarial bruta
+
+label.datosSeleccion=DATOS SELECCIÓN
+label.nOferta=Nº de oferta
+label.idContratoOferta=Id. Contato de oferta
+label.idContratoDirecto=Id. Contrato directo
+
+label.datosPersonaContratada=DATOS DE LA PERSONA CONTRATADA
+label.dni_nie=DNI/NIE
+label.nombre=Nombre
+label.apellido1=Apellido 1
+label.apellido2=Apellido 2
+label.fechaNacimiento=Fecha nacimiento
+label.edad=Edad
+label.sexo=Sexo
+label.may55=¿Mayor de 55 años?
+label.finFormativa=¿Ha final.acCIÓN form.con compr.de contratación?
+label.codFormativa=Código acción formativa
+label.denFormativa=Denominación acción formativa
+
+label.datosPuestoTrabajo=DATOS DEL PUESTO DE TRABAJO
+label.puesto=Puesto
+label.ocupacion=Ocupación
+label.desOcupacionLibre=Descripción ocupación
+label.desTitulacionLibre=Titulación solicitud
+label.titulacion=Titulación
+label.titulacionRequerida=Titulación Requerida
+label.funciones=Funciones
+label.tipoContrato=Tipo de contrato
+label.cProfesionalidad=Certificado Profesionalidad
+label.modalidadContrato=Modalidad de contrato
+label.jornada=Jornada
+label.porcJornada=Porcentaje de jornada (mín.70)
+label.horasConv=Horas convenio
+label.fechaInicio=Fecha inicio contrato
+label.fechaFin=Fecha fin contrato
+label.mesesContrato=Duración contrato (meses)
+label.grupoCotizacion=Grupo de cotización de la SS
+label.direccionCT=Dirección del centro de trabajo
+label.nSS=Nº cuenta de cotiz.de la SS
+label.costeContrato=Coste del contrato
+label.tipoRetribucion=Tipo retribución salarial bruta
+
+label.importeSub=Importe de la subvención
+
+label.estado=Estado
+label.organismo=Organismo
+label.objeto=Objeto
+label.importe=Importe
+label.fecha=Fecha
+
+label.importeSub=Importe
+label.titreqpuesto=Titulación requerida para el puesto
+label.funciones=Funciones
+label.historico=Datos antiguos
+label.historico.titSol=Titulación solicitud
+label.historico.titulacion=Titulación
+
+
+
+###  BOTONES
+btn.nuevo=Nuevo
+btn.modificar=Modificar
+btn.eliminar=Eliminar
+btn.Exportar=Exportación excel
+btn.guadar=Guardar
+btn.aceptar=Aceptar
+btn.cancelar=Cancelar
+
+
+###  TEXTOS PARA COLUMNAS DE LA TABLA CONTRATACIONES
+contratacion.tablaContrataciones.id=ID
+contratacion.tablaContrataciones.nOferta=Nº oferta
+contratacion.tablaContrataciones.idContratoOferta=Id.Cont.oferta
+contratacion.tablaContrataciones.idContratoDirecto=Id.Cont.directo
+
+contratacion.tablaContrataciones.dni_nie=DNI/NIE
+contratacion.tablaContrataciones.nombre=Nombre
+contratacion.tablaContrataciones.apellido1=Apellido1
+contratacion.tablaContrataciones.apellido2=Apellido2
+contratacion.tablaContrataciones.fechaNacimiento=Fech.nac.
+contratacion.tablaContrataciones.edad=Edad
+contratacion.tablaContrataciones.sexo=Sexo
+contratacion.tablaContrataciones.may55=>55
+contratacion.tablaContrataciones.finFormativa=Fin acc.format.
+contratacion.tablaContrataciones.codFormativa=Código acc.format.
+contratacion.tablaContrataciones.denFormativa=Denominación acc.format.
+
+contratacion.tablaContrataciones.puesto=Puesto
+contratacion.tablaContrataciones.codOcupacion=Cod.Ocup.
+contratacion.tablaContrataciones.ocupacion=Ocupación
+contratacion.tablaContrataciones.modalidadContrato=Mod.contrato
+contratacion.tablaContrataciones.desTitulacion=Titulación solic.
+contratacion.tablaContrataciones.titulacion=Titulación
+contratacion.tablaContrataciones.cProfesionalidad=Cert.Profesional.
+contratacion.tablaContrataciones.jornada=Jornada
+contratacion.tablaContrataciones.porcJornada=Porc.Jorn.
+contratacion.tablaContrataciones.horasConv=Horas convenio
+contratacion.tablaContrataciones.fechaInicio=Fech.ini.cont.
+contratacion.tablaContrataciones.fechaFin=Fech.fin cont.
+contratacion.tablaContrataciones.mesesContrato=Meses cont.
+contratacion.tablaContrataciones.grupoCotización=Gr.cotización
+contratacion.tablaContrataciones.direccionCT=Dirección CT
+contratacion.tablaContrataciones.nSS=Nº SS
+contratacion.tablaContrataciones.costeContrato=Coste cont.
+contratacion.tablaContrataciones.tipRetribucion=Tipo retribución
+
+# Campos RSB - Retribución salarial bruta computable
+contratacion.tablaContrataciones.rsbTotal=Retribución salarial bruta computable
+
+contratacion.tablaContrataciones.importeSub=Importe
+contratacion.tablaContrataciones.titreqpuesto=Titulación requerida para el puesto
+contratacion.tablaContrataciones.funciones=Funciones
+
+# Agrupador histórico
+contratacion.historico=Datos antiguos
+
+# Cabeceras dentro del histórico
+contratacion.historico.titSol=Titulación solicitud
+contratacion.historico.titulacion=Titulación
+
+
+###  TEXTOS PARA COLUMNAS DE LA TABLA SUBVENCIONES
+minimis.tablaMinimis.id=ID
+minimis.tablaMinimis.estado=Estado ayuda
+minimis.tablaMinimis.organismo=Organismo concedente
+minimis.tablaMinimis.objeto=Objeto ayuda
+minimis.tablaMinimis.importe=Importe
+minimis.tablaMinimis.fecha=Fecha sol.concesión
+
+###  TEXTOS PARA COLUMNAS DE LA TABLA Desglose Subvenciones
+tablaDesglose.desgloseRSB=Desglose Retribución salarial bruta
+tablaDesglose.salarioBase=Salario base
+tablaDesglose.pagasExtra=Pagas extraordinarias
+tablaDesglose.complementosSalariales=Complementos salariales
+tablaDesglose.extrasalariales=Otro tipo de percepciones y complementos extrasalariales
+tablaDesglose.rsbimporte=Importe
+tablaDesglose.rsbconcepto=Concepto Fijo / Variable
+tablaDesglose.rsbobserv=Observaciones
+
+# Tab 2 Desglose RSB
+tab2.desglose.cargando=Cargando desglose...
+tab2.desglose.sinLineas=No hay líneas
+tab2.desglose.col.importe=Importe
+tab2.desglose.col.concepto=Concepto
+tab2.desglose.col.observ=Observaciones
+tab2.desglose.alert.seleccione=Seleccione un trabajador en la tabla de Anexo A para continuar.
+tab2.desglose.titulo1=COMPLEMENTOS SALARIALES
+tab2.desglose.titulo2=OTRO TIPO DE PERCEPCIONES Y COMPLEMENTOS EXTRASALARIALES
+
+
+
+### Mensajes
+msg.msjNoSelecFila=No se ha seleccionado ninguna fila
+mel11.btn.listaProyectos=Lista de proyectos
+mel11.btn.desgloseRSB=Desglose RSB
+mel11.tabs.desglose.tab1=Resumen
+mel11.tabs.desglose.tab2=Detalle Complementos
+mel11.tabs.tablaA=Tabla A
+mel11.tabs.tablaB=Tabla B
+msg.vaciaBD=No hay registros en BBDD con los datos de búsqueda introducidos
+msg.preguntaEliminar=¿Está seguro de eliminar esta contratación?
+msg.preguntaCancelar=¿Seguro que desea cancelar la operación?
+msg.datosSeleccion=Se deben completar ó bien Nº de oferta e Id. Contato de oferta, ó bien Id. Contrato directo
+msg.dni=DNI/NIE obligatorio
+msg.nombre=Nombre obligatorio
+msg.apellido1=Apellido1 obligatorio
+msg.apellido2=Apellido2 obligatorio
+msg.fecNac=Fecha de nacimiento obligatoria
+msg.edad=Edad obligatoria
+msg.edad.errNumerico=La edad debe ser numérico
+msg.sexo=Sexo obligatorio
+msg.may55=Campo Mayor de 55, obligatorio
+msg.finFormativa=Campo Finalizada acción formativa, obligatorio
+msg.puesto=Puesto obligatorio
+msg.ocupacion=Ocupación obligatoria
+msg.titulacion=Titulación obligatoria
+msg.titulacionequerida=Titulación Requerida obligatoria
+msg.modalidad=Modalidad contrato obligatoria
+msg.jornada=Jornada obligatoria
+msg.porcJornada=Porcentaje de jornada obligatoria sólo en Jornada Parcial
+msg.porcJornada.errNumerico=Porcentaje de jornada debe estar en el rango (70 / 99) con un máximo de dos decimales
+msg.horasConv.errNumerico=Horas convenio debe ser numérico
+msg.fechInicio=Fecha inicio contrato obligatoria
+msg.mesesContrato.errNumerico=Los meses contrato debe ser numérico
+msg.grupoCotizacion=Grupo de cotización obligatorio
+msg.direccionCT=Dirección del centro de trabajo obligatoria
+msg.nSS=Nº SS obligatorio
+msg.costeContrato=Coste contrato obligatorio
+msg.costeContrato.errNumerico=El coste contrato debe ser numérico con un máximo de dos decimales
+msg.importeSub=Importe subvención obligatorio
+msg.importeSub.errNumerico=El importe subvención debe ser numérico con un máximo de dos decimales
+msg.importe.errNumerico=El importe de la ayuda debe ser numérico con un máximo de dos decimales
+
+msg.estado=Estado obligatorio
+msg.organismo=Organismo obligatorio
+msg.objeto=Objeto obligatorio
+msg.importe=Importe obligatorio
+msg.importe.errNumerico=El importe debe ser numérico con un máximo de dos decimales
+msg.fechaSub=Fecha obligatoria
+
+# Anexo A â€“ TitulaciÃ³n requerida
+anexoA.titulacion.requerida = Titulación requerida para el puesto de trabajo:
+
+
+#Errores
+error.errorBD=Ha ocurrido un error al acceder a la base de datos
+error.errorGen=Ha ocurrido un error genérico.
+error.pasoParametros=Ha ocurrido un error en la petición. Error en el paso de parámetros.
+
+
+campos.antiguos.informacion=Datos antiguos ? solo para consulta
+
+
+

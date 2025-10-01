@@ -53,7 +53,11 @@
 
                 }
 
+                // Compatibilidad: intentar primero "codOrganizacionModulo" y si no viene, usar "codOrganizacion"
                 codOrganizacion  = request.getParameter("codOrganizacionModulo");
+                if (codOrganizacion == null || "".equals(codOrganizacion)) {
+                    codOrganizacion = request.getParameter("codOrganizacion");
+                }
                 nuevo = (String)request.getAttribute("nuevo");
                 if(request.getAttribute("datModif") != null)
                 {
@@ -178,9 +182,10 @@
                                 + "&fecha=" + document.getElementById('fecha').value
                                 ;
                     } else {
-                        parametros = "tarea=preparar&modulo=MELANBIDE11&operacion=modificarMinimis&tipo=0"
-                                + "&id=<%=datModif != null && datModif.getId() != null ? datModif.getId().toString() : ""%>"
-                                + "&estado=" + document.getElementById('codListaEstado').value
+            var idRegistroMinimis = '<%= (datModif != null && datModif.getId() != null) ? datModif.getId() : "" %>';
+            parametros = "tarea=preparar&modulo=MELANBIDE11&operacion=modificarMinimis&tipo=0"
+                + "&id=" + encodeURIComponent(idRegistroMinimis)
+                + "&estado=" + document.getElementById('codListaEstado').value
                                 + '&organismo=' + organismo
                                 + '&objeto=' + objeto
                                 + "&importe=" + document.getElementById('importe').value
@@ -269,7 +274,21 @@
                         }//for(j=0;hijos!=null && j<hijos.length;j++)
                         if (codigoOperacion == "0") {
                             //jsp_alerta("A",'Correcto');
-                            self.parent.opener.retornoXanelaAuxiliar(lista);
+                            // Desacople: usar callback específico si existe
+                            try {
+                                if (self.parent && self.parent.opener) {
+                                    if (typeof self.parent.opener.retornoMinimis === 'function') {
+                                        self.parent.opener.retornoMinimis(lista);
+                                    } else if (typeof self.parent.opener.retornoXanelaAuxiliar === 'function') {
+                                        // fallback legacy
+                                        self.parent.opener.retornoXanelaAuxiliar(lista);
+                                    } else {
+                                        console.warn('No se encontró retornoMinimis ni retornoXanelaAuxiliar en opener');
+                                    }
+                                }
+                            } catch(cbErr){
+                                console.error('Error invocando callback de retorno minimis', cbErr);
+                            }
                             cerrarVentana();
                         } else if (codigoOperacion == "1") {
                             jsp_alerta("A", '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"error.errorBD")%>');
@@ -359,7 +378,7 @@
                 if (Trim(inputFecha.value) != '') {
                     var D = ValidarFechaConFormatoLanbide(inputFecha.value, formato);
                     if (!D[0]) {
-                        jsp_alerta("A", "<%=meLanbide11I18n.getMensaje(idiomaUsuario, "msg.fechaNoVal")%>");
+                        jsp_alerta("A", "<%=meLanbide11I18n.getMensaje(idiomaUsuario, \"msg.fechaNoVal\")%>");
                         document.getElementById(inputFecha.name).focus();
                         document.getElementById(inputFecha.name).select();
                         return false;
@@ -513,5 +532,22 @@
             </script>
             <div id="popupcalendar" class="text"></div>        
         </div>
+        <!-- Fallback defensivo: en algunos contextos (carga parcial vía popup/ajax) el bloque <head> puede no ejecutarse
+             y la función reemplazarPuntos no quedar definida antes de los onChange inline. -->
+        <script type="text/javascript">
+            if (typeof window.reemplazarPuntos !== 'function') {
+                window.reemplazarPuntos = function(campo){
+                    try {
+                        if (campo && campo.value) {
+                            campo.value = campo.value.replace(/\./g, ',');
+                        }
+                    } catch(e) {
+                        if (window.console && console.warn) {
+                            console.warn('Fallback reemplazarPuntos capturó un error:', e);
+                        }
+                    }
+                };
+            }
+        </script>
     </body>
 </html> 

@@ -195,19 +195,75 @@ int idiomaUsuario = 1;
     }
 
     function recargarTablaMinimis(result) {
-        var fila;
-        listaMinimis = new Array();
-        listaMinimisTabla = new Array();
-        for (var i = 1; i < result.length; i++) {
-            fila = result[i];
-            listaMinimis[i - 1] = [fila[0], fila[1], fila[2], fila[3], fila[4], fila[5]];
-            listaMinimisTabla[i - 1] = [fila[0], fila[1], fila[2], fila[3], fila[4], fila[5]];
-        }
+        try {
+            if (!result || result.length === 0) {
+                console.log('[Minimis] REFRESCO COMPLETO (legacy) resultado vacío: sin cambios');
+                return;
+            }
+            // Evitar refresco si la pestaña no está visible: bufferizamos para aplicar al activarse.
+            if (typeof isMinimisTabVisible === 'function' && !isMinimisTabVisible()) {
+                window._bufferMinimis = result;
+                console.log('[Minimis] Refresco diferido (pestaña oculta) - bufferizado filas=' + (result.length - 1));
+                return;
+            }
 
-        inicializarTabla();
-        tablaMinimis.lineas = listaMinimisTabla;
-        tablaMinimis.displayTabla();
+            // Serializar dataset nuevo para detectar cambios reales y evitar flicker por reconstrucción idéntica.
+            var nuevoHash = JSON.stringify(result);
+            if (window._ultimoHashMinimis && window._ultimoHashMinimis === nuevoHash) {
+                console.log('[Minimis] Datos idénticos, se omite refresco.');
+                return;
+            }
+            window._ultimoHashMinimis = nuevoHash;
+
+            console.log('[Minimis] REFRESCO (optimizado) - filas recibidas=' + (result.length - 1));
+            var fila;
+            var nuevaLista = [];
+            var nuevaListaTabla = [];
+            for (var i = 1; i < result.length; i++) {
+                fila = result[i];
+                nuevaLista[i - 1] = [fila[0], fila[1], fila[2], fila[3], fila[4], fila[5]];
+                nuevaListaTabla[i - 1] = [fila[0], fila[1], fila[2], fila[3], fila[4], fila[5]];
+            }
+
+            // Inicializar solo la primera vez.
+            if (!window._tablaMinimisInicializada) {
+                inicializarTabla();
+                window._tablaMinimisInicializada = true;
+            }
+
+            listaMinimis = nuevaLista;
+            listaMinimisTabla = nuevaListaTabla;
+            // Persistimos snapshot para reconstrucciones resilientes.
+            window._snapshotMinimis = JSON.parse(JSON.stringify(listaMinimisTabla));
+            tablaMinimis.lineas = listaMinimisTabla;
+
+            // Doble buffer visual: actualizar con requestAnimationFrame para suavizar y reducir parpadeo.
+            if (window.requestAnimationFrame) {
+                requestAnimationFrame(function(){ tablaMinimis.displayTabla(); });
+            } else {
+                tablaMinimis.displayTabla();
+            }
+        } catch (e) {
+            console.error('[Minimis] Error en recargarTablaMinimis (legacy)', e);
+        }
     }
+
+    // Callback específico para ventanas emergentes de Minimis.
+    // Evita reutilizar retornoXanelaAuxiliar (usado por contrataciones) y que una pestaña afecte a la otra.
+    function retornoMinimis(result){
+        try {
+            if(!result){
+                console.warn('[Minimis] retornoMinimis: resultado null/undefined');
+                return;
+            }
+            // result es el mismo formato que recibe recargarTablaMinimis
+            recargarTablaMinimis(result);
+        } catch(e){
+            console.error('[Minimis] Error en retornoMinimis', e);
+        }
+    }
+
+    // Eliminado hook de interceptación para volver a comportamiento estable.
 
     function dblClckTablaMinimis(rowID, tableName) {
         pulsarModificarMinimis();
@@ -216,12 +272,12 @@ int idiomaUsuario = 1;
     function inicializarTabla() {
         tablaMinimis = new FixedColumnTable(document.getElementById('listaMinimis'), 1600, 1650, 'listaMinimis');
 
-        tablaMinimis.addColumna('50', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.id")%>");
-        tablaMinimis.addColumna('100', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.estado")%>");
-        tablaMinimis.addColumna('400', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.organismo")%>");
-        tablaMinimis.addColumna('820', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.objeto")%>");
-        tablaMinimis.addColumna('100', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.importe")%>");
-        tablaMinimis.addColumna('100', 'center', "<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.fecha")%>");
+    tablaMinimis.addColumna('50', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.id")%>');
+    tablaMinimis.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.estado")%>');
+    tablaMinimis.addColumna('400', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.organismo")%>');
+    tablaMinimis.addColumna('820', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.objeto")%>');
+    tablaMinimis.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.importe")%>');
+    tablaMinimis.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"minimis.tablaMinimis.fecha")%>');
 
         tablaMinimis.displayCabecera = true;
         tablaMinimis.height = 360;
@@ -241,7 +297,7 @@ int idiomaUsuario = 1;
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/validaciones.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/popup.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/FixedColumnsTable.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/JavaScriptUtil.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/meLanbide11/JavaScriptUtil.js"></script>
 <script type="text/javascript">
     var APP_CONTEXT_PATH = '<%=request.getContextPath()%>';
 </script>
@@ -269,6 +325,65 @@ int idiomaUsuario = 1;
     var tablaMinimis;
     var listaMinimis = new Array();
     var listaMinimisTabla = new Array();
+    window._tablaMinimisInicializada = false;
+
+    function isMinimisTabVisible(){
+        var el = document.getElementById('tabPage112');
+        if(!el) return true; // si no encontramos el nodo no bloqueamos
+        return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
+    }
+
+    // Al hacer click en la pestaña, si hay datos bufferizados los aplicamos.
+    (function prepararActivacionPestania(){
+        var cab = document.getElementById('pestana112');
+        if(!cab) return;
+        if (!cab._listenerMinimis){
+            cab.addEventListener('click', function(){
+                // Si la tabla aparece vacía pero tenemos snapshot, restauramos.
+                if (tablaMinimis && (!tablaMinimis.lineas || tablaMinimis.lineas.length===0) && window._snapshotMinimis && window._snapshotMinimis.length>0){
+                    console.warn('[Minimis] Restaurando desde snapshot (tabla vacía al activar)');
+                    tablaMinimis.lineas = JSON.parse(JSON.stringify(window._snapshotMinimis));
+                    tablaMinimis.displayTabla();
+                }
+                if (window._bufferMinimis){
+                    var pendiente = window._bufferMinimis;
+                    window._bufferMinimis = null;
+                    console.log('[Minimis] Aplicando refresco diferido al activar pestaña');
+                    recargarTablaMinimis(pendiente);
+                }
+            });
+            cab._listenerMinimis = true;
+        }
+    })();
+
+    // Observador para detectar si alguien borra el contenedor de la tabla y reinyectar datos.
+    (function observarMutaciones(){
+        var target = document.getElementById('tabPage112');
+        if(!target || window._observerMinimis) return;
+        var obs = new MutationObserver(function(mutations){
+            var cont = document.getElementById('listaMinimis');
+            if(!cont) return;
+            // Si la tabla se queda sin contenido DOM visible pero tenemos snapshot, re-render.
+            if (tablaMinimis && window._snapshotMinimis && window._snapshotMinimis.length>0){
+                if (cont.innerHTML.trim()===''){
+                    var causa = [];
+                    causa.push('innerHTML vacio');
+                    causa.push('childNodes=' + cont.childNodes.length);
+                    causa.push('snapshot=' + window._snapshotMinimis.length + ' filas');
+                    causa.push('hash=' + (window._ultimoHashMinimis?window._ultimoHashMinimis.length:0));
+                    console.warn('[Minimis] Detectado contenedor vacío, re-render desde snapshot | ' + causa.join(' | '));
+                    if (!window._tablaMinimisInicializada){
+                        inicializarTabla();
+                        window._tablaMinimisInicializada = true;
+                    }
+                    tablaMinimis.lineas = JSON.parse(JSON.stringify(window._snapshotMinimis));
+                    tablaMinimis.displayTabla();
+                }
+            }
+        });
+        obs.observe(target, {childList:true, subtree:true});
+        window._observerMinimis = obs;
+    })();
 
     inicializarTabla();
 

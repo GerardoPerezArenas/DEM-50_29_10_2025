@@ -1490,3 +1490,10 @@ function validarNumericoVacio(numero){
         return false;
     }
 }
+function elementoVisible(valor, idBarra) {
+    if (valor == 'on') {
+        document.getElementById(idBarra).style.visibility = 'inherit';
+    } else if (valor == 'off') {
+        document.getElementById(idBarra).style.visibility = 'hidden';
+    }
+}

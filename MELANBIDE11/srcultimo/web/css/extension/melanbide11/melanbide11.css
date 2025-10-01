@@ -1,0 +1,474 @@
+/* === DEM50 - MELANBIDE11: estilos consolidados === */
+
+/* Datos históricos (solo consulta) */
+.datosAntiguos,
+.datoAntiguos {                  /* alias por compatibilidad */
+  background-color: #f5f5f5;
+  color: #888;
+  font-style: italic;
+}
+th.datosAntiguos { font-weight: normal; }
+
+/* Leyenda azul común del procedimiento */
+.legendAzul{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  color: rgb(43, 98, 181);
+  font-weight: bold;
+  text-align: center;
+}
+
+/* DataTables: compactar celdas y evitar saltos */
+table.dataTable td {
+  padding: 3px 10px;
+  width: 1px;
+  white-space: nowrap;
+}
+
+/* DEM50 - Contrataciones: marcar columnas históricas */
+th.col-historico { background-color: #e6f2ff; }
+td.col-historico { background-color: #f7fbff; }
+
+.legend-historico {
+  font-size: 11px;
+  margin: 4px 0 8px 0;
+}
+.legend-historico .chip {
+  display: inline-block;
+  padding: 2px 6px;
+  border-radius: 3px;
+  background-color: #e6f2ff;
+  border: 1px solid #cfe6ff;
+  margin-right: 6px;
+}
+
+/* DEM50 - Desglose RSB: alineación de etiquetas e inputs 
+.lineaFormulario { clear: both; }
+.lineaFormulario:after { content: ""; display: block; clear: both; }
+.lineaFormulario .etiquetaLPEEL { float: left; width: 300px; line-height: 22px; }
+.lineaFormulario .campoFormulario { float: left; }
+
+/* Pestañas WebFX del Desglose 
+#tab-panel-m11.tab-pane { margin: 8px 5px 4px 5px; }
+#tab-panel-m11 .tab-row {
+  padding: 0;
+  margin: 0 0 8px 0;
+  border-bottom: 1px solid #c5d3e6;
+}
+#tab-panel-m11 h2.tab {
+  display: inline-block;
+  margin: 0 6px 0 0;
+  padding: 6px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2f5b8a;
+  background: #eaf2fb;
+  border: 1px solid #c5d3e6;
+  border-bottom: none;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  cursor: pointer;
+}
+#tab-panel-m11 h2.tab.selected {
+  background: #ffffff;
+  color: #1f3f63;
+  border-color: #9fb8d9;
+}
+#tab-panel-m11 .tab-page {
+  border: 1px solid #c5d3e6;
+  padding: 10px;
+  background: #fff;
+}
+#tab-panel-m11 .tab-page[style*="display: none"] { display: none !important; }
+
+*/
+
+/* === ESTILOS PARA MODALES DE DESGLOSE === */
+
+/* Mejora visual para las pestañas del modal desglose */
+.m11-tabs {
+  margin-bottom: 15px;
+}
+
+.m11-tabs .tab-page {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 15px;
+  background: #fafafa;
+  border-radius: 0 0 5px 5px;
+  margin-bottom: 10px;
+}
+
+.m11-tabs h2.tab {
+  display: inline-block;
+  background: #e9e9e9;
+  border: 1px solid #ccc;
+  border-bottom: none;
+  padding: 8px 15px;
+  margin: 0 2px 0 0;
+  cursor: pointer;
+  border-radius: 5px 5px 0 0;
+  font-size: 13px;
+  color: #555;
+  transition: background-color 0.3s ease;
+}
+
+.m11-tabs h2.tab:hover {
+  background: #ddd;
+}
+
+.m11-tabs h2.tab.selected {
+  background: #fff;
+  color: #333;
+  font-weight: bold;
+  border-bottom: 1px solid #fff;
+  position: relative;
+  z-index: 10;
+}
+
+/* Separación adicional entre tabs y contenido */
+.tab-content-separator {
+  height: 8px;
+  background: transparent;
+}
+
+/* Tema bilingüe para etiquetas - Tab1 */
+.label-bilingual {
+  display: block;
+  line-height: 1.3;
+}
+
+.label-bilingual .label-es {
+  display: block;
+  font-weight: bold;
+  color: #333;
+  font-size: 12px;
+}
+
+.label-bilingual .label-eu {
+  display: block;
+  font-style: italic;
+  color: #666;
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+/* Mejorar separación en formularios */
+.lineaFormulario {
+  margin-bottom: 8px;
+}
+
+.etiquetaLPEEL {
+  min-height: 35px;
+  display: flex;
+  align-items: flex-start;
+  padding-top: 3px;
+}
+
+/* Estilos para el modal de edición de líneas en Tab2 */
+.m11-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.m11-dialog {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.m11-dialog .m11-title {
+  background: rgb(43, 98, 181);
+  color: #fff;
+  padding: 15px 20px;
+  margin: 0;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 8px 8px 0 0;
+}
+
+.m11-dialog .body {
+  padding: 20px;
+}
+
+.m11-dialog footer {
+  padding: 15px 20px;
+  border-top: 1px solid #eee;
+  text-align: right;
+  background: #f8f9fa;
+  border-radius: 0 0 8px 8px;
+}
+
+.m11-dialog footer .botonGeneral {
+  margin-left: 10px;
+}
+
+.m11-dialog .lineaFormulario {
+  margin-bottom: 15px;
+  clear: both;
+}
+
+.m11-dialog .etiqueta {
+  font-weight: bold;
+  margin-bottom: 5px;
+  display: block;
+  width: auto !important;
+  float: none !important;
+}
+
+.m11-dialog .inputTexto {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Estilos para el dropdown de concepto */
+.m11-dialog .dropdown-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.m11-dialog .dropdown-input {
+  width: 100%;
+  padding-right: 35px; /* Espacio para la flecha */
+  box-sizing: border-box;
+  background: #fff;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 35px 8px 12px;
+}
+
+.m11-dialog .dropdown-input:focus {
+  border-color: rgb(43, 98, 181);
+  outline: none;
+  box-shadow: 0 0 5px rgba(43, 98, 181, 0.3);
+}
+
+.m11-dialog .dropdown-arrow {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: rgb(43, 98, 181);
+  font-size: 12px;
+  pointer-events: none;
+  font-weight: bold;
+}
+
+.m11-dialog .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 10000;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.m11-dialog .dropdown-option {
+  padding: 10px 12px;
+  cursor: pointer;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.m11-dialog .dropdown-option:last-child {
+  border-bottom: none;
+}
+
+.m11-dialog .dropdown-option:hover {
+  background-color: rgba(43, 98, 181, 0.1);
+  color: rgb(43, 98, 181);
+}
+
+.m11-dialog .dropdown-option:active {
+  background-color: rgba(43, 98, 181, 0.2);
+}
+
+/* Centrado de botones para las tablas de desglose */
+.botonera-centro {
+  text-align: center;
+  margin: 10px 0;
+  padding: 8px 0;
+}
+
+.botonera-centro .botonGeneral {
+  margin: 0 5px;
+}
+
+/* Forzar eliminación de scrolls horizontales en tablas FixedColumnTable */
+[id*="hScroll_"]:not(.keep-scroll), 
+[id*="scrollcontent_"]:not(.keep-scroll), 
+/* Ocultar elementos scroll solo en desglose RSB */
+[id*="frozencontent_tablaDesgloseRSB"]:not(.keep-scroll),
+[id*="scrollingcontent_tablaDesgloseRSB"]:not(.keep-scroll),
+.scrollX {
+  display: none !important;
+  visibility: hidden !important;
+  width: 0 !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Reglas específicas para el modal de desglose RSB solamente */
+.m11-desglose-wrapper {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+#wrapperTablaDesgloseRSB,
+#wrapperTablaDesgloseRSB2 {
+  overflow-x: hidden;
+  max-width: 100%;
+  display: block; /* Asegurar que se puedan mostrar */
+}
+
+#tablaDesgloseRSB,
+#tablaDesgloseRSB2 {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+/* Asegurar que las tablas internas de desglose no generen overflow */
+.m11-desglose-wrapper .FixedColumnTable table,
+.m11-desglose-wrapper table[id*="tbl_"],
+#wrapperTablaDesgloseRSB .FixedColumnTable table,
+#wrapperTablaDesgloseRSB table[id*="tbl_"],
+#wrapperTablaDesgloseRSB2 .FixedColumnTable table,
+#wrapperTablaDesgloseRSB2 table[id*="tbl_"] {
+  width: 100%;
+  table-layout: fixed;
+  max-width: 100%;
+}
+
+/* Asegurar scroll horizontal en tablas principales */
+.tablaNueva,
+.tablaNueva .tablaNuevaWrapper,
+#tabContrataciones .tablaNueva,
+#tabMinimis .tablaNueva {
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+}
+
+/* Mantener scroll horizontal en elementos específicos de FixedColumnsTable */
+div.horizontal-scroll {
+  overflow: hidden !important;
+  overflow-x: scroll !important;
+}
+
+/* Mantener scroll vertical en elementos específicos de FixedColumnsTable */
+div.vertical-scroll {
+  overflow: hidden !important;
+  overflow-y: scroll !important;
+}
+
+/* Asegurar que los contenedores de FixedColumnTable mantengan scroll */
+#listaAccesos,
+#listaMinimis,
+.table-container {
+  overflow: visible !important;
+}
+
+/* Elementos específicos generados por FixedColumnTable */
+div[id*="frozencontent_"]:not([id*="frozencontent_tablaDesgloseRSB"]),
+div[id*="scrollingcontent_"]:not([id*="scrollingcontent_tablaDesgloseRSB"]) {
+  overflow-x: auto !important;
+  overflow-y: auto !important;
+}
+
+/* APLICAR SCROLL HORIZONTAL DIRECTAMENTE A LAS TABLAS Y SUS CONTENEDORES INMEDIATOS */
+/* Quitar scroll del contenedor principal */
+body div#listaAccesos,
+body div#listaMinimis {
+  overflow: visible !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Aplicar scroll a los elementos internos que contienen las tablas */
+body div#listaAccesos div[id*="frozencontent_"],
+body div#listaAccesos div[id*="scrollingcontent_"],
+body div#listaMinimis div[id*="frozencontent_"],
+body div#listaMinimis div[id*="scrollingcontent_"] {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
+/* Aplicar scroll directamente a las tablas si es necesario */
+body div#listaAccesos table,
+body div#listaMinimis table {
+  overflow-x: auto !important;
+  display: block !important;
+  white-space: nowrap !important;
+}
+
+/* Restablecer reglas de FixedColumnTable para tablas principales */
+body div.horizontal-scroll:not(.m11-desglose-wrapper div.horizontal-scroll) {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+}
+
+body div.vertical-scroll:not(.m11-desglose-wrapper div.vertical-scroll) {
+  overflow-x: visible !important;
+  overflow-y: auto !important;
+}
+
+/* Forzar scroll en wrapper de FixedColumnTable */
+body div#listaAccesos .FixedColumnTable,
+body div#listaMinimis .FixedColumnTable {
+  overflow-x: auto !important;
+  display: block !important;
+}
+
+/* Scroll específico para divs generados por FixedColumnTable */
+body div#listaAccesos div[id^="wrapper_"],
+body div#listaMinimis div[id^="wrapper_"] {
+  overflow-x: auto !important;
+  overflow-y: visible !important;
+  max-width: 100% !important;
+}
+
+/* Evitar scrolls múltiples en elementos de FixedColumnTable */
+body div#listaAccesos table,
+body div#listaAccesos .dataTable,
+body div#listaMinimis table,
+body div#listaMinimis .dataTable {
+  overflow: visible !important;
+}
+
+/* Asegurar que el contenedor de la tabla no tenga altura extra */
+body div#listaAccesos,
+body div#listaMinimis {
+  display: block !important;
+  position: relative !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 10px !important;
+}
+
+/* Evitar espacios extra que empujen el scroll hacia abajo */
+body div#listaAccesos > *:last-child,
+body div#listaMinimis > *:last-child {
+  margin-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
