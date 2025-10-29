@@ -1,12 +1,10 @@
-
 package es.altia.flexia.integracion.moduloexterno.melanbide11.util;
 
-public class ConstantesMeLanbide11 
-{
+public class ConstantesMeLanbide11 {
     public ConstantesMeLanbide11() {
     }
-    
-    //Fichero de propiedades del modulo.
+
+    // Fichero de propiedades del modulo.
     public static final String FICHERO_PROPIEDADES = "MELANBIDE11";
 
     // Separadores
@@ -19,17 +17,21 @@ public class ConstantesMeLanbide11
     public static final int CODIGO_IDIOMA_CASTELLANO = 1;
     public static final int CODIGO_IDIOMA_EUSKERA = 4;
 
-    //Nombres de las tablas en el fichero de propiedades.
+    // Nombres de las tablas en el fichero de propiedades.
     public static final String MELANBIDE11_CONTRATACION = "MELANBIDE11_CONTRATACION";
     public static final String MELANBIDE11_SUBSOLIC = "MELANBIDE11_SUBSOLIC";
     public static final String TABLA_VALORES_CAMPOS_SUPLEMENTARIOS_NUMERICOS = "TABLA_VALORES_CAMPOS_SUPLEMENTARIOS_NUMERICOS";
     public static final String MELANBIDE11_DESGRSB = "MELANBIDE11_DESGRSB";
+    public static final String TABLA_SUBVENCION_REF = "MELANBIDE11_SUBVENCION_REF";
 
-    //Nombre de Sequencia ID 
+    // Nombre de Sequencia ID
     public static final String SEQ_MELANBIDE11_CONTRATACION = "SEQ_MELANBIDE11_CONTRATACION";
     public static final String SEQ_MELANBIDE11_SUBSOLIC = "SEQ_MELANBIDE11_SUBSOLIC";
+    public static final String SEQ_MELANBIDE11_DESGRSB = "SEQ_MELANBIDE11_DESGRSB";
+    public static final String SEQ_TABLA_SUBVENCION_REF = "SEQ_MELANBIDE11_SUBVENCION_REF";
 
-    //Constante para la clave del fichero de propiedades que indica el nombre del módulo.
+    // Constante para la clave del fichero de propiedades que indica el nombre del
+    // módulo.
     public static final String NOMBRE_MODULO = "NOMBRE_MODULO";
 
     // Otros
@@ -40,7 +42,6 @@ public class ConstantesMeLanbide11
 
     public static final String TABLA_CODIGOS_DESPLEGABLES_EXTERNOS = "TABLA_CODIGOS_DESPLEGABLES_EXTERNOS";
 
-    
     // Códigos desplegables
     public static final String COD_DES_SEXO = "COD_DES_SEXO";
     public static final String COD_DES_BOOL = "COD_DES_BOOL";
@@ -56,6 +57,4 @@ public class ConstantesMeLanbide11
     public static final String COD_DES_EXT_TIIN = "COD_DES_EXT_TIIN";
     public static final String COD_DES_EXT_CPIN = "COD_DES_EXT_CPIN";
 
-    
 }
- 

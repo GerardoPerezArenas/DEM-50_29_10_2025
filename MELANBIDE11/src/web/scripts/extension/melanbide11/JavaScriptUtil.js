@@ -1,11 +1,4 @@
-/*
- * JavaScriptUtil is a part of JavaScripTools (http://javascriptools.sourceforge.net).
- * This file was compressed using JavaScriptZip (http://javascriptzip.sourceforge.net).
- * Author: Luis Fernando Planella Gonzalez (lfpg.dev at gmail dot com)
- * Version: 2.2.5
- * JavaScripTools is distributed under the GNU Lesser General Public License (LGPL).
- * For more information, see http://www.gnu.org/licenses/lgpl-2.1.txt
- */
+
 var JST_CHARS_NUMBERS = "0123456789";
 var JST_CHARS_LOWER = "";
 var JST_CHARS_UPPER = "";
@@ -130,30 +123,24 @@ function isUndefined(object) {
     return typeof (object) == "undefined"
 }
 function invoke(functionName, args) {
-    var arguments;
+    var argExpr;
     if (args == null || isUndefined(args)) {
-        arguments = "()"
+        argExpr = "()"
     } else if (!isInstance(args, Array)) {
-        arguments = "(args)"
+        argExpr = "(args)"
     } else {
-        arguments = "(";
+        argExpr = "(";
         for (var i = 0; i < args.length; i++) {
             if (i > 0) {
-                arguments += ","
+                argExpr += ","
             }
-            arguments += "args[" + i + "]"
+            argExpr += "args[" + i + "]"
         }
-        arguments += ")"
+        argExpr += ")"
     }
-    return eval(functionName + arguments)
-}
-function invokeAsMethod(object, method, args) {
-    return method.apply(object, args)
+    return eval(functionName + argExpr)
 }
 function ensureArray(object) {
-    if (typeof (object) == 'undefined' || object == null) {
-        return []
-    }
     if (object instanceof Array) {
         return object
     }
@@ -256,7 +243,7 @@ function observeEvent(object, eventName, handler) {
             }*/
             /*
             if(object.attachEvent(eventName, handler)){
-                alert('a�dido evento correctamente --- opcion 2 observeEvent - object.attachEvent');
+                alert('añdido evento correctamente --- opcion 2 observeEvent - object.attachEvent');
             }else{
                 alert("opcion 2 observeEvent - object.attachEvent --  no correcto");
             }
@@ -1497,3 +1484,88 @@ function elementoVisible(valor, idBarra) {
         document.getElementById(idBarra).style.visibility = 'hidden';
     }
 }
+(function(global){
+  // Utilidades mínimas para compatibilidad con pantallas ECA.
+  var ecaUtils = {
+    // Formatea número con separador decimal coma y miles con puntos.
+    formatEuro: function(n){
+      if (n==null || isNaN(+n)) return '0,00';
+      var parts = (+n).toFixed(2).split('.');
+      parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+      return parts.join(',');
+    },
+    escapeHtml: function(s){
+      if(!s && s!==0) return '';
+      return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+    }
+  };
+  global.ecaUtils = ecaUtils;
+})(window);
+
+$(document).ready(function() {
+    function calcularClienteComputable() {
+        var salario = parseFloat($('#salarioBase').val()) || 0;
+        var pagas = parseFloat($('#pagasExtraordinarias').val()) || 0;
+        var sumaFijos = 0;
+        $('#tablaComplementosSalariales tbody tr').each(function() {
+            var tipo = $(this).find('.tipoComplemento').val();
+            var imp = parseFloat($(this).find('.importeComplemento').val()) || 0;
+            if (tipo && (tipo.toUpperCase() === 'FIJO' || tipo.toUpperCase() === 'FINKOA')) {
+                sumaFijos += imp;
+            }
+        });
+        var total = salario + pagas + sumaFijos;
+        $('#retribucionComputable').val(total.toFixed(2));
+        return total;
+    }
+
+    function calcularClienteBruta() {
+        var salario = parseFloat($('#salarioBase').val()) || 0;
+        var pagas = parseFloat($('#pagasExtraordinarias').val()) || 0;
+        var sumaAll = 0;
+        $('#tablaComplementosSalariales tbody tr').each(function() {
+            var imp = parseFloat($(this).find('.importeComplemento').val()) || 0;
+            sumaAll += imp;
+        });
+        $('#tablaOtrasPercepciones tbody tr').each(function() {
+            var imp = parseFloat($(this).find('.importePercepcion').val()) || 0;
+            sumaAll += imp;
+        });
+        var total = salario + pagas + sumaAll;
+        $('#CSTCONT').val(total.toFixed(2));
+        return total;
+    }
+
+    function sincronizarBackend(idContratacion) {
+        if (!idContratacion) return;
+        $.ajax({
+            url: 'melanbide11Action.do',
+            type: 'POST',
+            data: {
+                action: 'recalcularRetribuciones',
+                idContratacion: idContratacion
+            },
+            success: function(response) {
+                try {
+                    if (response.success) {
+                        $('#retribucionComputable').val(response.retribucionComputable);
+                        $('#CSTCONT').val(response.retribucionBrutaTotal);
+                    } else {
+                        console.error('Error backend:', response.error);
+                    }
+                } catch (e) { console.error(e); }
+            },
+            error: function() { console.error('Error AJAX recalcularRetribuciones'); }
+        });
+    }
+
+    $(document).on('change keyup', '#salarioBase, #pagasExtraordinarias, .importeComplemento, .tipoComplemento, .importePercepcion', function() {
+        calcularClienteComputable();
+        calcularClienteBruta();
+        // opcional: sincronizarBackend($('#idContratacion').val());
+    });
+
+    // inicial
+    calcularClienteComputable();
+    calcularClienteBruta();
+});

@@ -123,6 +123,7 @@ public class ContratacionVO {
     private Double rsbImporte; // RSBIMPORTE - Complementos salariales
     private Double rsbCompConv; // RSBCOMPCONV - Retribución salarial bruta computable para la convocatoria
                                 // (TOTAL CALCULADO)
+    private Double cstCont; // CSTCONT - Coste total del contrato (incluyendo extrasalariales)
     // Campo tipo de complemento (1 = salarial, 2 = extrasalarial). Solo hay un
     // importe RSBIMPORTE
     private String rsbTipo; // RSBTIPO
@@ -520,6 +521,14 @@ public class ContratacionVO {
 
     public void setRsbCompConv(Double rsbCompConv) {
         this.rsbCompConv = rsbCompConv;
+    }
+
+    public Double getCstCont() {
+        return cstCont;
+    }
+
+    public void setCstCont(Double cstCont) {
+        this.cstCont = cstCont;
     }
 
     public String getRsbTipo() {

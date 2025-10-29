@@ -1,4 +1,4 @@
-<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
+Ôªø<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
 <%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
 <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html" %>
 <%@taglib uri="/WEB-INF/tlds/c.tld" prefix="c" %>
@@ -48,8 +48,8 @@
           }
         } catch(Exception ex) {}
 
-        // Aceptar ambos nombres de par·metro para compatibilidad: primero intentar "codOrganizacionModulo",
-        // si viene vacÌo, probar con "codOrganizacion" que es como lo envÌa el controlador actualmente.
+        // Aceptar ambos nombres de par√°metro para compatibilidad: primero intentar "codOrganizacionModulo",
+        // si viene vac√≠o, probar con "codOrganizacion" que es como lo env√≠a el controlador actualmente.
         codOrganizacion  = request.getParameter("codOrganizacionModulo");
         if (codOrganizacion == null || "".equals(codOrganizacion)) {
           codOrganizacion = request.getParameter("codOrganizacion");
@@ -95,10 +95,10 @@
     <script type="text/javascript">
       var APP_CONTEXT_PATH = '<%=request.getContextPath()%>';
       
-      // Tabla de cuantÌas para c·lculo autom·tico del importe de subvenciÛn
+      // Tabla de cuant√≠as para c√°lculo autom√°tico del importe de subvenci√≥n
       // TODO: Cargar desde BD - por ahora datos de ejemplo para pruebas
       var tablaCuantias = [
-        // TitulaciÛn FP2 - FormaciÛn Profesional de 2∫ Grado
+        // Titulaci√≥n FP2 - Formaci√≥n Profesional de 2¬∫ Grado
         {anio: 2025, tit: "FP2", mujer: false, ge55: false, discapacidad: false, importe: 3000, tipoContrato: "", base12m: true},
         {anio: 2025, tit: "FP2", mujer: true, ge55: false, discapacidad: false, importe: 3500, tipoContrato: "", base12m: true},
         {anio: 2025, tit: "FP2", mujer: false, ge55: true, discapacidad: false, importe: 3800, tipoContrato: "", base12m: true},
@@ -106,23 +106,23 @@
         {anio: 2025, tit: "FP2", mujer: false, ge55: false, discapacidad: true, importe: 4000, tipoContrato: "", base12m: true},
         {anio: 2025, tit: "FP2", mujer: true, ge55: false, discapacidad: true, importe: 4500, tipoContrato: "", base12m: true},
         
-        // TitulaciÛn UNIVERSIDAD - EducaciÛn Universitaria
+        // Titulaci√≥n UNIVERSIDAD - Educaci√≥n Universitaria
         {anio: 2025, tit: "UNIVERSIDAD", mujer: false, ge55: false, discapacidad: false, importe: 4500, tipoContrato: "", base12m: true},
         {anio: 2025, tit: "UNIVERSIDAD", mujer: true, ge55: false, discapacidad: false, importe: 5000, tipoContrato: "", base12m: true},
         {anio: 2025, tit: "UNIVERSIDAD", mujer: false, ge55: true, discapacidad: false, importe: 5200, tipoContrato: "", base12m: true},
         {anio: 2025, tit: "UNIVERSIDAD", mujer: true, ge55: true, discapacidad: false, importe: 5700, tipoContrato: "", base12m: true},
         
-        // Sin titulaciÛn especÌfica - base
+        // Sin titulaci√≥n espec√≠fica - base
         {anio: 2025, tit: "", mujer: false, ge55: false, discapacidad: false, importe: 2500, tipoContrato: "", base12m: true},
         {anio: 2025, tit: "", mujer: true, ge55: false, discapacidad: false, importe: 3000, tipoContrato: "", base12m: true},
         {anio: 2025, tit: "", mujer: false, ge55: true, discapacidad: false, importe: 3200, tipoContrato: "", base12m: true},
         
-        // AÒo anterior - 2024 con valores diferentes
+        // A√±o anterior - 2024 con valores diferentes
         {anio: 2024, tit: "FP2", mujer: false, ge55: false, discapacidad: false, importe: 2800, tipoContrato: "", base12m: true},
         {anio: 2024, tit: "FP2", mujer: true, ge55: false, discapacidad: false, importe: 3300, tipoContrato: "", base12m: true}
       ];
       
-      console.log("Tabla de cuantÌas cargada:", tablaCuantias.length, "reglas disponibles");
+      console.log("Tabla de cuant√≠as cargada:", tablaCuantias.length, "reglas disponibles");
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // INICIO OBJETO COMBOBOX
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -192,7 +192,7 @@
         this.i_codigos = new Array();
         this.i_items = new Array();
 
-        //Creamos la vista del combo, que ser· un DIV que incluir· la tabla con los elementos de la lista.
+        //Creamos la vista del combo, que ser√° un DIV que incluir√° la tabla con los elementos de la lista.
         this.base = document.createElement("DIV");
         this.base.combo = this;
         this.base.style.position = 'absolute';
@@ -264,7 +264,7 @@
           var rowID = 1;
 
           if (!!navigator.userAgent.match(/Trident.*rv[ :]*11\./) || navigator.appName.indexOf("Internet Explorer") != -1) {
-            // Se calcula la posiciÛn de item del combo que ha sido seleccionado
+            // Se calcula la posici√≥n de item del combo que ha sido seleccionado
             var i = padre.parentElement.sourceIndex;
             var j = padre.sourceIndex;
             rowID = (j - i - 1);
@@ -272,7 +272,7 @@
           } else {
             // Firefox u otro navegador
 
-            /** Se obtiene el valor del item de men˙ seleccionado, para a partir de Èl, obtener la posiciÛn en el combo y seleccionar dicha fila **/
+            /** Se obtiene el valor del item de men√∫ seleccionado, para a partir de √©l, obtener la posici√≥n en el combo y seleccionar dicha fila **/
             var hijos = padre.childNodes;
             var valorFilaSeleccionada = "";
             if (hijos != null) {
@@ -289,7 +289,7 @@
                 }
               }
             }
-            // En z est· la posiciÛn de la fila seleccionada por el usuario
+            // En z est√° la posici√≥n de la fila seleccionada por el usuario
             rowID = z;
           }// else
 
@@ -574,7 +574,7 @@
             this.selectItem(i);
           } else {
             if (this.des.readOnly)
-              jsp_alerta('A', 'CÛdigo inexistente');
+              jsp_alerta('A', 'C√≥digo inexistente');
             this.selectItem(-1);
             return false;
           }
@@ -622,11 +622,11 @@
       }
 
       function quitarTildes(st) {
-        st = st.replace(new RegExp(/[‡·‚„‰Â]/g), "a");
-        st = st.replace(new RegExp(/[ËÈÍÎ]/g), "e");
-        st = st.replace(new RegExp(/[ÏÌÓÔ]/g), "i");
-        st = st.replace(new RegExp(/[ÚÛÙıˆ]/g), "o");
-        st = st.replace(new RegExp(/[˘˙˚¸]/g), "u");
+        st = st.replace(new RegExp(/[√†√°√¢√£√§√•]/g), "a");
+        st = st.replace(new RegExp(/[√®√©√™√´]/g), "e");
+        st = st.replace(new RegExp(/[√¨√≠√Æ√Ø]/g), "i");
+        st = st.replace(new RegExp(/[√≤√≥√¥√µ√∂]/g), "o");
+        st = st.replace(new RegExp(/[√π√∫√ª√º]/g), "u");
 
         return st;
       }
@@ -704,7 +704,7 @@
       }
 
 //********************************************************** //
-// Calculamos el tamaÒo y posicion que tendr· el Combo.      //
+// Calculamos el tama√±o y posicion que tendr√° el Combo.      //
 //***********************************************************//
       function NC_CB_resize() {
 
@@ -1069,7 +1069,7 @@
         return true;
       }
 
-      // FunciÛn para cerrar ventana de modificaciÛn/creaciÛn
+      // Funci√≥n para cerrar ventana de modificaci√≥n/creaci√≥n
       function cerrarVentana() {
         console.log("=== CERRANDO VENTANA ===");
         console.log("Tipo de ventana detectado:");
@@ -1081,16 +1081,16 @@
         try {
           var ventanaCerrada = false;
           
-          // MÈtodo 1: Ventana modal o popup tradicional
+          // M√©todo 1: Ventana modal o popup tradicional
           if (window.opener && !window.parent.opener) {
-            console.log("MÈtodo 1: Ventana popup - cerrando con window.close()");
+            console.log("M√©todo 1: Ventana popup - cerrando con window.close()");
             window.close();
             ventanaCerrada = true;
           }
           
-          // MÈtodo 2: Ventana dentro de un iframe o frame
+          // M√©todo 2: Ventana dentro de un iframe o frame
           else if (window.parent && window.parent !== window.self) {
-            console.log("MÈtodo 2: Ventana en frame/iframe");
+            console.log("M√©todo 2: Ventana en frame/iframe");
             
             // Intentar cerrar desde el parent
             if (window.parent.window && typeof window.parent.window.close === 'function') {
@@ -1106,33 +1106,33 @@
             }
           }
           
-          // MÈtodo 3: Compatibilidad con navegadores especÌficos
+          // M√©todo 3: Compatibilidad con navegadores espec√≠ficos
           else if (navigator.appName == "Microsoft Internet Explorer") {
-            console.log("MÈtodo 3: Internet Explorer");
+            console.log("M√©todo 3: Internet Explorer");
             window.parent.window.opener = null;
             window.parent.window.close();
             ventanaCerrada = true;
           } 
           else if (navigator.appName == "Netscape") {
-            console.log("MÈtodo 3: Netscape");
+            console.log("M√©todo 3: Netscape");
             top.window.opener = top;
             top.window.open('', '_parent', '');
             top.window.close();
             ventanaCerrada = true;
           }
           
-          // MÈtodo 4: Fallback general para navegadores modernos
+          // M√©todo 4: Fallback general para navegadores modernos
           if (!ventanaCerrada) {
-            console.log("MÈtodo 4: Fallback general");
+            console.log("M√©todo 4: Fallback general");
             if (window.close) {
               window.close();
               ventanaCerrada = true;
             }
           }
           
-          // MÈtodo 5: Si a˙n no se ha cerrado, intentar redirecciÛn
+          // M√©todo 5: Si a√∫n no se ha cerrado, intentar redirecci√≥n
           if (!ventanaCerrada) {
-            console.log("MÈtodo 5: ⁄ltimo recurso - recargar p·gina padre");
+            console.log("M√©todo 5: √öltimo recurso - recargar p√°gina padre");
             if (window.parent && window.parent.location && window.parent.location.reload) {
               setTimeout(function() {
                 window.parent.location.reload();
@@ -1151,13 +1151,13 @@
           console.error("Error cerrando ventana:", e);
           console.error("Stack trace:", e.stack);
           
-          // ⁄ltimo fallback: m˙ltiples intentos
+          // √öltimo fallback: m√∫ltiples intentos
           try {
-            console.log("⁄ltimo fallback: intentos m˙ltiples");
+            console.log("√öltimo fallback: intentos m√∫ltiples");
             
             // Intento 1: Cerrar directamente
             setTimeout(function() { 
-              try { window.close(); } catch(ex) { console.warn("Intento 1 fallÛ:", ex); }
+              try { window.close(); } catch(ex) { console.warn("Intento 1 fall√≥:", ex); }
             }, 50);
             
             // Intento 2: Cerrar desde parent
@@ -1166,43 +1166,50 @@
                 if (window.parent && window.parent.close) {
                   window.parent.close(); 
                 }
-              } catch(ex) { console.warn("Intento 2 fallÛ:", ex); }
+              } catch(ex) { console.warn("Intento 2 fall√≥:", ex); }
             }, 100);
             
-            // Intento 3: Recargar p·gina padre
+            // Intento 3: Recargar p√°gina padre
             setTimeout(function() { 
               try { 
                 if (window.parent && window.parent.location) {
                   window.parent.location.reload();
                 }
-              } catch(ex) { console.warn("Intento 3 fallÛ:", ex); }
+              } catch(ex) { console.warn("Intento 3 fall√≥:", ex); }
             }, 200);
             
           } catch(e2) {
-            console.error("Error en ˙ltimo fallback:", e2);
+            console.error("Error en √∫ltimo fallback:", e2);
           }
         }
       }
 
+      /**
+       * Alias para cerrarVentana() - Cancelar el formulario sin guardar
+       */
+      function cancelar() {
+        cerrarVentana();
+      }
+
       // ========================================
-      // FUNCIONES DE C¡LCULO DE SUBVENCI”N
+      // FUNCIONES DE C√ÅLCULO DE SUBVENCI√ìN
       // ========================================
       
       /**
-       * Obtiene el estado actual del formulario para el c·lculo de subvenciÛn
+       * Obtiene el estado actual del formulario para el c√°lculo de subvenci√≥n
        */
       function getEstadoFormulario() {
-        // Obtener titulaciÛn (simplificado para esta implementaciÛn)
+        // Obtener titulaci√≥n (simplificado para esta implementaci√≥n)
         var titulacion = "";
         var codTitulacion = document.getElementById('codListaTitulacion')?.value || "";
         
-        // Mapear cÛdigos de titulaciÛn a los de la tabla de cuantÌas
+        // Mapear c√≥digos de titulaci√≥n a los de la tabla de cuant√≠as
         if (codTitulacion.includes("FP") || codTitulacion.includes("CICLO")) {
           titulacion = "FP2";
         } else if (codTitulacion.includes("UNIVERSIDAD") || codTitulacion.includes("LICENC") || codTitulacion.includes("GRADO")) {
           titulacion = "UNIVERSIDAD";
         } else {
-          titulacion = ""; // Sin titulaciÛn especÌfica
+          titulacion = ""; // Sin titulaci√≥n espec√≠fica
         }
         
         // Determinar si es mujer
@@ -1217,16 +1224,16 @@
         var esMayor55 = edad >= 55;
         
         // Determinar discapacidad (simplificado - puede estar en otros campos)
-        var tieneDiscapacidad = false; // TODO: implementar detecciÛn desde campos apropiados
+        var tieneDiscapacidad = false; // TODO: implementar detecci√≥n desde campos apropiados
         
-        // AÒo de convocatoria (por defecto 2025)
-        var anio = 2025; // TODO: obtener desde campo apropiado o par·metro
+        // A√±o de convocatoria (por defecto 2025)
+        var anio = 2025; // TODO: obtener desde campo apropiado o par√°metro
         
         // Jornada (por defecto 100% si no se especifica)
         var jornadaPct = 100; // TODO: obtener desde campo de jornada si existe
         
-        // DuraciÛn en meses (por defecto 12)
-        var meses = 12; // TODO: obtener desde campo de duraciÛn si existe
+        // Duraci√≥n en meses (por defecto 12)
+        var meses = 12; // TODO: obtener desde campo de duraci√≥n si existe
         
         return {
           tit: titulacion,
@@ -1236,15 +1243,15 @@
           jornadaPct: jornadaPct,
           meses: meses,
           anio: anio,
-          tipoContrato: "" // Por defecto vacÌo para que coincida con cualquier tipo
+          tipoContrato: "" // Por defecto vac√≠o para que coincida con cualquier tipo
         };
       }
       
       /**
-       * Busca la regla de cuantÌa que coincida con el estado del formulario
+       * Busca la regla de cuant√≠a que coincida con el estado del formulario
        */
       function buscarCuantia(tabla, estado) {
-        console.log("Buscando cuantÌa para:", estado);
+        console.log("Buscando cuant√≠a para:", estado);
         
         var coincidencias = tabla.filter(function(regla) {
           var coincide = regla.anio === estado.anio &&
@@ -1265,14 +1272,14 @@
       }
       
       /**
-       * FunciÛn principal que recalcula el importe de subvenciÛn
+       * Funci√≥n principal que recalcula el importe de subvenci√≥n
        */
       function recalcularImporteSubvencion() {
-        console.log("=== INICIANDO REC¡LCULO DE SUBVENCI”N ===");
+        console.log("=== INICIANDO REC√ÅLCULO DE SUBVENCI√ìN ===");
         
-        // Verificar que la tabla de cuantÌas est· disponible
+        // Verificar que la tabla de cuant√≠as est√° disponible
         if (typeof tablaCuantias === 'undefined') {
-          console.warn("Tabla de cuantÌas no disponible");
+          console.warn("Tabla de cuant√≠as no disponible");
           return;
         }
         
@@ -1291,7 +1298,7 @@
         }
         
         if (!regla) {
-          console.warn("No se encontrÛ regla aplicable, limpiando campo");
+          console.warn("No se encontr√≥ regla aplicable, limpiando campo");
           campoImporte.value = '';
           return;
         }
@@ -1306,31 +1313,31 @@
         // Prorrateo por jornada si no es del 100%
         if (estado.jornadaPct !== 100 && isFinite(estado.jornadaPct)) {
           importeFinal = importeFinal * (estado.jornadaPct / 100);
-          console.log("DespuÈs de prorrateo por jornada (" + estado.jornadaPct + "%):", importeFinal);
+          console.log("Despu√©s de prorrateo por jornada (" + estado.jornadaPct + "%):", importeFinal);
         }
         
-        // Prorrateo por duraciÛn si no son 12 meses y la regla permite base12m
+        // Prorrateo por duraci√≥n si no son 12 meses y la regla permite base12m
         if (estado.meses !== 12 && regla.base12m && isFinite(estado.meses)) {
           importeFinal = importeFinal * (estado.meses / 12);
-          console.log("DespuÈs de prorrateo por duraciÛn (" + estado.meses + " meses):", importeFinal);
+          console.log("Despu√©s de prorrateo por duraci√≥n (" + estado.meses + " meses):", importeFinal);
         }
         
         // Redondear a 2 decimales
         var importeRedondeado = Math.round(importeFinal * 100) / 100;
         
-        // Establecer el valor en el campo (formato espaÒol con comas)
+        // Establecer el valor en el campo (formato espa√±ol con comas)
         campoImporte.value = importeRedondeado.toFixed(2).replace('.', ',');
         
-        console.log("=== SUBVENCI”N CALCULADA:", importeRedondeado.toFixed(2), "EUR ===");
+        console.log("=== SUBVENCI√ìN CALCULADA:", importeRedondeado.toFixed(2), "EUR ===");
       }
       
       /**
        * Configura los eventos de cambio en los campos determinantes
        */
       function configurarEventosSubvencion() {
-        console.log("Configurando eventos para c·lculo de subvenciÛn...");
+        console.log("Configurando eventos para c√°lculo de subvenci√≥n...");
         
-        // Lista de campos que deben triggear el rec·lculo
+        // Lista de campos que deben triggear el rec√°lculo
         var camposCalculables = [
           'codListaTitulacion',
           'descListaTitulacion', 
@@ -1350,13 +1357,13 @@
           }
         });
         
-        console.log("Eventos configurados. Realizando c·lculo inicial...");
+        console.log("Eventos configurados. Realizando c√°lculo inicial...");
         
-        // Realizar c·lculo inicial
+        // Realizar c√°lculo inicial
         setTimeout(recalcularImporteSubvencion, 100);
       }
       
-      // Configurar eventos cuando el DOM estÈ listo
+      // Configurar eventos cuando el DOM est√© listo
       if (document.readyState !== 'loading') {
         configurarEventosSubvencion();
       } else {
@@ -1476,7 +1483,7 @@
           comboListaTitReqPuesto.buscaCodigo(codTitReqPuesto);
           console.log('Codigo TitReqPuesto seleccionado:', codTitReqPuesto);
         } else {
-          console.warn('comboListaTitReqPuesto no est· inicializado o no tiene mÈtodo buscaCodigo');
+          console.warn('comboListaTitReqPuesto no est√° inicializado o no tiene m√©todo buscaCodigo');
           var inputField = document.getElementById("codListaTitReqPuesto");
           if (inputField && codTitReqPuesto) {
             inputField.value = codTitReqPuesto;
@@ -1540,11 +1547,11 @@
         }
       }
 
-      // Reemplaza COMPLETO por esta versiÛn
+      // Reemplaza COMPLETO por esta versi√≥n
 function nc_guardarDatos() {
     console.log("=== INICIO FLUJO MODIFICACION ===");
     console.log("Timestamp:", new Date().toISOString());
-    console.log("OperaciÛn iniciada desde JavaScript");
+    console.log("Operaci√≥n iniciada desde JavaScript");
 
     if (nc_validarDatosNumericosVacios() && nc_validarDatos()) {
         console.log("Validaciones pasadas correctamente");
@@ -1606,7 +1613,7 @@ function nc_guardarDatos() {
             console.log("rsbTotal enviado:", document.getElementById('rsbTotal') ? document.getElementById('rsbTotal').value : 'NO EXISTE');
             console.log("*** FIN AJAX CREAR DEBUG ***");
         } else {
-            console.log("=== MODIFICACION - Preparando par·metros===");
+            console.log("=== MODIFICACION - Preparando par√°metros===");
             console.log('ID a modificar:');
             console.log('   => <%= (datModif != null && datModif.getId() != null) ? datModif.getId().toString() : "(sin id)" %>');
 
@@ -1655,14 +1662,14 @@ function nc_guardarDatos() {
 
             console.log("*** AJAX MODIFICAR DEBUG ***");
             console.log("rsbTotal enviado:", document.getElementById('rsbTotal') ? document.getElementById('rsbTotal').value : 'NO EXISTE');
-            console.log("Par·metros completos:", parametros.substring(0, 500) + "...");
+            console.log("Par√°metros completos:", parametros.substring(0, 500) + "...");
             console.log("*** FIN AJAX MODIFICAR DEBUG ***");
         }
 
         try {
-            console.log("=== ENVIANDO PETICI”N AJAX ===");
+            console.log("=== ENVIANDO PETICI√ìN AJAX ===");
             console.log("URL destino:", url);
-            console.log("MÈtodo: POST");
+            console.log("M√©todo: POST");
 
             // Sincrono por compatibilidad legacy
             ajax.open("POST", url, false);
@@ -1670,7 +1677,7 @@ function nc_guardarDatos() {
             ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
             ajax.send(parametros);
 
-            console.log("PeticiÛn enviada. Estado:", ajax.readyState, "Status:", ajax.status);
+            console.log("Petici√≥n enviada. Estado:", ajax.readyState, "Status:", ajax.status);
 
             if (ajax.readyState === 4) {
                 if (ajax.status === 200) {
@@ -1686,11 +1693,11 @@ function nc_guardarDatos() {
                         console.log("XML parseado en IE");
                     } else {
                         xmlDoc = ajax.responseXML;
-                        console.log("XML parseado en navegador est·ndar");
+                        console.log("XML parseado en navegador est√°ndar");
                     }
 
                     if (!xmlDoc) {
-                        throw new Error("XML vacÌo o inv·lido");
+                        throw new Error("XML vac√≠o o inv√°lido");
                     }
 
                     console.log("=== PROCESANDO RESPUESTA XML ===");
@@ -1706,7 +1713,7 @@ function nc_guardarDatos() {
                     var nodoFila;
                     var hijosFila;
 
-                    console.log("N˙mero de nodos hijos:", hijos.length);
+                    console.log("N√∫mero de nodos hijos:", hijos.length);
 
                     for (var j = 0; hijos != null && j < hijos.length; j++) {
                         if (hijos[j].nodeName == "CODIGO_OPERACION") {
@@ -1827,7 +1834,7 @@ function nc_guardarDatos() {
                                     } else {
                                         fila[17] = '-';
                                     }
-                } else if (hijosFila[cont].nodeName == "TITREQPUESTO") { // nuevo: titulaciÛn requerida puesto
+                } else if (hijosFila[cont].nodeName == "TITREQPUESTO") { // nuevo: titulaci√≥n requerida puesto
                   if (hijosFila[cont].childNodes[0] && hijosFila[cont].childNodes[0].nodeValue != "null") {
                     fila[18] = hijosFila[cont].childNodes[0].nodeValue;
                   } else {
@@ -1853,7 +1860,7 @@ function nc_guardarDatos() {
                   }
                                 } else if (hijosFila[cont].nodeName == "CPROFESIONALIDAD") {
                                     if (hijosFila[cont].childNodes[0] && hijosFila[cont].childNodes[0].nodeValue != "null") {
-                    fila[20] = hijosFila[cont].childNodes[0].nodeValue; // se mantiene Ìndice original
+                    fila[20] = hijosFila[cont].childNodes[0].nodeValue; // se mantiene √≠ndice original
                                     } else {
                                         fila[20] = '-';
                                     }
@@ -1986,19 +1993,35 @@ function nc_guardarDatos() {
                               }
                               console.log('Post-fallback indices clave -> 18(TitReqPuesto):', fila[18], '19(Funciones):', fila[19], '35(DesTitulacion):', fila[35], '36(Titulacion):', fila[36]);
                             } catch(fbErr){
-                              console.warn('Fallback titulaciÛn / funciones no pudo aplicarse:', fbErr);
+                              console.warn('Fallback titulaci√≥n / funciones no pudo aplicarse:', fbErr);
                             }
                             fila = new Array();
                         }
                     } // for hijos
 
                     console.log("=== FINALIZANDO PROCESAMIENTO XML ===");
-                    console.log("CÛdigo de operaciÛn final:", codigoOperacion);
+                    console.log("C√≥digo de operaci√≥n final:", codigoOperacion);
 
                     if (codigoOperacion == "0") {
-                        console.log("=== OPERACI”N EXITOSA ===");
-                        self.parent.opener.retornoXanelaAuxiliar(lista);
-                        cerrarVentana();
+                        console.log("=== OPERACI√ìN EXITOSA ===");
+                        console.log("Lista a devolver:", lista);
+                        console.log("N√∫mero de elementos en lista:", lista.length);
+                        
+                        // Mostrar alert antes de cerrar la ventana
+                        setTimeout(function() {
+                            jsp_alerta("I", "Datos guardados correctamente");
+                            // Cerrar ventana con datos actualizados usando framework Flexia
+                            setTimeout(function() {
+                                console.log("Cerrando ventana con cerrarVentanaModal y devolviendo datos actualizados");
+                                // Usar cerrarVentanaModal del framework Flexia en lugar de retornoXanelaAuxiliar
+                                if (typeof cerrarVentanaModal === 'function') {
+                                    cerrarVentanaModal(lista);
+                                } else {
+                                    console.warn("cerrarVentanaModal no disponible, intentando window.close()");
+                                    cerrarVentana();
+                                }
+                            }, 500);
+                        }, 100);
                         console.log("=== FIN FLUJO MODIFICACION - EXITOSO ===");
                     } else if (codigoOperacion == "1") {
                         console.log("=== ERROR EN BD ===");
@@ -2024,8 +2047,8 @@ function nc_guardarDatos() {
             console.log("=== FIN FLUJO MODIFICACION - ERROR ===");
         }
     } else {
-        console.log("=== VALIDACI”N FALLIDA ===");
-        console.log("Mensaje de validaciÛn:", nc_mensajeValidacion);
+        console.log("=== VALIDACI√ìN FALLIDA ===");
+        console.log("Mensaje de validaci√≥n:", nc_mensajeValidacion);
         jsp_alerta("A", nc_mensajeValidacion);
     }
 }
@@ -2173,7 +2196,7 @@ function nc_guardarDatos() {
                  return false;
                  }*/
                 // =============================
-                // NUEVO: ValidaciÛn FUNCIONES (m·ximo 200)
+                // NUEVO: Validaci√≥n FUNCIONES (m√°ximo 200)
                 // =============================
 
                 var funciones = document.getElementById('funciones').value;    
@@ -2182,7 +2205,7 @@ function nc_guardarDatos() {
                 // =============================
                 // NUEVO: Lectura TITREQPUESTO (no obligatorio, como JORN)
                 // =============================
-                // Soporte doble: patrÛn legacy (codListaTitReqPuesto) o <select id="titReqPuesto">
+                // Soporte doble: patr√≥n legacy (codListaTitReqPuesto) o <select id="titReqPuesto">
                 var titReqPuesto = document.getElementById('codListaTitReqPuesto'),value;
     
                 // Si en el futuro fuera obligatorio, descomentar:
@@ -2197,18 +2220,18 @@ function nc_guardarDatos() {
                 return correcto;
             }
 
-            // FunciÛn para validar que un campo es numÈrico
+            // Funci√≥n para validar que un campo es num√©rico
             function nc_validarNumerico(campo) {
                 try {
                     if (!campo || !campo.value) {
-                        return true; // Los campos vacÌos se permiten
+                        return true; // Los campos vac√≠os se permiten
                     }
                     
-                    var valor = campo.value.replace(',', '.'); // Convertir formato espaÒol a decimal
+                    var valor = campo.value.replace(',', '.'); // Convertir formato espa√±ol a decimal
                     var numero = parseFloat(valor);
                     
                     if (isNaN(numero) || !isFinite(numero)) {
-                        nc_mensajeValidacion = 'El campo "' + (campo.name || campo.id) + '" debe contener un valor numÈrico v·lido.';
+                        nc_mensajeValidacion = 'El campo "' + (campo.name || campo.id) + '" debe contener un valor num√©rico v√°lido.';
                         return false;
                     }
                     
@@ -2220,19 +2243,19 @@ function nc_guardarDatos() {
                     
                     return true;
                 } catch (e) {
-                    console.warn('Error validando campo numÈrico:', e);
+                    console.warn('Error validando campo num√©rico:', e);
                     nc_mensajeValidacion = 'Error validando el campo "' + (campo.name || campo.id) + '".';
                     return false;
                 }
             }
 
-            // FunciÛn para validar todos los campos numÈricos que no pueden estar vacÌos
+            // Funci√≥n para validar todos los campos num√©ricos que no pueden estar vac√≠os
             function nc_validarDatosNumericosVacios() {
                 try {
                     var correcto = true;
                     nc_mensajeValidacion = "";
                     
-                    // Validar campos RSB (RetribuciÛn Salarial Bruta)
+                    // Validar campos RSB (Retribuci√≥n Salarial Bruta)
                     var camposRSB = ['rsbSalBase', 'rsbPagExtra', 'rsbImporte', 'rsbTotal'];
                     
                     for (var i = 0; i < camposRSB.length; i++) {
@@ -2245,7 +2268,7 @@ function nc_guardarDatos() {
                         }
                     }
                     
-                    // Validar otros campos numÈricos crÌticos
+                    // Validar otros campos num√©ricos cr√≠ticos
                     var otrosCampos = ['edad', 'horasConv', 'costeContrato'];
                     
                     for (var i = 0; i < otrosCampos.length; i++) {
@@ -2259,13 +2282,13 @@ function nc_guardarDatos() {
                     }
                     
                     if (!correcto) {
-                        console.log("ValidaciÛn numÈrica fallida:", nc_mensajeValidacion);
+                        console.log("Validaci√≥n num√©rica fallida:", nc_mensajeValidacion);
                     }
                     
                     return correcto;
                 } catch (e) {
                     console.warn('Error en nc_validarDatosNumericosVacios:', e);
-                    nc_mensajeValidacion = 'Error validando los datos numÈricos del formulario.';
+                    nc_mensajeValidacion = 'Error validando los datos num√©ricos del formulario.';
                     return false;
                 }
             }
@@ -2275,9 +2298,9 @@ function nc_guardarDatos() {
             var complementosExtrasalariales = 0;
             var complementosCargados = false;
 
-            // FunciÛn para obtener complementos por tipo desde el servidor - VERSI”N CORREGIDA v2
+            // Funci√≥n para obtener complementos por tipo desde el servidor - VERSI√ìN CORREGIDA v2
             function nc_obtenerComplementosPorTipo(callback) {
-                console.log('=== FUNCI”N nc_obtenerComplementosPorTipo VERSI”N CORREGIDA v2+fallback ===');
+                console.log('=== FUNCI√ìN nc_obtenerComplementosPorTipo VERSI√ìN CORREGIDA v2+fallback ===');
                 try {
                     var dniElement = document.getElementById('dni');
                     var numExp = '<%=request.getAttribute("numExp")%>';
@@ -2298,7 +2321,7 @@ function nc_guardarDatos() {
                     }
                     var dni = dniElement.value;
                     if (!dni || !numExp || numExp === 'null') {
-                        console.warn('nc_obtenerComplementosPorTipo: DNI o numExp vacÌos', dni, numExp);
+                        console.warn('nc_obtenerComplementosPorTipo: DNI o numExp vac√≠os', dni, numExp);
                         callback(0,0); return;
                     }
 
@@ -2313,9 +2336,6 @@ function nc_guardarDatos() {
                                 +'&dni='+encodeURIComponent(dni)
                                 +'&numExp='+encodeURIComponent(numExp)
                                 +'&expediente='+encodeURIComponent(numExp);
-                        }},
-                        { url: '<%=request.getContextPath()%>/servlet/MELANBIDE11', buildParams: function(){
-                            return 'action=getComplementosPorTipo&dni='+encodeURIComponent(dni)+'&numExp='+encodeURIComponent(numExp);
                         }}
                     ];
 
@@ -2328,7 +2348,7 @@ function nc_guardarDatos() {
                         var xhr = new XMLHttpRequest();
                         var params = attempt.buildParams();
                         console.log('[Complementos] Intento '+(index+1)+' URL:', attempt.url);
-                        console.log('[Complementos] Par·metros:', params);
+                        console.log('[Complementos] Par√°metros:', params);
                         xhr.open('POST', attempt.url, true);
                         xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
                         xhr.onreadystatechange = function(){
@@ -2336,7 +2356,7 @@ function nc_guardarDatos() {
                                 if(xhr.status===200){
                                     var raw = xhr.responseText ? xhr.responseText.trim() : '';
                                     if(raw.length===0){
-                                        console.warn('[Complementos] Respuesta vacÌa, reintentando con siguiente endpoint');
+                                        console.warn('[Complementos] Respuesta vac√≠a, reintentando con siguiente endpoint');
                                         tryRequest(index+1); return;
                                     }
                                     try{
@@ -2377,7 +2397,83 @@ function nc_guardarDatos() {
                 }
             }
 
-            // FunciÛn para calcular RSB Total autom·ticamente
+            /**
+             * Obtiene solo los complementos salariales FIJOS (excluye VARIABLES).
+             * Se usa para calcular correctamente el campo RSBCOMPCONV.
+             */
+            function nc_obtenerComplementosFijos(callback) {
+                console.log('=== nc_obtenerComplementosFijos ===');
+                try {
+                    var dniElement = document.getElementById('dni');
+                    var numExp = '<%=request.getAttribute("numExp")%>';
+                    if (!numExp || numExp === 'null') {
+                        numExp = '<%=request.getParameter("numExp")%>';
+                    }
+                    if (!numExp || numExp === 'null') {
+                        var urlParams = new URLSearchParams(window.location.search);
+                        numExp = urlParams.get('numExp');
+                    }
+                    if (!numExp || numExp === 'null') {
+                        numExp = '<%=expediente%>';
+                    }
+
+                    if (!dniElement) {
+                        console.warn('Campo DNI no encontrado');
+                        callback(0); return;
+                    }
+                    var dni = dniElement.value;
+                    if (!dni || !numExp || numExp === 'null') {
+                        console.warn('DNI o numExp vac√≠os', dni, numExp);
+                        callback(0); return;
+                    }
+
+                    var xhr = new XMLHttpRequest();
+                    var url = '<%=request.getContextPath()%>/PeticionModuloIntegracion.do';
+                    var tipo = '0';
+                    var nuevoFlag = '<%=nuevo%>';
+                    if (!nuevoFlag || nuevoFlag === 'null') { nuevoFlag = '0'; }
+                    var idRegistro = '<%=datModif != null && datModif.getId() != null ? datModif.getId().toString() : ""%>';
+                    
+                    var params = 'tarea=preparar&modulo=MELANBIDE11&operacion=getComplementosFijos'
+                        + '&tipo=' + encodeURIComponent(tipo)
+                        + '&nuevo=' + encodeURIComponent(nuevoFlag)
+                        + (idRegistro ? ('&id=' + encodeURIComponent(idRegistro)) : '')
+                        + '&dni=' + encodeURIComponent(dni)
+                        + '&numExp=' + encodeURIComponent(numExp)
+                        + '&expediente=' + encodeURIComponent(numExp);
+
+                    console.log('[Complementos FIJOS] URL:', url);
+                    console.log('[Complementos FIJOS] Params:', params);
+
+                    xhr.open('POST', url, true);
+                    xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === 4) {
+                            if (xhr.status === 200) {
+                                try {
+                                    console.log('[Complementos FIJOS] Respuesta:', xhr.responseText);
+                                    var data = JSON.parse(xhr.responseText);
+                                    var fijos = parseFloat(data.fijos) || 0;
+                                    console.log('[Complementos FIJOS] Valor parseado:', fijos);
+                                    callback(fijos);
+                                } catch (e) {
+                                    console.error('[Complementos FIJOS] Error parseando JSON:', e);
+                                    callback(0);
+                                }
+                            } else {
+                                console.error('[Complementos FIJOS] HTTP error:', xhr.status);
+                                callback(0);
+                            }
+                        }
+                    };
+                    xhr.send(params);
+                } catch (ex) {
+                    console.error('[Complementos FIJOS] Excepci√≥n:', ex);
+                    callback(0);
+                }
+            }
+
+            // Funci√≥n para calcular RSB Total autom√°ticamente
             function nc_calcularRsbTotal() {
                 try {
                     console.log("=== CALCULANDO RSB TOTAL (CON AJAX) ===");
@@ -2395,44 +2491,29 @@ function nc_guardarDatos() {
                     console.log("- Salario Base:", salBase);
                     console.log("- Pagas Extra:", pagExtra);
                     
-                    // Obtener complementos por tipo desde el servidor
-                    nc_obtenerComplementosPorTipo(function(salariales, extrasalariales) {
-                        console.log("?? === C¡LCULOS RSB DETALLADOS ===");
+                    // Obtener SOLO complementos FIJOS desde el servidor (excluye VARIABLES)
+                    nc_obtenerComplementosFijos(function(complementosFijos) {
+                        console.log("?? === C√ÅLCULOS RSB DETALLADOS ===");
                         console.log("?? Valores recibidos del callback:");
-                        console.log("   ?? Salariales recibidos:", salariales, "(tipo:", typeof salariales, ")");
-                        console.log("   ?? Extrasalariales recibidos:", extrasalariales, "(tipo:", typeof extrasalariales, ")");
+                        console.log("   ?? Complementos FIJOS recibidos:", complementosFijos, "(tipo:", typeof complementosFijos, ")");
                         
                         console.log("?? Valores base del formulario:");
                         console.log("   ?? Salario Base:", salBase, "(tipo:", typeof salBase, ")");
                         console.log("   ?? Pagas Extra:", pagExtra, "(tipo:", typeof pagExtra, ")");
                         
-                        // RSBCOMPCONV = Base + Extras + complementos SALARIALES (tipo 1)
-                        var total = salBase + pagExtra + salariales;
+                        // RSBCOMPCONV = Base + Extras + complementos FIJOS (excluye VARIABLES)
+                        var total = salBase + pagExtra + complementosFijos;
                         
-                        console.log("?? C¡LCULO PASO A PASO:");
-                        console.log("   ?? FÛrmula: salBase + pagExtra + salariales");
-                        console.log("   ?? SustituciÛn:", salBase, "+", pagExtra, "+", salariales);
+                        console.log("?? C√ÅLCULO PASO A PASO:");
+                        console.log("   ?? F√≥rmula: salBase + pagExtra + complementosFijos");
+                        console.log("   ?? Sustituci√≥n:", salBase, "+", pagExtra, "+", complementosFijos);
                         console.log("   ?? Resultado:", total, "(tipo:", typeof total, ")");
                         
-                        console.log("?? RESUMEN DE C¡LCULOS:");
+                        console.log("?? RESUMEN DE C√ÅLCULOS:");
                         console.log("   ?? Base:", salBase);
                         console.log("   ?? Extras:", pagExtra);
-                        console.log("   ?? Complementos Salariales (tipo 1):", salariales);
-                        console.log("   ?? Complementos Extrasalariales (tipo 2):", extrasalariales);
-                        console.log("   ?? TOTAL RSB CALCULADO:", total);
-                        
-                        // Actualizar el campo visual de complementos salariales
-                        var rsbImporteField = document.getElementById('rsbImporte');
-                        if (rsbImporteField) {
-                            var salarialesFormateado = salariales.toFixed(2).replace('.', ',');
-                            rsbImporteField.value = salarialesFormateado;
-                            console.log("? Campo 'Complementos Salariales' actualizado:");
-                            console.log("   ?? Valor original:", salariales);
-                            console.log("   ?? Valor formateado:", salarialesFormateado);
-                            console.log("   ?? Campo ID: rsbImporte");
-                        } else {
-                            console.error('? ERROR: Campo rsbImporte NO ENCONTRADO');
-                        }
+                        console.log("   ?? Complementos FIJOS (solo FIJOS, NO variables):", complementosFijos);
+                        console.log("   ?? TOTAL RSB COMPUTABLE CALCULADO:", total);
                         
                         // Actualizar el campo rsbTotal
                         var rsbTotalField = document.getElementById('rsbTotal');
@@ -2443,7 +2524,7 @@ function nc_guardarDatos() {
                             console.log("   ?? Valor original:", total);
                             console.log("   ?? Valor formateado:", totalFormateado);
                             console.log("   ?? Campo ID: rsbTotal");
-              // Auto-disparar c·lculo de coste contrato aprovechando que ya tenemos complementos
+              // Auto-disparar c√°lculo de coste contrato aprovechando que ya tenemos complementos
               if (typeof nc_calcularCosteContrato === 'function') {
                 try {
                   console.log("? Auto-disparo nc_calcularCosteContrato tras actualizar RSB");
@@ -2453,13 +2534,13 @@ function nc_guardarDatos() {
                   console.warn("No se pudo auto-calcular coste contrato:", autoErr);
                 }
               } else {
-                console.warn("FunciÛn nc_calcularCosteContrato no disponible en este contexto");
+                console.warn("Funci√≥n nc_calcularCosteContrato no disponible en este contexto");
               }
                         } else {
                             console.error('? ERROR: Campo rsbTotal NO ENCONTRADO');
                         }
                         
-                        console.log("?? === FIN C¡LCULOS RSB DETALLADOS ===");
+                        console.log("?? === FIN C√ÅLCULOS RSB DETALLADOS ===");
                     });
                     
                     console.log("=== FIN CALCULO RSB TOTAL ===");
@@ -2468,7 +2549,7 @@ function nc_guardarDatos() {
                 }
             }
 
-            // FunciÛn para calcular Coste del Contrato (CSTCONT) autom·ticamente
+            // Funci√≥n para calcular Coste del Contrato (CSTCONT) autom√°ticamente
             function nc_calcularCosteContrato() {
                 try {
                     console.log("?? === CALCULANDO COSTE CONTRATO DETALLADO ===");
@@ -2481,7 +2562,7 @@ function nc_guardarDatos() {
                     console.log("?? RSB Total desde formulario:");
                     console.log("   ?? Elemento encontrado:", !!rsbTotalElem);
                     console.log("   ?? Valor string del campo:", rsbTotalValue);
-                    console.log("   ?? Valor numÈrico parseado:", rsbTotal, "(tipo:", typeof rsbTotal, ")");
+                    console.log("   ?? Valor num√©rico parseado:", rsbTotal, "(tipo:", typeof rsbTotal, ")");
                     
           // Si ya tenemos complementos cacheados evitamos nueva llamada AJAX
           if (typeof complementosCargados !== 'undefined' && complementosCargados === true) {
@@ -2496,7 +2577,7 @@ function nc_guardarDatos() {
           });
 
           function procesarCoste(salariales, extrasalariales){
-                        console.log("?? C¡LCULO COSTE CONTRATO:");
+                        console.log("?? C√ÅLCULO COSTE CONTRATO:");
                         console.log("   ?? Salariales (ya incluidos en RSB):", salariales);
                         console.log("   ?? Extrasalariales (se suman al total):", extrasalariales);
                         console.log("   ?? RSB Total actual:", rsbTotal);
@@ -2504,15 +2585,15 @@ function nc_guardarDatos() {
                         // CSTCONT = RSBCOMPCONV + complementos EXTRASALARIALES (tipo 2)
                         var costeTotal = rsbTotal + extrasalariales;
                         
-                        console.log("?? C¡LCULO COSTE PASO A PASO:");
-                        console.log("   ?? FÛrmula: rsbTotal + extrasalariales");
-                        console.log("   ?? SustituciÛn:", rsbTotal, "+", extrasalariales);
+                        console.log("?? C√ÅLCULO COSTE PASO A PASO:");
+                        console.log("   ?? F√≥rmula: rsbTotal + extrasalariales");
+                        console.log("   ?? Sustituci√≥n:", rsbTotal, "+", extrasalariales);
                         console.log("   ?? Resultado:", costeTotal, "(tipo:", typeof costeTotal, ")");
                         
                         console.log("?? RESUMEN COSTE CONTRATO:");
                         console.log("   ?? RSB Total (Base+Extras+Salariales):", rsbTotal);
                         console.log("   ?? Complementos Salariales (ya incluidos):", salariales);
-                        console.log("   ?? Complementos Extrasalariales (a aÒadir):", extrasalariales);
+                        console.log("   ?? Complementos Extrasalariales (a a√±adir):", extrasalariales);
                         console.log("   ?? COSTE TOTAL CALCULADO:", costeTotal);
                         
                         // Actualizar el campo costeContrato
@@ -2915,7 +2996,7 @@ function nc_guardarDatos() {
 
 <div class="lineaFormulario">
   <div class="etiqueta" style="width: 250px; float: left;">
-    <%=meLanbide11I18n.getMensaje(idiomaUsuario,"label.titulacionRequerida")%>
+    <%=meLanbide11I18n.getMensaje(idiomaUsuario,"label.titreqpuesto")%>
   </div>
   <div>
     <div>
@@ -3191,10 +3272,10 @@ function nc_guardarDatos() {
                     </div>
                      <br><br>
 
-                    <!-- Campo calculado RSB - RetribuciÛn Salarial Bruta Total (SOLO LECTURA) -->
+                    <!-- Campo calculado RSB - Retribuci√≥n Salarial Bruta Total (SOLO LECTURA) -->
 <div class="lineaFormulario">
   <div class="etiqueta" style="width: 250px; float: left; font-weight: bold;">
-    <strong>RetribuciÛn salarial bruta computable TOTAL</strong>
+    <strong>Retribuci√≥n salarial bruta computable TOTAL</strong>
   </div>
   <div>
     <div style="float: left;">

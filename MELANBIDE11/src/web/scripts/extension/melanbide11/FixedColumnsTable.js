@@ -20,144 +20,45 @@ if(document.all)
 else 
     cursor = 'pointer';
 
-
-document.writeln('<style type="text/css">');
-document.writeln('table.main');
-document.writeln('{');
-document.writeln('table-layout: fixed;');
-document.writeln('}');
-document.writeln('table.root');
-document.writeln('{');
-document.writeln('table-layout: fixed;');
-document.writeln('}');
-document.writeln('table.content');
-document.writeln('{');
-document.writeln('table-layout: fixed;');
-document.writeln('}');
-document.writeln('table.head');
-document.writeln('{');
-document.writeln('table-layout: fixed;');
-document.writeln('}');
-document.writeln('table.frozen');
-document.writeln('{');
-document.writeln('table-layout: fixed;');
-document.writeln('}');
-document.writeln('div.horizontal-scroll');
-document.writeln('{');
-document.writeln('overflow: hidden;');
-document.writeln('overflow-x: scroll;');
-document.writeln('}');
-document.writeln('div.horizontal-scroll div');
-document.writeln('{');
-document.writeln('height: 0.1px;');
-document.writeln('}');
-document.writeln('div.vertical-scroll');
-document.writeln('{');
-document.writeln('width: 22px;');
-document.writeln('overflow: hidden;');
-document.writeln('overflow-y: scroll;');
-document.writeln('}');
-document.writeln('div.vertical-scroll div');
-document.writeln('{');
-document.writeln('width: 1px;');
-document.writeln('}');
-document.writeln('td.inner');
-document.writeln('{');
-document.writeln('border-left: 1px solid #666;');
-document.writeln('border-bottom: 1px solid #666;');
-document.writeln('padding: 3px;');
-document.writeln('height: 28px;');
-document.writeln('overflow: hidden;');
-document.writeln('}');
-document.writeln('td.frozencol');
-document.writeln('{');
-document.writeln('border-right: 1px double #666;');
-document.writeln('}');
-document.writeln('td.col1');
-document.writeln('{');
-document.writeln('border-left: none;');
-document.writeln('width: 100px;');
-document.writeln('}');
-document.writeln('td.bottomcol');
-document.writeln('{');
-document.writeln('/*border-bottom: 1px solid #666;*/');
-document.writeln('}');
-document.writeln('.scrollCol');
-document.writeln('{');
-//document.writeln('overflow: hidden;');
-//document.writeln('text-overflow: ellipses;');
-document.writeln('white-space: nowrap;');
-document.writeln('}');
-document.writeln('td.head');
-document.writeln('{');
-document.writeln('/*border-bottom: 1px solid #666;*/');
-document.writeln('background-color: #efefef;');
-document.writeln('border-top: 1px solid #666;');
-document.writeln('}');
-document.writeln('.rightcol');
-document.writeln('{');
-document.writeln('border-right: 1px solid #666;');
-document.writeln('}');
-document.writeln('.toprow');
-document.writeln('{');
-document.writeln('border-top: 0px;');
-document.writeln('}');
-document.writeln('div.root');
-document.writeln('{');
-document.writeln('margin-left: 0px;');
-document.writeln('overflow: hidden;');
-document.writeln('width: auto;');
-document.writeln('border-bottom: 1px solid #666;');
-document.writeln('}');
-document.writeln('div.frozen');
-document.writeln('{');
-document.writeln('overflow: hidden;');
-document.writeln('width: auto;');
-document.writeln('}');
-document.writeln('div.divhead');
-document.writeln('{');
-document.writeln('overflow: hidden;');
-document.writeln('width: 500px;');
-document.writeln('border-left: 1px solid #666;');
-document.writeln('border-right: 1px solid #666; /*border-bottom: 0px solid #666;*/');
-document.writeln('border-bottom: 1px solid #666;');
-document.writeln('}');
-document.writeln('div.content');
-document.writeln('{');
-document.writeln('overflow: hidden;');
-document.writeln('width: 500px;');
-document.writeln('border-left: 1px solid #666;');
-document.writeln('}');
-document.writeln('td.tablefrozencolumn');
-document.writeln('{');
-document.writeln('border-right: 3px solid #666;');
-document.writeln('border-left: 1px solid #999999;');
-document.writeln('border-top: 1px solid #999999;');
-document.writeln('}');
-document.writeln('td.tablecontent');
-document.writeln('{');
-document.writeln('border-top: 1px solid #999999;');
-document.writeln('}');
-document.writeln('td.tableverticalscroll');
-document.writeln('{');
-document.writeln('width: 24px;');
-document.writeln('vertical-align: top;');
-document.writeln('}');
-document.writeln('div.ff-fill');
-document.writeln('{');
-document.writeln('height: 23px;');
-document.writeln('width: 23px;');
-//document.writeln('background-color: #FFF;');
-document.writeln('border-right: 1px solid #FFF;');
-document.writeln('border-bottom: 1px solid #FFF;');
-document.writeln('}');
-document.writeln('tr.horizontal-scroll');
-document.writeln('{');
-document.writeln('line-height: 22px;');
-document.writeln('}');
-document.writeln('</style>');
-
-
+// Create and append CSS styles using DOM instead of document.write
+(function() {
+    var style = document.createElement('style');
+    style.type = 'text/css';
+    var css = 
+        'table.main { table-layout: fixed; }' +
+        'table.root { table-layout: fixed; }' +
+        'table.content { table-layout: fixed; }' +
+        'table.head { table-layout: fixed; }' +
+        'table.frozen { table-layout: fixed; }' +
+        'div.horizontal-scroll { overflow: hidden; overflow-x: scroll; }' +
+        'div.horizontal-scroll div { height: 0.1px; }' +
+        'div.vertical-scroll { width: 22px; overflow: hidden; overflow-y: scroll; }' +
+        'div.vertical-scroll div { width: 1px; }' +
+        'td.inner { border-left: 1px solid #666; border-bottom: 1px solid #666; padding: 3px; height: 28px; overflow: hidden; }' +
+        'td.frozencol { border-right: 1px double #666; }' +
+        'td.col1 { border-left: none; width: 100px; }' +
+        'td.bottomcol { /*border-bottom: 1px solid #666;*/ }' +
+        '.scrollCol { white-space: nowrap; }' +
+        'td.head { /*border-bottom: 1px solid #666;*/ background-color: #efefef; border-top: 1px solid #666; }' +
+        '.rightcol { border-right: 1px solid #666; }' +
+        '.toprow { border-top: 0px; }' +
+        'div.root { margin-left: 0px; overflow: hidden; width: auto; border-bottom: 1px solid #666; }' +
+        'div.frozen { overflow: hidden; width: auto; }' +
+        'div.divhead { overflow: hidden; width: 500px; border-left: 1px solid #666; border-right: 1px solid #666; border-bottom: 1px solid #666; }' +
+        'div.content { overflow: hidden; width: 500px; border-left: 1px solid #666; }' +
+        'td.tablefrozencolumn { border-right: 3px solid #666; border-left: 1px solid #999999; border-top: 1px solid #999999; }' +
+        'td.tablecontent { border-top: 1px solid #999999; }' +
+        'td.tableverticalscroll { width: 24px; vertical-align: top; }' +
+        'div.ff-fill { height: 23px; width: 23px; }';
+    
+    if (style.styleSheet) {
+        style.styleSheet.cssText = css; // IE
+    } else {
+        style.appendChild(document.createTextNode(css));
+    }
+    
+    document.head.appendChild(style);
+})();
 
 function fctb_addElement(lista,elemento) {
     var i = lista.length;
@@ -204,7 +105,8 @@ function FixedColumnTable(par,anchoTabla,pWidth,nomT){
   this.height = '100';
   this.selectedIndex = -1;
 
-  this.anchoTabla = (anchoTabla||0);
+  // Asegurar un ancho válido - fallback a parentWidth o dimensiones del contenedor
+  this.anchoTabla = anchoTabla || this.parentWidth || (this.parent.offsetWidth > 0 ? this.parent.offsetWidth : null) || (this.parent.clientWidth > 0 ? this.parent.clientWidth : null) || 800;
   
   this.scrollWidth = -1;
   this.scrollHeight = -1;
@@ -256,7 +158,8 @@ function FixedColumnTable(par,anchoTabla,pWidth,nomT){
                 this.tooltipLineas = this.lineas;
             }
             var str = '';
-            str += '<table border="0" id="tbl_'+this.nombreTabla+'" cellpadding="0" cellspacing="0" class="main" height="'+this.height+'" width="'+this.anchoTabla+'" onmousewheel="forwardEvent(event, \''+this.nombreTabla+'\');"  onselectstart="return false;" onclick="fctb_selectRow(event, \''+this.nombreTabla+'\');" '+(this.dblClkFunction != '' ? 'ondblclick="'+this.dblClkFunction+'();"' : '')+'>';
+            // CAMBIO: Removido onmousewheel inline - se agregará como addEventListener pasivo después
+            str += '<table border="0" id="tbl_'+this.nombreTabla+'" cellpadding="0" cellspacing="0" class="main" height="'+this.height+'" width="'+this.anchoTabla+'" onselectstart="return false;" onclick="fctb_selectRow(event, \''+this.nombreTabla+'\');" '+(this.dblClkFunction != '' ? 'ondblclick="'+this.dblClkFunction+'();"' : '')+'>';
             
             str += '<tr>';
             //Solo habra que escribir este codigo si hay columnas fijas
@@ -359,8 +262,13 @@ function FixedColumnTable(par,anchoTabla,pWidth,nomT){
                                             str += '<td class="inner frozencol" width="'+(parseFloat(this.columnas[j][0])+1)+'" title="'+titleAct+'" align="'+this.columnas[j][2]+'" style="border-left: 0px solid #666;'+estiloAct+'">';
                                         }
                                     }
-                                            str += this.lineas[i][j];
-                                        str += '</td>';
+                                    // CAMBIO: Convertir null a "-" para mejor visualización
+                                    var cellValue = this.lineas[i][j];
+                                    if (cellValue === null || cellValue === 'null' || cellValue === undefined) {
+                                        cellValue = '-';
+                                    }
+                                    str += cellValue;
+                                    str += '</td>';
                                 }
                                 str += '</tr>';
                             }
@@ -421,7 +329,12 @@ function FixedColumnTable(par,anchoTabla,pWidth,nomT){
                                             str += '<td class="inner" width="'+this.columnas[j][0]+'" title="'+titleAct+'" align="'+this.columnas[j][2]+'" style="'+estiloAct+'">';
                                         }
                                     }
-                                    str += this.lineas[i][j];
+                                    // CAMBIO: Convertir null a "-" para mejor visualización
+                                    var cellValue = this.lineas[i][j];
+                                    if (cellValue === null || cellValue === 'null' || cellValue === undefined) {
+                                        cellValue = '-';
+                                    }
+                                    str += cellValue;
                                     str += '</td>';
                                 }
                                 str += '</tr>';
@@ -444,8 +357,13 @@ function FixedColumnTable(par,anchoTabla,pWidth,nomT){
             
             var anchoTotal = anchoColumnasFijas + anchoColumnasScroll;
             
+            // Asegurar que scrollWidth tenga un valor razonable y mayor que anchoTabla
             if(this.scrollWidth < 0){
-                this.scrollWidth = anchoTotal+((anchoTotal*7)/100);
+                this.scrollWidth = Math.max(anchoTotal + Math.round(anchoTotal * 0.07), anchoTotal + 200);
+            }
+            // Forzar que scrollWidth sea mayor que anchoTabla para garantizar scroll
+            if(this.scrollWidth <= this.anchoTabla){
+                this.scrollWidth = this.anchoTabla + 200;
             }
             
             //Antes
@@ -464,12 +382,12 @@ function FixedColumnTable(par,anchoTabla,pWidth,nomT){
             str += '<tr class="horizontal-scroll">';
                 str += '<td colspan="2" width="'+anchoTotal+'" valign="top" height="22">';
                 if(navigator.appName.indexOf("Internet Explorer") != -1){
-                    //str += '<div id="hScroll_'+this.nombreTabla+'" class="horizontal-scroll" style="display: inline-block; position: relative; width: '+anchoTabla+'; margin-top: -22px;" onscroll="reposHorizontal(this, \''+this.nombreTabla+'\');">';
-					str += '<div id="hScroll_'+this.nombreTabla+'" class="horizontal-scroll" style="display: inline-flex; position: relative; width: '+anchoTabla+'; margin-top: -15px;" onscroll="reposHorizontal(this, \''+this.nombreTabla+'\');">';
+                    //str += '<div id="hScroll_'+this.nombreTabla+'" class="horizontal-scroll" style="display: inline-block; position: relative; width: 100%; margin-top: -22px;" onscroll="reposHorizontal(this, \''+this.nombreTabla+'\');">';
+					str += '<div id="hScroll_'+this.nombreTabla+'" class="horizontal-scroll" style="display: inline-flex; position: relative; width: 100%; margin-top: -15px; overflow-x: auto;" onscroll="reposHorizontal(this, \''+this.nombreTabla+'\');">';
                 }else{
-                    str += '<div id="hScroll_'+this.nombreTabla+'" class="horizontal-scroll" onscroll="reposHorizontal(this, \''+this.nombreTabla+'\');">';
+                    str += '<div id="hScroll_'+this.nombreTabla+'" class="horizontal-scroll" style="width: 100%; overflow-x: auto;" onscroll="reposHorizontal(this, \''+this.nombreTabla+'\');">';
                 }
-                        str += '<div style="width: '+this.scrollWidth+'px;">';
+                        str += '<div style="width: '+this.scrollWidth+'px; height: 1px;">';
                         str += '</div>';
                     str += '</div>';
                     str += '<div id="ff-horizontal-fill" class="ff-fill"/>';
@@ -489,7 +407,8 @@ function FixedColumnTable(par,anchoTabla,pWidth,nomT){
                                         tabla.attachEvent("on"+mousewheelevt, function () {forwardEvent(event, this.nombreTabla)})
                                 }
 				else if (document.addEventListener){ //WC3 browsers
-                                        tabla.addEventListener(mousewheelevt, function () {forwardEvent(event, this.nombreTabla)}, false)
+                                        // Use passive event listener for better performance
+                                        tabla.addEventListener(mousewheelevt, function () {forwardEvent(event, this.nombreTabla)}, {passive: true})
                                 }	
 				
             }catch(err){
@@ -666,7 +585,7 @@ function seleccionarFila(rowID,tableName){
   if(indiceAnt != rowID){
     tabla.selectedIndex = rowID;
     if (document.all){
-      with(eval('document.all.tbl_'+tableName+'.parentElement.parentElement.parentElement')){
+      var _root = eval('document.all.tbl_'+tableName+'.parentElement.parentElement.parentElement');
         //tabla.selectLinea(rowID);
         if(document.getElementById('frozencontent_'+tableName)){
             if(document.getElementById('frozencontent_'+tableName).children[0]){
@@ -689,9 +608,8 @@ function seleccionarFila(rowID,tableName){
                 }
             }
         }
-      }
     }else if (document.getElementById){
-      with(document.getElementById('tbl_'+tableName).parentNode.parentNode.parentNode){
+      var _tblParent = document.getElementById('tbl_'+tableName).parentNode.parentNode.parentNode;
         //tabla.selectLinea(rowID);
         if(document.getElementById('frozencontent_'+tableName)){
             if(document.getElementById('frozencontent_'+tableName).children[0]){
@@ -712,7 +630,6 @@ function seleccionarFila(rowID,tableName){
               document.getElementById('innercontent_'+tableName).children[0].children[indiceAnt].className = 'pendienteEstaUnidad';
             }
         }
-      }
     }
   }
   //callClick(rowID,tableName);

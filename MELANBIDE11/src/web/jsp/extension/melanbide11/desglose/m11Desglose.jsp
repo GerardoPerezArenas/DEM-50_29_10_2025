@@ -87,7 +87,7 @@
     <!-- Cabecera con estilo unificado -->
     <div class="legendAzul">
       <h1 id="tituloPrincipalM11" style="margin:0;text-align:center;font-size:20px;line-height:1.2;">
-        Desglose retribucin salarial bruta
+        Desglose retribucion salarial bruta
       </h1>
       <div style="text-align:center;font-size:13px;margin:10px;">
         <strong>Expediente:</strong> <%= (numExpediente!=null?numExpediente:"-") %>
@@ -112,8 +112,8 @@
 
    
     <div class="botonera" style="text-align:center; margin:20px 0 10px 0; padding-top:10px;">
-      <input type="button" id="btnAceptar" name="btnAceptar" class="botonGeneral" value="Aceptar" onclick="aceptarDesglose();" />
-      <input type="button" id="btnCancelar" name="btnCancelar" class="botonGeneral" value="Cancelar" onclick="cancelarDesglose();" />
+      <input type="button" id="btnAceptar" name="btnAceptar" class="botonGeneral" value="<%=I18N.getMensaje(idiomaUsuario, "btn.aceptar")%>" onclick="aceptarDesglose();" />
+      <input type="button" id="btnCancelar" name="btnCancelar" class="botonGeneral" value="<%=I18N.getMensaje(idiomaUsuario, "btn.cancelar")%>"onclick="cancelarDesglose();" />
     </div>
 
     <script type="text/javascript">
@@ -165,7 +165,7 @@
         if (typeof window.guardarDesglose === 'function') {
           window.guardarDesglose();
         } else {
-          console.warn("window.guardarDesglose no est disponible, cerrando ventana");
+          console.warn("window.guardarDesglose no disponible, cerrando ventana");
           window.close();
         }
       }
@@ -202,8 +202,8 @@
         if (typeof window.cancelar === 'function') {
           window.cancelar();
         } else {
-          console.warn("window.cancelar no est disponible, cerrando ventana");
-          if (confirm("Seguro que desea cancelar la operacin?")) {
+          console.warn("window.cancelar no disponible, cerrando ventana");
+          if (confirm("Seguro que desea cancelar la operacion?")) {
             window.close();
           }
         }
@@ -214,7 +214,7 @@
         
         
         var hayRegistroSeleccionado = false;
-        var mensajeConfirmacion = "Est seguro de que desea eliminar este registro?";
+        var mensajeConfirmacion = "Esta seguro de que desea eliminar este registro?";
         var detallesRegistro = "";
         
         try {
@@ -265,7 +265,7 @@
         }
         
        
-        mensajeConfirmacion = "Est seguro de que desea eliminar este registro" + detallesRegistro + "?\n\nEsta accin no se puede deshacer.";
+        mensajeConfirmacion = "Esta seguro de que desea eliminar este registro" + detallesRegistro + "?\n\nEsta accion no se puede deshacer.";
         
         var confirmar = false;
         try {
@@ -276,11 +276,11 @@
             confirmar = confirm(mensajeConfirmacion);
           }
         } catch(e) {
-          confirmar = confirm("Est seguro de que desea eliminar este registro?");
+          confirmar = confirm("Esta seguro de que desea eliminar este registro?");
         }
         
         if (!confirmar) {
-          console.log("Eliminacin cancelada por el usuario");
+          console.log("Eliminacion cancelada por el usuario");
           return;
         }
         
@@ -310,9 +310,9 @@
         
         
         if (typeof jsp_alerta === 'function') {
-          jsp_alerta('A', 'Funcin de eliminacin no disponible en esta pestaa.');
+          jsp_alerta('A', 'Funcion de eliminacion no disponible en esta pestana.');
         } else {
-          alert('Funcin de eliminacin no disponible en esta pestaa.');
+          alert('Funcion de eliminacion no disponible en esta pestana.');
         }
       }
       

@@ -378,7 +378,7 @@
                 if (Trim(inputFecha.value) != '') {
                     var D = ValidarFechaConFormatoLanbide(inputFecha.value, formato);
                     if (!D[0]) {
-                        jsp_alerta("A", "<%=meLanbide11I18n.getMensaje(idiomaUsuario, \"msg.fechaNoVal\")%>");
+                        jsp_alerta("A", "<%=meLanbide11I18n.getMensaje(idiomaUsuario, 'msg.fechaNoVal')%>");
                         document.getElementById(inputFecha.name).focus();
                         document.getElementById(inputFecha.name).select();
                         return false;

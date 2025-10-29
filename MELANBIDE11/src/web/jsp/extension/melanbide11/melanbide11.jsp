@@ -81,7 +81,7 @@ private static String escJS(Object v){
                 + '&tipo=0&numExp=' + encodeURIComponent(numExp)
                 + '&id=' + encodeURIComponent(idLinea);
 
-        lanzarPopUpModal(url, 920, 1200, 'no', 'no', function(result){
+        lanzarPopUpModal(url, 900, 1200, 'no', 'no', function(result){
             if (result != undefined) {
                 if (result[0] == '0') {
                     console.log("Desglose RSB completado exitosamente");
@@ -240,17 +240,17 @@ private static String escJS(Object v){
                 fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9],
                 fila[10], fila[11], fila[12], fila[13], fila[14], fila[15], fila[16], fila[17], fila[18], fila[19],
                 fila[20], fila[21], fila[22], fila[23], fila[24], fila[25], fila[26], fila[27], fila[28], fila[29],
-                fila[30], fila[31], fila[32], fila[33], fila[34], fila[35], fila[36]
+                fila[30], fila[31], fila[32], fila[33], fila[34], fila[36], fila[35]
             ];
             listaAccesosTabla[i - 1] = [
                 fila[0], fila[1], fila[2], fila[3], fila[4], fila[5], fila[6], fila[7], fila[8], fila[9],
                 fila[10], fila[11], fila[12], fila[13], fila[14], fila[15], fila[16], fila[17], fila[18], fila[19],
                 fila[20], fila[21], fila[22], fila[23], fila[24], fila[25], fila[26], fila[27], fila[28], fila[29],
-                fila[30], fila[31], fila[32], fila[33], fila[34], fila[35], fila[36]
+                fila[30], fila[31], fila[32], fila[33], fila[34], fila[36], fila[35]
             ];
         }
 
-        inicializarTabla();
+        inicializarTablaContrataciones();
         tabaAccesos.lineas = listaAccesosTabla;
         tabaAccesos.displayTabla();
     }
@@ -259,54 +259,54 @@ private static String escJS(Object v){
         pulsarModificarContratacion();
     }
 
-    function inicializarTabla() {
+    function inicializarTablaContrataciones() {
         tabaAccesos = new FixedColumnTable(document.getElementById('listaAccesos'), 1600, 1650, 'listaAccesos');
 
         tabaAccesos.addColumna('50',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.id")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.nOferta")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.idContratoOferta")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.idContratoDirecto")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.dni_nie")%>');
-        tabaAccesos.addColumna('200', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.nombre")%>');
-        tabaAccesos.addColumna('200', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.apellido1")%>');
-        tabaAccesos.addColumna('200', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.apellido2")%>');
-        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.fechaNacimiento")%>');
-        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.edad")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.sexo")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.may55")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.finFormativa")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.codFormativa")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.denFormativa")%>');
-        tabaAccesos.addColumna('200', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.puesto")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.codOcupacion")%>');
-        tabaAccesos.addColumna('330', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.ocupacion")%>');
+        tabaAccesos.addColumna('80', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.nOferta")%>');
+        tabaAccesos.addColumna('90', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.idContratoOferta")%>');
+        tabaAccesos.addColumna('90', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.idContratoDirecto")%>');
+        tabaAccesos.addColumna('90', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.dni_nie")%>');
+        tabaAccesos.addColumna('150', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.nombre")%>');
+        tabaAccesos.addColumna('150', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.apellido1")%>');
+        tabaAccesos.addColumna('150', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.apellido2")%>');
+        tabaAccesos.addColumna('100',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.fechaNacimiento")%>');
+        tabaAccesos.addColumna('60',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.edad")%>');
+        tabaAccesos.addColumna('80', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.sexo")%>');
+        tabaAccesos.addColumna('80', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.may55")%>');
+        tabaAccesos.addColumna('90', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.finFormativa")%>');
+        tabaAccesos.addColumna('90', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.codFormativa")%>');
+        tabaAccesos.addColumna('120', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.denFormativa")%>');
+        tabaAccesos.addColumna('180', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.puesto")%>');
+        tabaAccesos.addColumna('90', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.codOcupacion")%>');
+        tabaAccesos.addColumna('200', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.ocupacion")%>');
 
         // Nuevas columnas intermedias
-        tabaAccesos.addColumna('330', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.titreqpuesto")%>');
-        tabaAccesos.addColumna('330', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.funciones")%>');
+        tabaAccesos.addColumna('180', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.titreqpuesto")%>');
+        tabaAccesos.addColumna('200', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.funciones")%>');
 
-        tabaAccesos.addColumna('330', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.cProfesionalidad")%>');
-        tabaAccesos.addColumna('150', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.modalidadContrato")%>');
-        tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.jornada")%>');
-        tabaAccesos.addColumna('50',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.porcJornada")%>');
-        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.horasConv")%>');
-        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.fechaInicio")%>');
-        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.fechaFin")%>');
-        tabaAccesos.addColumna('50',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.mesesContrato")%>');
-        tabaAccesos.addColumna('350', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.grupoCotizacion")%>');
-        tabaAccesos.addColumna('250', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.direccionCT")%>');
+        tabaAccesos.addColumna('180', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.cProfesionalidad")%>');
+        tabaAccesos.addColumna('130', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.modalidadContrato")%>');
+        tabaAccesos.addColumna('90', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.jornada")%>');
+        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.porcJornada")%>');
+        tabaAccesos.addColumna('90',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.horasConv")%>');
+        tabaAccesos.addColumna('100',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.fechaInicio")%>');
+        tabaAccesos.addColumna('100',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.fechaFin")%>');
+        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.mesesContrato")%>');
+        tabaAccesos.addColumna('180', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.grupoCotizacion")%>');
+        tabaAccesos.addColumna('150', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.direccionCT")%>');
         tabaAccesos.addColumna('100', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.nSS")%>');
-        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.costeContrato")%>');
-        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.tipRetribucion")%>');
+        tabaAccesos.addColumna('100',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.costeContrato")%>');
+        tabaAccesos.addColumna('110',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.tipRetribucion")%>');
 
         // RSB total computable
         tabaAccesos.addColumna('150', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.rsbTotal")%>');
 
-        tabaAccesos.addColumna('70',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.importeSub")%>');
+        tabaAccesos.addColumna('150',  'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.importeSub")%>');
 
         // Históricos al final
-        tabaAccesos.addColumna('330', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.desTitulacion")%> (consulta)');
-        tabaAccesos.addColumna('330', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.historico.titulacion")%> (consulta)');
+        tabaAccesos.addColumna('180', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.titulacion")%>');
+        tabaAccesos.addColumna('180', 'center', '<%=meLanbide11I18n.getMensaje(idiomaUsuario,"contratacion.tablaContrataciones.desTitulacion")%>');
 
         tabaAccesos.displayCabecera = true;
         tabaAccesos.height = 360;
@@ -357,7 +357,7 @@ private static String escJS(Object v){
     var tabaAccesos;
     var listaAccesos = new Array();
     var listaAccesosTabla = new Array();
-    inicializarTabla();
+    inicializarTablaContrataciones();
 </script>
 
 
@@ -397,8 +397,37 @@ private static String escJS(Object v){
                 sexo = descripcion;
             }
 
-            String mayor55 = (objectVO.getMayor55()!=null) ? objectVO.getMayor55() : "-";
-            String finFormativa = (objectVO.getFinFormativa()!=null) ? objectVO.getFinFormativa() : "-";
+             String mayor55 = "-";
+            if (objectVO.getMayor55() != null) {
+                String descripcion = objectVO.getMayor55();
+                // Separar por idiomas si contiene el separador
+                String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
+                String[] descripcionDobleIdioma = (descripcion != null ? descripcion.split(barraSeparadoraDobleIdiomaDesple) : null);
+                if (descripcionDobleIdioma != null && descripcionDobleIdioma.length > 1) {
+                    if (idiomaUsuario == ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA) {
+                        descripcion = descripcionDobleIdioma[1];
+                    } else {
+                        descripcion = descripcionDobleIdioma[0];
+                    }
+                }
+                mayor55 = descripcion;
+            }
+            
+            String finFormativa = "-";
+            if (objectVO.getFinFormativa() != null) {
+                String descripcion = objectVO.getFinFormativa();
+                String barraSeparadoraDobleIdiomaDesple = ConfigurationParameter.getParameter(ConstantesMeLanbide11.BARRA_SEPARADORA_IDIOMA_DESPLEGABLES, ConstantesMeLanbide11.FICHERO_PROPIEDADES);
+                String[] descripcionDobleIdioma = (descripcion != null ? descripcion.split(barraSeparadoraDobleIdiomaDesple) : null);
+                if (descripcionDobleIdioma != null && descripcionDobleIdioma.length > 1) {
+                    if (idiomaUsuario == ConstantesMeLanbide11.CODIGO_IDIOMA_EUSKERA) {
+                        descripcion = descripcionDobleIdioma[1];
+                    } else {
+                        descripcion = descripcionDobleIdioma[0];
+                    }
+                }
+                finFormativa = descripcion;
+            }
+           
             String codFormativa = (objectVO.getCodFormativa()!=null) ? objectVO.getCodFormativa() : "-";
             String denFormativa = (objectVO.getDenFormativa()!=null) ? objectVO.getDenFormativa() : "-";
 
@@ -409,9 +438,12 @@ private static String escJS(Object v){
                 ocupacion = objectVO.getDesOcupacionLibre();
             }else if(objectVO.getDesOcupacion()!=null){
                 ocupacion = objectVO.getDesOcupacion();
+                        }else{
+                            ocupacion="-";
             }
 
-            String titReqPuesto = (objectVO.getTitReqPuesto()!=null && !"".equals(objectVO.getTitReqPuesto().trim())) ? objectVO.getTitReqPuesto() : "-";
+            // Mostrar la descripción de la titulación solicitada en lugar del código
+            String titReqPuesto = (objectVO.getDesTitReqPuesto()!=null && !"".equals(objectVO.getDesTitReqPuesto().trim())) ? objectVO.getDesTitReqPuesto() : "-";
 
             String funcionesJS = "-";
             if (objectVO.getFunciones()!=null && !objectVO.getFunciones().trim().isEmpty()){
@@ -438,6 +470,8 @@ private static String escJS(Object v){
                     else descripcion = descripcionDobleIdioma[0];
                 }
                 jornada = descripcion;
+                    }else{
+                        jornada="-";
             }
 
             String porcJornada = (objectVO.getPorcJornada()!=null) ? String.valueOf((objectVO.getPorcJornada().toString()).replace(".",",")) : "-";
@@ -456,6 +490,8 @@ private static String escJS(Object v){
                     else descripcion = descripcionDobleIdioma[0];
                 }
                 grupoCotizacion = descripcion;
+                    }else{
+                        grupoCotizacion="-";
             }
 
             String direccionCT = (objectVO.getDireccionCT()!=null) ? objectVO.getDireccionCT() : "-";
@@ -472,8 +508,13 @@ private static String escJS(Object v){
                     else descripcion = descripcionDobleIdioma[0];
                 }
                 tipRetribucion = descripcion;
+                    }else{
+                        tipRetribucion="-";
             }
+            
+            
 
+            
             String importeSub = (objectVO.getImporteSub()!=null) ? String.valueOf((objectVO.getImporteSub().toString()).replace(".",",")) : "-";
             String desTitulacion = (objectVO.getDesTitulacionLibre()!=null) ? objectVO.getDesTitulacionLibre() : "-";
             String titulacion    = (objectVO.getDesTitulacion()!=null) ? objectVO.getDesTitulacion() : "-";

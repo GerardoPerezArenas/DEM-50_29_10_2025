@@ -151,59 +151,150 @@
           jsp_alerta('A', mensajeValidacion);
           return;
         }
-        elementoVisible('on', 'barraProgresoLPEEL');
+        
+        console.log("=== INICIANDO GUARDADO COMPLETO ===");
+        
+        // PASO 1: Primero guardar las líneas de desglose de TAB2 (si existe)
+        // Buscar la función de guardado de TAB2 en el contexto global
+        var guardarTab2Existe = false;
+        var fnGuardarTab2 = null;
+        
+        try {
+          // Buscar función expuesta por TAB2
+          if (typeof window.guardarLineasDesgloseTab2 === 'function') {
+            console.log("? window.guardarLineasDesgloseTab2 encontrada");
+            fnGuardarTab2 = window.guardarLineasDesgloseTab2;
+            guardarTab2Existe = true;
+          } else if (typeof guardarLineasDesglose === 'function') {
+            console.log("? guardarLineasDesglose encontrada en contexto actual");
+            fnGuardarTab2 = guardarLineasDesglose;
+            guardarTab2Existe = true;
+          }
+        } catch (e) {
+          console.warn("No se pudo acceder a función de guardado de TAB2:", e);
+        }
+        
+        // Función interna para guardar datos de TAB1
+        function guardarDatosTab1() {
+          console.log("=== GUARDANDO DATOS TAB1 (Resumen) ===");
+          elementoVisible('on', 'barraProgresoLPEEL');
 
-        var rsbSalBase = document.getElementById('rsbSalBase').value;
-        var rsbPagasExtra = document.getElementById('rsbPagasExtra').value;
-        var rsbCompImporte = document.getElementById('rsbCompImporte').value;
-        var rsbCompExtra = document.getElementById('rsbCompExtra').value;
+          var rsbSalBase = document.getElementById('rsbSalBase').value;
+          var rsbPagasExtra = document.getElementById('rsbPagasExtra').value;
+          var rsbCompImporte = document.getElementById('rsbCompImporte').value;
+          var rsbCompExtra = document.getElementById('rsbCompExtra').value;
 
-        var parametros = "tarea=preparar&modulo=MELANBIDE11&operacion=guardarDesgloseRSB&tipo=0"
-          + "&idRegistro=" + encodeURIComponent('<%=idRegistro%>')
-          + "&rsbSalBase=" + encodeURIComponent(rsbSalBase)
-          + "&rsbPagasExtra=" + encodeURIComponent(rsbPagasExtra)
-          + "&rsbCompImporte=" + encodeURIComponent(rsbCompImporte)
-          + "&rsbCompExtra=" + encodeURIComponent(rsbCompExtra);
+          var parametros = "tarea=preparar&modulo=MELANBIDE11&operacion=guardarDesgloseRSB&tipo=0"
+            + "&idRegistro=" + encodeURIComponent('<%=idRegistro%>')
+            + "&rsbSalBase=" + encodeURIComponent(rsbSalBase)
+            + "&rsbPagasExtra=" + encodeURIComponent(rsbPagasExtra)
+            + "&rsbCompImporte=" + encodeURIComponent(rsbCompImporte)
+            + "&rsbCompExtra=" + encodeURIComponent(rsbCompExtra);
 
-        try{
-          $.ajax({
-            url: url,
-            type: 'POST',
-            async: true,
-            data: parametros,
-            success: procesarRespuestaGuardar,
-            error: mostrarErrorGuardar
-          });
-        }catch(err){
-          elementoVisible('off', 'barraProgresoLPEEL');
-          mostrarErrorPeticion();
+          try{
+            $.ajax({
+              url: url,
+              type: 'POST',
+              async: true,
+              data: parametros,
+              success: procesarRespuestaGuardar,
+              error: mostrarErrorGuardar
+            });
+          }catch(err){
+            console.error("Error en AJAX TAB1:", err);
+            elementoVisible('off', 'barraProgresoLPEEL');
+            mostrarErrorPeticion();
+          }
+        }
+        
+        // Si TAB2 tiene guardado pendiente, ejecutarlo primero
+        if (guardarTab2Existe && fnGuardarTab2) {
+          console.log("=== GUARDANDO PRIMERO LÍNEAS DE DESGLOSE (TAB2) ===");
+          elementoVisible('on', 'barraProgresoLPEEL');
+          
+          try {
+            // Guardar TAB2 con callback para continuar con TAB1
+            fnGuardarTab2(function(exitoTab2) {
+              console.log("Resultado guardado TAB2:", exitoTab2);
+              if (exitoTab2) {
+                console.log("? TAB2 guardado exitosamente, continuando con TAB1");
+                // Pequeña pausa para asegurar que BD se actualizó
+                setTimeout(guardarDatosTab1, 300);
+              } else {
+                console.error("? Error guardando TAB2, abortando");
+                elementoVisible('off', 'barraProgresoLPEEL');
+                jsp_alerta('A', 'Error al guardar las líneas de desglose. No se continuará con el guardado.');
+              }
+            });
+          } catch (errTab2) {
+            console.error("Error ejecutando guardarLineasDesgloseTab2:", errTab2);
+            // Si falla TAB2, continuar con TAB1 de todos modos
+            console.warn("Continuando con guardado TAB1 a pesar del error en TAB2");
+            guardarDatosTab1();
+          }
+        } else {
+          console.log("? TAB2 no tiene función de guardado o no está disponible");
+          console.log("Guardando solo datos de TAB1");
+          guardarDatosTab1();
         }
       }
 
-      function procesarRespuestaGuardar(ajaxResult){
-        elementoVisible('off', 'barraProgresoLPEEL');
-        try{
-          var datos = JSON.parse(ajaxResult);
-         
-          var codigoOperacion = datos && datos.resultado ? datos.resultado.codigoOperacion : "4";
+            function procesarRespuestaGuardar(ajaxResult) {
+                elementoVisible('off', 'barraProgresoLPEEL');
+                
+                console.log("Respuesta recibida:", ajaxResult);
+                console.log("Tipo de respuesta:", typeof ajaxResult);
+                
+                if (!ajaxResult) {
+                  console.error('Respuesta vacía al guardar desglose RSB');
+                  jsp_alerta('A', 'Se ha recibido una respuesta vacía del servidor.');
+                  return;
+                }
+                
+                try {
+                  // Si ajaxResult ya es un objeto (jQuery parseó el JSON automáticamente)
+                  var datos;
+                  if (typeof ajaxResult === 'string') {
+                    console.log("Respuesta es string, parseando JSON...");
+                    datos = JSON.parse(ajaxResult);
+                  } else {
+                    console.log("Respuesta ya es objeto, usando directamente...");
+                    datos = ajaxResult;
+                  }
+
+                  var codigoOperacion = datos && datos.resultado ? datos.resultado.codigoOperacion : "4";
+                  console.log("Código de operación:", codigoOperacion);
           if (codigoOperacion == "0"){
-            console.log("Desglose RSB guardado exitosamente - cerrando modal");
-           
+            console.log("Desglose RSB guardado exitosamente");
+            
+            // Actualizar valores en ventana padre si existen
+            try {
+              if (datos.resultado && datos.resultado.rsbCompConv !== undefined) {
+                var rsbCompConv = parseFloat(datos.resultado.rsbCompConv) || 0;
+                var cstCont = parseFloat(datos.resultado.cstCont) || 0;
+                
+                console.log("Valores actualizados desde BD:");
+                console.log("  - RSBCOMPCONV:", rsbCompConv);
+                console.log("  - CSTCONT:", cstCont);
+                
+                // Actualizar campo rsbTotal en ventana padre (si existe)
+                if (window.opener && window.opener.document) {
+                  var rsbTotalField = window.opener.document.getElementById('rsbTotal');
+                  if (rsbTotalField) {
+                    rsbTotalField.value = rsbCompConv.toFixed(2).replace('.', ',');
+                    console.log("Campo rsbTotal actualizado en ventana padre:", rsbTotalField.value);
+                  }
+                }
+              }
+            } catch (updateErr) {
+              console.warn("No se pudo actualizar campos en ventana padre:", updateErr);
+            }
+            
             jsp_alerta('I', 'Guardado correcto');
             
-            try {
-              if (window.opener && window.opener.modalCallback) {
-                window.opener.modalCallback(['0', 'Desglose RSB guardado exitosamente']);
-              } else if (window.parent && window.parent.modalCallback) {
-                window.parent.modalCallback(['0', 'Desglose RSB guardado exitosamente']);
-              }
-            } catch(e) {
-              console.warn("No se pudo pasar resultado al padre:", e);
-            }
-           
-            setTimeout(function() {
-              cerrarVentana(['0', 'Desglose RSB guardado exitosamente']);
-            }, 1500); 
+            // Cerrar inmediatamente después de la alerta
+            console.log("Cerrando ventana modal...");
+            cerrarVentana(['0', 'Desglose RSB guardado exitosamente']); 
           } else if (codigoOperacion == "1") {
             jsp_alerta('A', document.getElementById('errorBD').value);
           } else if (codigoOperacion == "3") {
@@ -211,7 +302,8 @@
           } else {
             jsp_alerta('A', document.getElementById('generico').value);
           }
-        }catch(e){
+        } catch (e) {
+          console.error('Error procesando respuesta de guardado RSB:', e);
           jsp_alerta('A', document.getElementById('generico').value);
         }
       }
@@ -307,10 +399,15 @@
             type: 'POST',
             async: true,
             data: parametros,
-            success: function(ajaxResult) {
+             success: function (ajaxResult) {
               elementoVisible('off', 'barraProgresoLPEEL');
+              if (!ajaxResult || !ajaxResult.trim()) {
+                console.error('Respuesta vacía al eliminar contratación RSB');
+                jsp_alerta('A', 'Se ha recibido una respuesta vacía del servidor.');
+                return;
+              }
               try {
-                var datos = JSON.parse(ajaxResult);
+                var datos = JSON.parse(ajaxResult || '{}');
                 var codigoOperacion = datos && datos.resultado ? datos.resultado.codigoOperacion : "4";
                 
                 if (codigoOperacion == "0") {
@@ -482,6 +579,48 @@
           } catch(e2) {
             console.error("Error en fallback:", e2);
           }
+        }
+      }
+
+      // Sobrescribir con función que usa el framework
+      function cerrarVentana(resultado) {
+        console.log("=== CERRANDO MODAL DESGLOSE RSB (framework) ===");
+        console.log("Resultado a pasar:", resultado);
+        
+        try {
+          // Verificar si cerrarVentanaModal existe
+          if (typeof cerrarVentanaModal === 'function') {
+            console.log("? cerrarVentanaModal disponible - usando framework");
+            cerrarVentanaModal(resultado || ['0']);
+            return; // Salir después de usar el framework
+          } else {
+            console.warn("? cerrarVentanaModal NO disponible - usando fallback");
+          }
+        } catch(e) {
+          console.error("? Error llamando cerrarVentanaModal:", e);
+        }
+        
+        // Fallback: cerrar manualmente
+        try {
+          console.log("Usando fallback: window.close()");
+          
+          // Intentar pasar resultado al padre si existe
+          if (resultado && window.opener && !window.opener.closed) {
+            console.log("Pasando resultado a window.opener");
+            window.returnValue = resultado;
+            
+            // Si el padre tiene callback, llamarlo
+            if (typeof window.opener.onModalClosed === 'function') {
+              window.opener.onModalClosed(resultado);
+            }
+          }
+          
+          // Cerrar la ventana
+          window.close();
+        } catch(e2) {
+          console.error("? Error en fallback:", e2);
+          // Último intento
+          try { self.close(); } catch(e3) { }
         }
       }
 

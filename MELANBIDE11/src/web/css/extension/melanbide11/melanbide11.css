@@ -1,6 +1,4 @@
-/* === DEM50 - MELANBIDE11: estilos consolidados === */
-
-/* Datos históricos (solo consulta) */
+/* Datos hist?ricos (solo consulta) */
 .datosAntiguos,
 .datoAntiguos {                  /* alias por compatibilidad */
   background-color: #f5f5f5;
@@ -9,7 +7,7 @@
 }
 th.datosAntiguos { font-weight: normal; }
 
-/* Leyenda azul común del procedimiento */
+/* Leyenda azul com?n del procedimiento */
 .legendAzul{
   font-family: Verdana, Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -25,7 +23,7 @@ table.dataTable td {
   white-space: nowrap;
 }
 
-/* DEM50 - Contrataciones: marcar columnas históricas */
+/* DEM50 - Contrataciones: marcar columnas hist?ricas */
 th.col-historico { background-color: #e6f2ff; }
 td.col-historico { background-color: #f7fbff; }
 
@@ -42,13 +40,13 @@ td.col-historico { background-color: #f7fbff; }
   margin-right: 6px;
 }
 
-/* DEM50 - Desglose RSB: alineación de etiquetas e inputs 
+/* DEM50 - Desglose RSB: alineaci?n de etiquetas e inputs 
 .lineaFormulario { clear: both; }
 .lineaFormulario:after { content: ""; display: block; clear: both; }
 .lineaFormulario .etiquetaLPEEL { float: left; width: 300px; line-height: 22px; }
 .lineaFormulario .campoFormulario { float: left; }
 
-/* Pestañas WebFX del Desglose 
+/* Pesta?as WebFX del Desglose 
 #tab-panel-m11.tab-pane { margin: 8px 5px 4px 5px; }
 #tab-panel-m11 .tab-row {
   padding: 0;
@@ -85,7 +83,7 @@ td.col-historico { background-color: #f7fbff; }
 
 /* === ESTILOS PARA MODALES DE DESGLOSE === */
 
-/* Mejora visual para las pestañas del modal desglose */
+/* Mejora visual para las pesta?as del modal desglose */
 .m11-tabs {
   margin-bottom: 15px;
 }
@@ -126,13 +124,13 @@ td.col-historico { background-color: #f7fbff; }
   z-index: 10;
 }
 
-/* Separación adicional entre tabs y contenido */
+/* Separaci?n adicional entre tabs y contenido */
 .tab-content-separator {
   height: 8px;
   background: transparent;
 }
 
-/* Tema bilingüe para etiquetas - Tab1 */
+/* Tema biling?e para etiquetas - Tab1 */
 .label-bilingual {
   display: block;
   line-height: 1.3;
@@ -153,7 +151,7 @@ td.col-historico { background-color: #f7fbff; }
   margin-top: 2px;
 }
 
-/* Mejorar separación en formularios */
+/* Mejorar separaci?n en formularios */
 .lineaFormulario {
   margin-bottom: 8px;
 }
@@ -165,7 +163,7 @@ td.col-historico { background-color: #f7fbff; }
   padding-top: 3px;
 }
 
-/* Estilos para el modal de edición de líneas en Tab2 */
+/* Estilos para el modal de edici?n de l?neas en Tab2 */
 .m11-dialog-overlay {
   position: fixed;
   top: 0;
@@ -314,40 +312,146 @@ td.col-historico { background-color: #f7fbff; }
   margin: 0 5px;
 }
 
-/* Forzar eliminación de scrolls horizontales SOLO en tablas del desglose modal */
-.m11-desglose-wrapper [id*="hScroll_"]:not(.keep-scroll), 
-.m11-desglose-wrapper [id*="scrollcontent_"]:not(.keep-scroll), 
-.m11-desglose-wrapper [id*="frozencontent_"]:not(.keep-scroll),
-.m11-desglose-wrapper .scrollX {
+/* COMENTADO - Estaba bloqueando el scroll horizontal necesario en tabla de contrataciones
+[id*="hScroll_"]:not(.keep-scroll), 
+[id*="scrollcontent_"]:not(.keep-scroll), 
+[id*="frozencontent_"]:not(.keep-scroll),
+.scrollX {
   display: none !important;
   visibility: hidden !important;
   width: 0 !important;
   height: 0 !important;
   overflow: hidden !important;
 }
+*/
 
 .m11-desglose-wrapper {
-  overflow-x: hidden;
+  /* overflow-x: hidden !important; */ /* Comentado para permitir scroll cuando sea necesario */
   max-width: 100%;
+  width: 100%;
 }
 
 #wrapperTablaDesgloseRSB,
 #wrapperTablaDesgloseRSB2 {
-  overflow-x: hidden;
+  /* overflow-x: hidden !important; */ /* Comentado - solo ocultar en tablas desglose específicas */
   max-width: 100%;
-  display: block; /* Asegurar que se puedan mostrar */
+  width: 100%;
+  display: block;
 }
 
 #tablaDesgloseRSB,
 #tablaDesgloseRSB2 {
-  overflow-x: hidden;
+  overflow-x: hidden !important;  /* Mantener solo para tablas desglose RSB */
+  max-width: 100%;
+  width: 100%;
+}
+
+/* Contenedor principal - permitir scroll horizontal cuando tabla lo requiera */
+#m11Container {
+  /* overflow-x: hidden !important; */ /* Comentado para permitir scroll en tabla principal */
   max-width: 100%;
 }
 
-/* Asegurar que las tablas internas no generen overflow */
+/* Asegurar que las tablas internas no generen overflow innecesario */
 .FixedColumnTable table,
 table[id*="tbl_"] {
-  width: 100%;
+  /* width: 100% !important; */ /* Comentado - permitir ancho según contenido */
   table-layout: fixed;
-  max-width: 100%;
+  max-width: none; /* Permitir que la tabla tenga su ancho natural */
+}
+
+/* Forzar que todos los elementos de tabla respeten el ancho máximo */
+.FixedColumnTable,
+.FixedColumnTable * {
+  box-sizing: border-box;
+}
+
+/* COMENTADO - Permitir que scrollbars horizontales se muestren cuando sean necesarios
+div[id^="hScroll_"],
+div[id*="_hScroll"] {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+}
+*/
+
+/* === ESTILOS ADICIONALES PARA DESGLOSE === */
+
+/* Botonera centrada con espaciado estándar (como el resto de la aplicación) */
+.botonera {
+  text-align: center;
+  margin: 15px 0;
+  padding: 10px 0;
+}
+
+.botonera .botonGeneral {
+  margin: 0 5px;
+}
+
+/* Mensaje cuando no hay líneas en desglose */
+.m11-empty {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+  font-style: italic;
+  background: #f9f9f9;
+  border: 1px dashed #ccc;
+  border-radius: 4px;
+  margin: 10px 0;
+}
+
+/* Loader de carga */
+.m11-loader {
+  text-align: center;
+  padding: 30px;
+  color: rgb(43, 98, 181);
+  font-size: 14px;
+  font-weight: bold;
+}
+
+/* Mejorar la apariencia de inputs y textareas en el modal */
+.m11-dialog .inputTexto {
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+.m11-dialog .inputTexto:focus {
+  border-color: rgb(43, 98, 181);
+  outline: none;
+  box-shadow: 0 0 5px rgba(43, 98, 181, 0.3);
+}
+
+.m11-dialog textarea.inputTexto {
+  resize: vertical;
+  min-height: 60px;
+}
+
+/* Mejorar el estilo de las etiquetas en el modal */
+.m11-dialog .etiqueta {
+  color: #333;
+  font-size: 12px;
+}
+
+/* Centrar botones del footer del modal */
+.m11-dialog footer {
+  text-align: center;
+}
+
+.m11-dialog footer .botonGeneral {
+  margin: 0 5px;
+}
+
+/* Estilos para dropdown-option con tipografía consistente */
+.m11-dialog .dropdown-option {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+
+.m11-dialog .dropdown-input {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 12px;
 }
