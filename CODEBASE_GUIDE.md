@@ -45,9 +45,10 @@ Sistema de gestión de subvenciones de empleo del Servicio Vasco de Empleo (Lanb
 ### Software Necesario
 1. **JDK 1.6** (Java Development Kit 6)
 2. **Servidor de aplicaciones Java EE** compatible con Java 6
-   - Apache Tomcat 6.x/7.x
+   - Apache Tomcat 6.x/7.x (Nota: Versiones EOL, evaluar riesgos de seguridad)
    - JBoss AS 5.x/6.x
    - Oracle WebLogic (versión compatible)
+   - **Importante**: Considerar uso en entornos aislados debido a limitaciones de seguridad de versiones antiguas
 3. **IDE** configurado con encoding ISO-8859-1
 4. **Maven** o **Ant** (según la configuración del proyecto)
 
@@ -88,9 +89,9 @@ El proyecto sigue la estructura típica de una aplicación Java EE legacy:
 ## Mejores Prácticas
 
 ### 1. Compatibilidad Java 1.6
-- No utilizar try-with-resources (introducido en Java 7)
-- No utilizar diamond operator <> (Java 7)
-- No utilizar String en switch statements (Java 7)
+- No utilizar try-with-resources (introducido en Java 7) → Usar bloques finally explícitos para gestión de recursos
+- No utilizar diamond operator <> (Java 7) → Especificar tipos genéricos completos: `new ArrayList<String>()`
+- No utilizar String en switch statements (Java 7) → Usar if-else o Map para despacho
 - No utilizar métodos de APIs introducidos después de Java 6
 
 ### 2. Manejo de Encoding
