@@ -240,116 +240,206 @@
       }
 
             function procesarRespuestaGuardar(ajaxResult) {
-                elementoVisible('off', 'barraProgresoLPEEL');
-                
-                console.log("Respuesta recibida:", ajaxResult);
-                console.log("Tipo de respuesta:", typeof ajaxResult);
-                
-                if (!ajaxResult) {
-                  console.error('Respuesta vacía al guardar desglose RSB');
-                  jsp_alerta('A', 'Se ha recibido una respuesta vacía del servidor.');
-                  return;
-                }
-                
+        elementoVisible('off', 'barraProgresoLPEEL');
+        
+        console.log("Respuesta recibida:", ajaxResult);
+        console.log("Tipo de respuesta:", typeof ajaxResult);
+        
+        if (!ajaxResult) {
+            console.error('Respuesta vacía al guardar desglose RSB');
+            jsp_alerta('A', 'Se ha recibido una respuesta vacía del servidor.');
+            return;
+        }
+        
+        try {
+            // Parsear respuesta - compatible con Java 6
+            var datos;
+            if (typeof ajaxResult === 'string') {
+                console.log("Respuesta es string, parseando JSON...");
+                // Para IE8/Java 6 compatibility
                 try {
-                  // Si ajaxResult ya es un objeto (jQuery parseó el JSON automáticamente)
-                  var datos;
-                  if (typeof ajaxResult === 'string') {
-                    console.log("Respuesta es string, parseando JSON...");
-                    datos = JSON.parse(ajaxResult);
-                  } else {
-                    console.log("Respuesta ya es objeto, usando directamente...");
-                    datos = ajaxResult;
-                  }
-
-                  var codigoOperacion = datos && datos.resultado ? datos.resultado.codigoOperacion : "4";
-                  console.log("Código de operación:", codigoOperacion);
-          if (codigoOperacion == "0"){
-            console.log("Desglose RSB guardado exitosamente");
-            
-            // Actualizar valores en ventana padre si existen
-            try {
-              if (datos.resultado && datos.resultado.rsbCompConv !== undefined) {
-                var rsbCompConv = parseFloat(datos.resultado.rsbCompConv) || 0;
-                var cstCont = parseFloat(datos.resultado.cstCont) || 0;
-                
-                console.log("Valores actualizados desde BD:");
-                console.log("  - RSBCOMPCONV:", rsbCompConv);
-                console.log("  - CSTCONT:", cstCont);
-                
-                // Actualizar campo rsbTotal en ventana padre (si existe)
-                if (window.opener && window.opener.document) {
-                  var rsbTotalField = window.opener.document.getElementById('rsbTotal');
-                  if (rsbTotalField) {
-                    rsbTotalField.value = rsbCompConv.toFixed(2).replace('.', ',');
-                    console.log("Campo rsbTotal actualizado en ventana padre:", rsbTotalField.value);
-                  }
+                    datos = eval('(' + ajaxResult + ')');
+                } catch(e) {
+                    // Fallback a JSON.parse si está disponible
+                    if (typeof JSON !== 'undefined' && JSON.parse) {
+                        datos = JSON.parse(ajaxResult);
+                    } else {
+                        throw e;
+                    }
                 }
-              }
-            } catch (updateErr) {
-              console.warn("No se pudo actualizar campos en ventana padre:", updateErr);
+            } else {
+                console.log("Respuesta ya es objeto, usando directamente...");
+                datos = ajaxResult;
+            }
+
+            var codigoOperacion = "4";
+            if (datos && datos.resultado) {
+                codigoOperacion = datos.resultado.codigoOperacion + "";
             }
             
-            jsp_alerta('I', 'Guardado correcto');
+            console.log("Código de operación:", codigoOperacion);
             
-            // Cerrar inmediatamente después de la alerta
-            console.log("Cerrando ventana modal...");
-            cerrarVentana(['0', 'Desglose RSB guardado exitosamente']); 
-          } else if (codigoOperacion == "1") {
-            jsp_alerta('A', document.getElementById('errorBD').value);
-          } else if (codigoOperacion == "3") {
-            jsp_alerta('A', 'Parmetros insuficientes');
-          } else {
-            jsp_alerta('A', document.getElementById('generico').value);
-          }
+            if (codigoOperacion == "0") {
+                console.log("Desglose RSB guardado exitosamente");
+                
+                // Actualizar valores calculados en ventana padre
+                try {
+                    if (datos.resultado) {
+                        var rsbCompConv = 0;
+                        var cstCont = 0;
+                        
+                        // Parsear valores con manejo de null/undefined
+                        if (datos.resultado.rsbCompConv !== undefined && datos.resultado.rsbCompConv !== null) {
+                            var tmpVal = String(datos.resultado.rsbCompConv).replace(',', '.');
+                            rsbCompConv = parseFloat(tmpVal);
+                            if (isNaN(rsbCompConv)) rsbCompConv = 0;
+                        }
+                        
+                        if (datos.resultado.cstCont !== undefined && datos.resultado.cstCont !== null) {
+                            var tmpVal2 = String(datos.resultado.cstCont).replace(',', '.');
+                            cstCont = parseFloat(tmpVal2);
+                            if (isNaN(cstCont)) cstCont = 0;
+                        }
+                        
+                        console.log("Valores actualizados desde BD:");
+                        console.log("  - RSBCOMPCONV:", rsbCompConv);
+                        console.log("  - CSTCONT:", cstCont);
+                        
+                        // Actualizar campo rsbTotal en ventana padre
+                        if (window.opener && !window.opener.closed) {
+                            try {
+                                var rsbTotalField = window.opener.document.getElementById('rsbTotal');
+                                if (rsbTotalField) {
+                                    // Formatear con 2 decimales y coma
+                                    var valorFormateado = rsbCompConv.toFixed(2).replace('.', ',');
+                                    rsbTotalField.value = valorFormateado;
+                                    console.log("Campo rsbTotal actualizado en ventana padre:", valorFormateado);
+                                    
+                                    // Disparar evento change para que se actualice la UI
+                                    if (rsbTotalField.onchange) {
+                                        rsbTotalField.onchange();
+                                    }
+                                }
+                                
+                                // También actualizar cstCont si existe el campo
+                                var cstContField = window.opener.document.getElementById('cstCont');
+                                if (cstContField) {
+                                    var valorFormateado2 = cstCont.toFixed(2).replace('.', ',');
+                                    cstContField.value = valorFormateado2;
+                                    console.log("Campo cstCont actualizado en ventana padre:", valorFormateado2);
+                                    
+                                    if (cstContField.onchange) {
+                                        cstContField.onchange();
+                                    }
+                                }
+                            } catch(e) {
+                                console.warn("Error actualizando campos padre:", e);
+                            }
+                        }
+                    } 
+                } catch (updateErr) {
+                    console.warn("No se pudo actualizar campos en ventana padre:", updateErr);
+                }
+                
+                jsp_alerta('I', 'Guardado correcto');
+                
+                // IMPORTANTE: Refrescar los datos antes de cerrar
+                // Compatible con IE8/Java 6
+                
+                // 1. Refrescar las tablas de TAB2
+                try {
+                    if (typeof window.refrescarDesgloseRSB === 'function') {
+                        console.log("Refrescando tablas de desglose TAB2...");
+                        // Usar setTimeout para compatibilidad
+                        window.setTimeout(function() {
+                            try {
+                                window.refrescarDesgloseRSB();
+                            } catch(e) {
+                                console.warn("Error refrescando TAB2:", e);
+                            }
+                        }, 200);
+                    }
+                } catch(e) {
+                    console.warn("No se pudo refrescar TAB2:", e);
+                }
+                
+                // 2. Refrescar ventana padre si tiene función de refresco
+                if (window.opener && !window.opener.closed) {
+                    console.log("Intentando refrescar ventana padre...");
+                    window.setTimeout(function() {
+                        try {
+                            // Buscar funciones de refresco en el padre
+                            if (typeof window.opener.refrescarDatosContratacion === 'function') {
+                                console.log("Llamando refrescarDatosContratacion...");
+                                window.opener.refrescarDatosContratacion();
+                            } else if (typeof window.opener.cargarDatosContratacion === 'function') {
+                                console.log("Llamando cargarDatosContratacion...");
+                                window.opener.cargarDatosContratacion();
+                            } else if (typeof window.opener.recargarTabla === 'function') {
+                                console.log("Llamando recargarTabla...");
+                                window.opener.recargarTabla();
+                            }
+                            
+                            // Si hay una tabla de contrataciones, refrescarla
+                            if (typeof window.opener.tablaContrataciones !== 'undefined' && 
+                                window.opener.tablaContrataciones && 
+                                typeof window.opener.tablaContrataciones.displayTabla === 'function') {
+                                console.log("Refrescando tabla de contrataciones...");
+                                window.opener.tablaContrataciones.displayTabla();
+                            }
+                        } catch(e) {
+                            console.warn("No se pudo refrescar ventana padre:", e);
+                        }
+                    }, 300);
+                }
+                
+                // 3. Cerrar ventana después de asegurar que todo se actualizó
+                window.setTimeout(function() {
+                    console.log("Cerrando ventana modal después de refrescos...");
+                    try {
+                        // Preparar resultado para el padre
+                        var resultado = ['0', 'Desglose RSB guardado exitosamente'];
+                        
+                        // Si existe cerrarVentanaModal del framework, usarla
+                        if (typeof cerrarVentanaModal === 'function') {
+                            cerrarVentanaModal(resultado);
+                        } else {
+                            // Fallback: cerrar manualmente
+                            if (window.opener && !window.opener.closed) {
+                                // Notificar al padre si tiene callback
+                                if (typeof window.opener.onDesgloseGuardado === 'function') {
+                                    window.opener.onDesgloseGuardado(resultado);
+                                }
+                            }
+                            window.close();
+                        }
+                    } catch(e) {
+                        console.error("Error cerrando ventana:", e);
+                        // Último intento
+                        try { 
+                            window.close(); 
+                        } catch(e2) {
+                            self.close();
+                        }
+                    }
+                }, 600); // Delay de 600ms para asegurar todos los refrescos
+                
+            } else if (codigoOperacion == "1") {
+                jsp_alerta('A', document.getElementById('errorBD').value);
+            } else if (codigoOperacion == "3") {
+                jsp_alerta('A', 'Parámetros insuficientes');
+            } else {
+                jsp_alerta('A', document.getElementById('generico').value);
+            }
         } catch (e) {
-          console.error('Error procesando respuesta de guardado RSB:', e);
-          jsp_alerta('A', document.getElementById('generico').value);
+            console.error('Error procesando respuesta de guardado RSB:', e);
+            jsp_alerta('A', document.getElementById('generico').value);
         }
       }
 
       function mostrarErrorGuardar(){
         elementoVisible('off', 'barraProgresoLPEEL');
         mostrarErrorPeticion(7);
-      }
-
-      window.guardarDesglose = function(){
-        console.log("=== EJECUTANDO GUARDAR DESGLOSE ===");
-        if(!validarDesglose()){
-          console.log("Validacin fall:", mensajeValidacion);
-          jsp_alerta('A', mensajeValidacion);
-          return;
-        }
-        elementoVisible('on', 'barraProgresoLPEEL');
-
-        var rsbSalBase = document.getElementById('rsbSalBase').value;
-        var rsbPagasExtra = document.getElementById('rsbPagasExtra').value;
-        var rsbCompImporte = document.getElementById('rsbCompImporte').value;
-        var rsbCompExtra = document.getElementById('rsbCompExtra').value;
-
-        console.log("Valores a guardar:", {rsbSalBase, rsbPagasExtra, rsbCompImporte, rsbCompExtra});
-
-        var parametros = "tarea=preparar&modulo=MELANBIDE11&operacion=guardarDesgloseRSB&tipo=0"
-          + "&idRegistro=" + encodeURIComponent('<%=idRegistro%>')
-          + "&rsbSalBase=" + encodeURIComponent(rsbSalBase)
-          + "&rsbPagasExtra=" + encodeURIComponent(rsbPagasExtra)
-          + "&rsbCompImporte=" + encodeURIComponent(rsbCompImporte)
-          + "&rsbCompExtra=" + encodeURIComponent(rsbCompExtra);
-
-        try{
-          $.ajax({
-            url: url,
-            type: 'POST',
-            async: true,
-            data: parametros,
-            success: procesarRespuestaGuardar,
-            error: mostrarErrorGuardar
-          });
-        }catch(err){
-          console.error("Error en AJAX:", err);
-          elementoVisible('off', 'barraProgresoLPEEL');
-          mostrarErrorPeticion();
-        }
       }
 
       window.cancelar = function(){

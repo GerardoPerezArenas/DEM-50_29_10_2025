@@ -316,6 +316,45 @@ private static String escJS(Object v){
         tabaAccesos.displayTabla();
         tabaAccesos.pack();
     }
+
+    /**
+     * Función para refrescar la tabla de contrataciones recargando la página completa
+     * Llamada desde ventanas modales (ej: m11Desglose_Tab1.jsp) después de guardar
+     * 
+     * Usamos reload en lugar de AJAX porque:
+     * 1. Garantiza que todos los datos estén actualizados
+     * 2. Evita problemas de sincronización
+     * 3. El servidor ya renderiza la lista completa en el JSP inicial
+     */
+    function refrescarDatosContratacion() {
+        try {
+            console.log("Refrescando tabla de contrataciones...");
+            // Recargar la página completa para obtener datos frescos del servidor
+            window.location.reload();
+        } catch (e) {
+            console.log("Error al refrescar datos de contrataciones: " + e.message);
+        }
+    }
+    
+    /**
+     * Función alternativa que recarga solo la tabla sin refrescar toda la página
+     * (requiere que exista la función cargarDatosContratacion que haga la petición AJAX)
+     */
+    function recargarTabla() {
+        try {
+            console.log("Recargando solo la tabla de contrataciones...");
+            if (typeof cargarDatosContratacion === 'function') {
+                cargarDatosContratacion();
+            } else {
+                // Fallback: recargar página completa
+                refrescarDatosContratacion();
+            }
+        } catch (e) {
+            console.log("Error al recargar tabla: " + e.message);
+            // Fallback: recargar página completa
+            refrescarDatosContratacion();
+        }
+    }
 </script>
 
 <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/jquery/jquery-1.9.1.min.js"></script>

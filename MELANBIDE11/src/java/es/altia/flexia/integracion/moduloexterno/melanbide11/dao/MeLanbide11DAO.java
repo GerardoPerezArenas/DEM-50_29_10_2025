@@ -1508,7 +1508,7 @@ public class MeLanbide11DAO {
             String tabla = ConfigurationParameter.getParameter(ConstantesMeLanbide11.MELANBIDE11_CONTRATACION,
                     ConstantesMeLanbide11.FICHERO_PROPIEDADES);
             
-            String sql = "SELECT ID, NUM_EXP, DNICONT, RSBSALBASE, RSBPAGEXTRA, RSBIMPORTE, RSBCOMPCONV, CSTCONT "
+            String sql = "SELECT ID, NUM_EXP, DNICONT, RSBSALBASE, RSBPAGEXTRA, RSBCOMPCONV, CSTCONT "
                     + "FROM " + tabla + " "
                     + "WHERE TRIM(NUM_EXP) = TRIM(?) "
                     + "AND UPPER(REPLACE(REPLACE(TRIM(DNICONT),' ',''),'-','')) = "
@@ -1526,7 +1526,6 @@ public class MeLanbide11DAO {
                 vo.setDni(rs.getString("DNICONT"));
                 vo.setRsbSalBase(rs.getDouble("RSBSALBASE"));
                 vo.setRsbPagExtra(rs.getDouble("RSBPAGEXTRA"));
-                vo.setRsbImporte(rs.getDouble("RSBIMPORTE"));
                 vo.setRsbCompConv(rs.getDouble("RSBCOMPCONV"));
                 vo.setCstCont(rs.getDouble("CSTCONT"));
                 return vo;
