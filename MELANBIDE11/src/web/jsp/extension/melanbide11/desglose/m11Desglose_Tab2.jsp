@@ -372,10 +372,21 @@ try{ (document.body || document.documentElement).style.overflow = ''; }catch(e){
 	}
 
 	function guardarLineasDesglose(callback){
+		// Modo silencioso si se pasa callback (llamado desde TAB1)
+		var modoSilencioso = (typeof callback === 'function');
+		
 		if(!dniCache || (dniCache+'').trim()===''){
-			jsp_alerta('A','<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.alert.seleccione") %>');
+			if (!modoSilencioso) {
+				jsp_alerta('A','<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.alert.seleccione") %>');
+			}
+			if(typeof callback==='function'){ callback(false); }
 			return;
 		}
+		
+		console.log("=== TAB2: guardarLineasDesglose ===");
+		console.log("Modo silencioso:", modoSilencioso);
+		console.log("Líneas en cache:", lineasAllCache.length);
+		
 		var raw = construirRawDesdeCache();
 		var xhr = new XMLHttpRequest();
 		var url = ctx + '/PeticionModuloIntegracion.do?tarea=preparar&modulo=MELANBIDE11&operacion=guardarLineasDesgloseRSB&tipo=0&numExp=' + encodeURIComponent(numExp) + '&dni=' + encodeURIComponent(dniCache);
@@ -388,7 +399,12 @@ try{ (document.body || document.documentElement).style.overflow = ''; }catch(e){
 						var resp = JSON.parse(xhr.responseText||'{}');
 						var cod = resp && resp.resultado ? (resp.resultado.codigoOperacion+'') : '4';
 						if(cod==='0' || cod==='2'){
-							jsp_alerta('I','Guardado correcto');
+							// Solo mostrar alert si NO estamos en modo silencioso
+							if (!modoSilencioso) {
+								jsp_alerta('I','Guardado correcto');
+							} else {
+								console.log("? TAB2: Líneas guardadas exitosamente (modo silencioso)");
+							}
 							cargarDesgloseTabla();
 							// Reaplicar recalculado tras guardar para evitar "volver" a tamaños por defecto
 							setTimeout(function(){ try{ recalcularAnchoTabla(); }catch(e){} }, 150);
@@ -396,14 +412,36 @@ try{ (document.body || document.documentElement).style.overflow = ''; }catch(e){
 							setTimeout(function(){ try{ recalcularAnchoTabla(); }catch(e){} }, 400);
 							if(typeof callback==='function'){ callback(true); }
 						}else if(cod==='3'){
-							jsp_alerta('A','Parámetros insuficientes (DNI)');
+							if (!modoSilencioso) {
+								jsp_alerta('A','Parámetros insuficientes (DNI)');
+							} else {
+								console.error("? TAB2: Parámetros insuficientes (DNI)");
+							}
 							if(typeof callback==='function'){ callback(false); }
 						}else{
-							jsp_alerta('A','No se pudo guardar (código '+cod+')');
+							if (!modoSilencioso) {
+								jsp_alerta('A','No se pudo guardar (código '+cod+')');
+							} else {
+								console.error("? TAB2: No se pudo guardar (código "+cod+")");
+							}
 							if(typeof callback==='function'){ callback(false); }
 						}
-					}catch(e){ jsp_alerta('A','Respuesta no válida del servidor'); if(typeof callback==='function'){ callback(false); } }
-				}else{ jsp_alerta('A','Error de comunicación ('+xhr.status+')'); if(typeof callback==='function'){ callback(false); } }
+					}catch(e){ 
+						if (!modoSilencioso) {
+							jsp_alerta('A','Respuesta no válida del servidor');
+						} else {
+							console.error("? TAB2: Respuesta no válida:", e);
+						}
+						if(typeof callback==='function'){ callback(false); } 
+					}
+				}else{ 
+					if (!modoSilencioso) {
+						jsp_alerta('A','Error de comunicación ('+xhr.status+')');
+					} else {
+						console.error("? TAB2: Error de comunicación ("+xhr.status+")");
+					}
+					if(typeof callback==='function'){ callback(false); } 
+				}
 			}
 		};
 		xhr.send('lineas=' + encodeURIComponent(raw));
