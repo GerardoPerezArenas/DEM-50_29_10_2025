@@ -158,6 +158,32 @@ table, .tablaContenido table, .tablaFija table {
 	
 	var dniCache = '';
 	var lineasAllCache = []; // cache con todas las líneas [{tipo,importe,concepto,observ}]
+
+	function calcularTotalesDesgloseInterno(){
+		var totales = {
+			salarialesTodos: 0,
+			salarialesFijos: 0,
+			extrasalariales: 0
+		};
+		for (var i = 0; i < lineasAllCache.length; i++) {
+			var item = lineasAllCache[i] || {};
+			var importe = Number(item.importe);
+			if (isNaN(importe)) {
+				importe = 0;
+			}
+			var tipo = String(item.tipo || '').trim();
+			if (tipo === '1') {
+				totales.salarialesTodos += importe;
+				var concepto = String(item.concepto || '').toUpperCase();
+				if (concepto === 'F') {
+					totales.salarialesFijos += importe;
+				}
+			} else if (tipo === '2') {
+				totales.extrasalariales += importe;
+			}
+		}
+		return totales;
+	}
 	// loggerDiv eliminado (no se muestra log visual)
 	function log(){ /* noop */ }
 
@@ -643,10 +669,14 @@ try{ (document.body || document.documentElement).style.overflow = ''; }catch(e){
 	// Exponer funciones globalmente para que TAB1 pueda llamarlas
 	window.refrescarDesgloseRSB = cargarDesgloseTabla;
 	window.guardarLineasDesgloseTab2 = guardarLineasDesglose;
+	window.obtenerTotalesDesgloseRSB = function(){
+		return calcularTotalesDesgloseInterno();
+	};
 	
 	console.log("=== TAB2 FUNCIONES EXPUESTAS ===");
 	console.log("window.refrescarDesgloseRSB:", typeof window.refrescarDesgloseRSB);
 	console.log("window.guardarLineasDesgloseTab2:", typeof window.guardarLineasDesgloseTab2);
+	console.log("window.obtenerTotalesDesgloseRSB:", typeof window.obtenerTotalesDesgloseRSB);
 	
 	setTimeout(cargarDesgloseTabla, 60);
 })();

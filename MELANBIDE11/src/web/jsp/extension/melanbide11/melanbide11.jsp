@@ -58,8 +58,119 @@ private static String escJS(Object v){
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 <script type="text/javascript">
+    var __modalCallback = null;
+
+    function abrirModal(url, height, width, scrollbars, resizable, callback) {
+        window.__modalCallback = callback;
+        lanzarPopUpModal(url, height, width, scrollbars, resizable, callback);
+    }
+
+    function normalizarImporteModal(valor) {
+        if (valor === undefined || valor === null) {
+            return null;
+        }
+        var numero = valor;
+        if (typeof numero === 'string') {
+            var tmp = numero.replace(/\s+/g, '');
+            if (tmp.indexOf(',') !== -1) {
+                tmp = tmp.replace(/\./g, '').replace(',', '.');
+            }
+            numero = parseFloat(tmp);
+        } else if (typeof numero !== 'number') {
+            numero = parseFloat(numero);
+        }
+        if (isNaN(numero)) {
+            return null;
+        }
+        return numero;
+    }
+
+    function formatearImporteModal(valor) {
+        if (valor === null || valor === undefined || isNaN(valor)) {
+            return null;
+        }
+        var numero = parseFloat(valor);
+        if (isNaN(numero)) {
+            return null;
+        }
+        return numero.toFixed(2).replace('.', ',');
+    }
+
+    function actualizarImportesContratacion(payload) {
+        try {
+            if (!payload) {
+                return;
+            }
+            var indiceSeleccionado = (typeof tabaAccesos !== 'undefined' && tabaAccesos && typeof tabaAccesos.selectedIndex === 'number')
+                ? tabaAccesos.selectedIndex
+                : -1;
+            if (indiceSeleccionado < 0) {
+                return;
+            }
+            var rsbValor = normalizarImporteModal(payload.rsbCompConv);
+            var costeValor = normalizarImporteModal(payload.cstCont);
+            var rsbFormateado = formatearImporteModal(rsbValor);
+            var costeFormateado = formatearImporteModal(costeValor);
+
+            console.log('Actualizando importes sin recarga. Índice:', indiceSeleccionado, 'RSB:', rsbFormateado, 'Coste:', costeFormateado);
+
+            if (listaAccesos && listaAccesos[indiceSeleccionado]) {
+                if (costeFormateado !== null) {
+                    listaAccesos[indiceSeleccionado][31] = costeFormateado;
+                }
+                if (rsbFormateado !== null) {
+                    listaAccesos[indiceSeleccionado][33] = rsbFormateado;
+                }
+            }
+            if (listaAccesosTabla && listaAccesosTabla[indiceSeleccionado]) {
+                if (costeFormateado !== null) {
+                    listaAccesosTabla[indiceSeleccionado][31] = costeFormateado;
+                }
+                if (rsbFormateado !== null) {
+                    listaAccesosTabla[indiceSeleccionado][33] = rsbFormateado;
+                }
+            }
+
+            if (typeof tabaAccesos !== 'undefined' && tabaAccesos) {
+                var indiceAnterior = tabaAccesos.selectedIndex;
+                tabaAccesos.lineas = listaAccesosTabla;
+                tabaAccesos.displayTabla();
+                if (indiceAnterior >= 0 && typeof seleccionarFila === 'function') {
+                    tabaAccesos.selectedIndex = indiceAnterior;
+                    seleccionarFila(indiceAnterior, 'listaAccesos');
+                }
+            }
+        } catch (err) {
+            console.log('No se pudo actualizar importes sin recargar:', err);
+        }
+    }
+
+    window.onModalClosed = function (result) {
+        try {
+            if (result && result.length >= 3 && result[2] === 'DESGLOSE_RSB') {
+                actualizarImportesContratacion({
+                    rsbCompConv: result.length > 3 ? result[3] : null,
+                    cstCont: result.length > 4 ? result[4] : null,
+                    idRegistro: result.length > 5 ? result[5] : null
+                });
+            }
+        } catch (errorModal) {
+            console.log('Error procesando resultado modal:', errorModal);
+        }
+
+        var callback = window.__modalCallback;
+        window.__modalCallback = null;
+        if (typeof callback === 'function') {
+            try {
+                callback(result);
+            } catch (callbackError) {
+                console.log('Error ejecutando callback modal:', callbackError);
+            }
+        }
+    };
+
     function pulsarNuevaContratacion() {
-        lanzarPopUpModal('<%=request.getContextPath()%>/PeticionModuloIntegracion.do?tarea=preparar&modulo=MELANBIDE11&operacion=cargarNuevaContratacion&tipo=0&numExp=<%=numExpediente%>&nuevo=1', 750, 1200, 'no', 'no', function (result) {
+        abrirModal('<%=request.getContextPath()%>/PeticionModuloIntegracion.do?tarea=preparar&modulo=MELANBIDE11&operacion=cargarNuevaContratacion&tipo=0&numExp=<%=numExpediente%>&nuevo=1', 750, 1200, 'no', 'no', function (result) {
             if (result != undefined) {
                 if (result[0] == '0') {
                     recargarTablaContrataciones(result);
@@ -81,7 +192,7 @@ private static String escJS(Object v){
                 + '&tipo=0&numExp=' + encodeURIComponent(numExp)
                 + '&id=' + encodeURIComponent(idLinea);
 
-        lanzarPopUpModal(url, 900, 1200, 'no', 'no', function(result){
+        abrirModal(url, 900, 1200, 'no', 'no', function(result){
             if (result != undefined) {
                 if (result[0] == '0') {
                     console.log("Desglose RSB completado exitosamente");
@@ -93,7 +204,7 @@ private static String escJS(Object v){
 
     function pulsarModificarContratacion() {
         if (tabaAccesos.selectedIndex != -1) {
-            lanzarPopUpModal('<%=request.getContextPath()%>/PeticionModuloIntegracion.do?tarea=preparar&modulo=MELANBIDE11&operacion=cargarModificarContratacion&tipo=0&nuevo=0&numExp=<%=numExpediente%>&id=' + listaAccesos[tabaAccesos.selectedIndex][0], 750, 1200, 'no', 'no', function (result) {
+            abrirModal('<%=request.getContextPath()%>/PeticionModuloIntegracion.do?tarea=preparar&modulo=MELANBIDE11&operacion=cargarModificarContratacion&tipo=0&nuevo=0&numExp=<%=numExpediente%>&id=' + listaAccesos[tabaAccesos.selectedIndex][0], 750, 1200, 'no', 'no', function (result) {
                 if (result != undefined) {
                     if (result[0] == '0') {
                         recargarTablaContrataciones(result);

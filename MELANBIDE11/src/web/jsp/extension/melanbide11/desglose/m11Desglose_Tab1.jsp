@@ -79,6 +79,83 @@
         }
       }
 
+      function esNumeroValido(valor) {
+        return typeof valor === 'number' && !isNaN(valor) && isFinite(valor);
+      }
+
+      function esCasiCero(valor) {
+        if (!esNumeroValido(valor)) {
+          return true;
+        }
+        return Math.abs(valor) < 0.005;
+      }
+
+      function parseImporteSeguro(valor) {
+        if (valor === null || valor === undefined) {
+          return 0;
+        }
+        try {
+          var limpio = String(valor).replace(/\s+/g, '');
+          if (limpio.indexOf(',') !== -1) {
+            limpio = limpio.replace(/\./g, '').replace(',', '.');
+          }
+          var numero = parseFloat(limpio);
+          return isNaN(numero) ? 0 : numero;
+        } catch (e) {
+          console.warn('parseImporteSeguro fall', e);
+          return 0;
+        }
+      }
+
+      function redondearDosDecimales(valor) {
+        if (!esNumeroValido(valor)) {
+          return 0;
+        }
+        return Math.round(valor * 100) / 100;
+      }
+
+      function obtenerTotalesLocalesDesglose() {
+        var salBaseEl = document.getElementById('rsbSalBase');
+        var pagasEl = document.getElementById('rsbPagasExtra');
+        var compImpEl = document.getElementById('rsbCompImporte');
+        var compExtraEl = document.getElementById('rsbCompExtra');
+
+        var salBase = parseImporteSeguro(salBaseEl ? salBaseEl.value : '0');
+        var pagasExtra = parseImporteSeguro(pagasEl ? pagasEl.value : '0');
+        var compImporteCampo = parseImporteSeguro(compImpEl ? compImpEl.value : '0');
+        var compExtraCampo = parseImporteSeguro(compExtraEl ? compExtraEl.value : '0');
+
+        var compImporte = compImporteCampo;
+        var compExtra = compExtraCampo;
+        var totalesTab2 = null;
+        try {
+          if (typeof window.obtenerTotalesDesgloseRSB === 'function') {
+            totalesTab2 = window.obtenerTotalesDesgloseRSB();
+          }
+        } catch (errTotales) {
+          console.warn('No se pudieron obtener totales de TAB2:', errTotales);
+        }
+
+        if (totalesTab2) {
+          if (esNumeroValido(totalesTab2.salarialesFijos)) {
+            compImporte = redondearDosDecimales(Number(totalesTab2.salarialesFijos));
+          }
+          if (esNumeroValido(totalesTab2.extrasalariales)) {
+            compExtra = redondearDosDecimales(Number(totalesTab2.extrasalariales));
+          }
+        }
+
+        var rsbCalculado = redondearDosDecimales(salBase + pagasExtra + compImporte);
+        var costeCalculado = redondearDosDecimales(rsbCalculado + compExtra);
+
+        return {
+          tieneDatos: (salBase !== 0 || pagasExtra !== 0 || compImporte !== 0 || compExtra !== 0),
+          rsbCompConv: rsbCalculado,
+          cstCont: costeCalculado,
+          fuenteTab2: !!(totalesTab2 && (esNumeroValido(totalesTab2.salarialesFijos) || esNumeroValido(totalesTab2.extrasalariales)))
+        };
+      }
+
       
       function reemplazarPuntos(campo) {
         try {
@@ -272,10 +349,28 @@
                 datos = ajaxResult;
             }
 
-            var codigoOperacion = "4";
-            if (datos && datos.resultado) {
-                codigoOperacion = datos.resultado.codigoOperacion + "";
-            }
+      var codigoOperacion = "4";
+      var rsbCompConv = null;
+      var cstCont = null;
+      var idRegistroSeleccionado = null;
+      var puedeActualizarSinRecarga = false;
+      if (datos && datos.resultado) {
+        codigoOperacion = datos.resultado.codigoOperacion + "";
+        if (datos.resultado.idRegistro !== undefined && datos.resultado.idRegistro !== null) {
+          idRegistroSeleccionado = String(datos.resultado.idRegistro);
+        }
+      }
+
+      if (!idRegistroSeleccionado) {
+        var campoIdRegistro = document.getElementById('idRegistroContratacion');
+        if (campoIdRegistro && campoIdRegistro.value && campoIdRegistro.value.trim() !== '') {
+          idRegistroSeleccionado = campoIdRegistro.value.trim();
+        }
+      }
+
+      if (window.opener && !window.opener.closed && typeof window.opener.actualizarImportesContratacion === 'function') {
+        puedeActualizarSinRecarga = true;
+      }
             
             console.log("Código de operación:", codigoOperacion);
             
@@ -285,8 +380,8 @@
                 // Actualizar valores calculados en ventana padre
                 try {
                     if (datos.resultado) {
-                        var rsbCompConv = 0;
-                        var cstCont = 0;
+            rsbCompConv = 0;
+            cstCont = 0;
                         
                         // Parsear valores con manejo de null/undefined
                         if (datos.resultado.rsbCompConv !== undefined && datos.resultado.rsbCompConv !== null) {
@@ -300,12 +395,45 @@
                             cstCont = parseFloat(tmpVal2);
                             if (isNaN(cstCont)) cstCont = 0;
                         }
+
+            var totalesLocales = obtenerTotalesLocalesDesglose();
+            var usarFallback =
+              totalesLocales.tieneDatos &&
+              (!esNumeroValido(rsbCompConv) ||
+               !esNumeroValido(cstCont) ||
+               (esCasiCero(rsbCompConv) && totalesLocales.rsbCompConv > 0) ||
+               (esCasiCero(cstCont) && totalesLocales.cstCont > 0));
+
+            if (usarFallback) {
+              if (totalesLocales.fuenteTab2) {
+                console.log("Totales de BD no disponibles. Usando sumatorio de TAB2.");
+              } else {
+                console.log("Totales de BD no disponibles. Usando valores de formulario TAB1.");
+              }
+              rsbCompConv = totalesLocales.rsbCompConv;
+              cstCont = totalesLocales.cstCont;
+            }
+
+            rsbCompConv = redondearDosDecimales(rsbCompConv);
+            cstCont = redondearDosDecimales(cstCont);
                         
                         console.log("Valores actualizados desde BD:");
-                        console.log("  - RSBCOMPCONV:", rsbCompConv);
-                        console.log("  - CSTCONT:", cstCont);
-                        
-                        // Actualizar campo rsbTotal en ventana padre
+            console.log("  - RSBCOMPCONV:", rsbCompConv);
+            console.log("  - CSTCONT:", cstCont);
+
+            if (window.opener && !window.opener.closed && typeof window.opener.actualizarImportesContratacion === 'function') {
+              try {
+                window.opener.actualizarImportesContratacion({
+                  rsbCompConv: rsbCompConv,
+                  cstCont: cstCont,
+                  idRegistro: idRegistroSeleccionado || null
+                });
+              } catch (inlineErr) {
+                console.warn("No se pudo actualizar tabla principal sin recarga:", inlineErr);
+              }
+            }
+
+            // Actualizar campo rsbTotal en ventana padre
                         if (window.opener && !window.opener.closed) {
                             try {
                                 var rsbTotalField = window.opener.document.getElementById('rsbTotal');
@@ -363,9 +491,9 @@
                     console.warn("No se pudo refrescar TAB2:", e);
                 }
                 
-                // 2. Refrescar ventana padre si tiene función de refresco
-                if (window.opener && !window.opener.closed) {
-                    console.log("Intentando refrescar ventana padre...");
+        // 2. Refrescar ventana padre solo si no existe actualización inline
+        if (!puedeActualizarSinRecarga && window.opener && !window.opener.closed) {
+          console.log("No hay función inline en ventana padre, aplicando refrescos tradicionales...");
                     window.setTimeout(function() {
                         try {
                             // Buscar funciones de refresco en el padre
@@ -380,6 +508,7 @@
                                 window.opener.recargarTabla();
                             }
                             
+
                             // Si hay una tabla de contrataciones, refrescarla
                             if (typeof window.opener.tablaContrataciones !== 'undefined' && 
                                 window.opener.tablaContrataciones && 
@@ -398,7 +527,12 @@
                     console.log("Cerrando ventana modal después de refrescos...");
                     try {
                         // Preparar resultado para el padre
-                        var resultado = ['0', 'Desglose RSB guardado exitosamente'];
+            var resultado = ['0', 'Desglose RSB guardado exitosamente', 'DESGLOSE_RSB'];
+            resultado.push(rsbCompConv !== null ? rsbCompConv : '');
+            resultado.push(cstCont !== null ? cstCont : '');
+            if (idRegistroSeleccionado) {
+              resultado.push(idRegistroSeleccionado);
+            }
                         
                         // Si existe cerrarVentanaModal del framework, usarla
                         if (typeof cerrarVentanaModal === 'function') {
