@@ -184,6 +184,55 @@ table, .tablaContenido table, .tablaFija table {
 		}
 		return totales;
 	}
+
+	function sincronizarComplementosConTab1(totalesCalculados){
+		try {
+			var totales = totalesCalculados || calcularTotalesDesgloseInterno();
+			if (!totales) {
+				return;
+			}
+
+			actualizarCampoTab1('rsbCompImporte', totales.salarialesFijos);
+			actualizarCampoTab1('rsbCompExtra', totales.extrasalariales);
+		} catch (syncErr) {
+			console.log('No se pudieron sincronizar los campos de TAB1:', syncErr);
+		}
+	}
+
+	function actualizarCampoTab1(idCampo, valor){
+		var campo = document.getElementById(idCampo);
+		if (!campo) {
+			return;
+		}
+
+		var numero = Number(valor);
+		if (isNaN(numero)) {
+			numero = 0;
+		}
+
+		var formateado = formateaImporte(numero);
+		if (campo.value === formateado) {
+			return;
+		}
+
+		campo.value = formateado;
+
+		try {
+			if (typeof Event === 'function') {
+				campo.dispatchEvent(new Event('change', { bubbles: true }));
+			} else if (document.createEvent) {
+				var evt = document.createEvent('HTMLEvents');
+				evt.initEvent('change', true, false);
+				campo.dispatchEvent(evt);
+			} else if (campo.fireEvent) {
+				campo.fireEvent('onchange');
+			} else if (typeof campo.onchange === 'function') {
+				campo.onchange();
+			}
+		} catch (evtErr) {
+			console.log('Aviso: no se pudo lanzar el evento change para', idCampo, evtErr);
+		}
+	}
 	// loggerDiv eliminado (no se muestra log visual)
 	function log(){ /* noop */ }
 
@@ -318,6 +367,7 @@ table, .tablaContenido table, .tablaFija table {
 		}
 		
 		actualizarEstadoBotones();
+		sincronizarComplementosConTab1();
 	}
 
 	function actualizarEstadoBotones(){
@@ -412,6 +462,7 @@ try{ (document.body || document.documentElement).style.overflow = ''; }catch(e){
 		console.log("=== TAB2: guardarLineasDesglose ===");
 		console.log("Modo silencioso:", modoSilencioso);
 		console.log("Líneas en cache:", lineasAllCache.length);
+		sincronizarComplementosConTab1();
 		
 		var raw = construirRawDesdeCache();
 		var xhr = new XMLHttpRequest();
